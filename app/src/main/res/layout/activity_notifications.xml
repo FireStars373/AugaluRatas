@@ -31,10 +31,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="80dp"
-            android:layout_marginEnd="300dp"
-            android:layout_marginStart="10dp"
+            android:layout_marginStart="45dp"
             android:background="@drawable/arrow_button"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -50,113 +48,184 @@
 
         <TextView
             android:id="@+id/textView57"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="TextView"
-            tools:layout_editor_absoluteX="175dp"
-            tools:layout_editor_absoluteY="201dp" />
+            android:layout_marginTop="30dp"
+            android:layout_marginStart="45dp"
+            android:layout_marginEnd="45dp"
+            android:background="@drawable/square_background_5"
+            android:text="Pranešimai pavadinimas"
+            android:fontFamily="@font/spectral_sc"
+            android:gravity="center"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView27" />
 
-        <View
-            android:id="@+id/view32"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:layout_editor_absoluteY="1dp" />
 
         <CheckBox
             android:id="@+id/checkBox6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="CheckBox"
-            tools:layout_editor_absoluteX="42dp"
-            tools:layout_editor_absoluteY="255dp" />
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginStart="45dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView57" />
 
         <CheckBox
             android:id="@+id/checkBox7"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="CheckBox"
-            tools:layout_editor_absoluteX="39dp"
-            tools:layout_editor_absoluteY="348dp" />
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginTop="60dp"
+            android:layout_marginStart="45dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/checkBox6" />
 
         <CheckBox
             android:id="@+id/checkBox8"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="CheckBox"
-            tools:layout_editor_absoluteX="45dp"
-            tools:layout_editor_absoluteY="455dp" />
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="45dp"
+            android:layout_marginTop="60dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/checkBox7" />
 
         <CheckBox
             android:id="@+id/checkBox9"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="CheckBox"
-            tools:layout_editor_absoluteX="52dp"
-            tools:layout_editor_absoluteY="571dp" />
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginTop="60dp"
+            android:layout_marginStart="45dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/checkBox8" />
 
         <TextView
             android:id="@+id/textView58"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="TextView"
-            tools:layout_editor_absoluteX="187dp"
-            tools:layout_editor_absoluteY="273dp" />
+            android:layout_width="0dp"
+            android:layout_height="24dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginEnd="45dp"
+            android:textStyle="bold"
+            android:fontFamily="@font/spectral_sc"
+            android:gravity="left|center_vertical"
+            android:textSize="16sp"
+            android:text="Skelbimo peržiūra"
+            android:paddingStart="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/checkBox6"
+            app:layout_constraintTop_toBottomOf="@+id/textView57" />
 
         <TextView
             android:id="@+id/textView59"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="70dp"
+            android:layout_marginEnd="45dp"
             android:text="TextView"
-            tools:layout_editor_absoluteX="186dp"
-            tools:layout_editor_absoluteY="315dp" />
+            android:fontFamily="@font/spectral_sc"
+            android:gravity="left|center_vertical"
+            android:textSize="16sp"
+            android:paddingStart="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/checkBox6" />
 
         <TextView
             android:id="@+id/textView60"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="TextView"
-            tools:layout_editor_absoluteX="186dp"
-            tools:layout_editor_absoluteY="361dp" />
+            android:layout_width="0dp"
+            android:layout_height="24dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginEnd="45dp"
+            android:fontFamily="@font/spectral_sc"
+            android:gravity="left|center_vertical"
+            android:paddingStart="16sp"
+            android:text="Skelbimo pasidalinimas"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/checkBox7"
+            app:layout_constraintTop_toBottomOf="@+id/textView59" />
 
         <TextView
             android:id="@+id/textView61"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="70dp"
+            android:layout_marginEnd="45dp"
             android:text="TextView"
-            tools:layout_editor_absoluteX="185dp"
-            tools:layout_editor_absoluteY="408dp" />
+            android:fontFamily="@font/spectral_sc"
+            android:gravity="left|center_vertical"
+            android:textSize="16sp"
+            android:paddingStart="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/checkBox7" />
 
         <TextView
             android:id="@+id/textView62"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="TextView"
-            tools:layout_editor_absoluteX="179dp"
-            tools:layout_editor_absoluteY="469dp" />
+            android:layout_width="0dp"
+            android:layout_height="24dp"
+            android:layout_marginTop="26dp"
+            android:layout_marginEnd="45dp"
+            android:fontFamily="@font/spectral_sc"
+            android:gravity="left|center_vertical"
+            android:paddingStart="16sp"
+            android:text="Patinka skelbimas"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/checkBox8"
+            app:layout_constraintTop_toBottomOf="@+id/textView61" />
 
         <TextView
             android:id="@+id/textView63"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="70dp"
+            android:layout_marginEnd="45dp"
             android:text="TextView"
-            tools:layout_editor_absoluteX="179dp"
-            tools:layout_editor_absoluteY="506dp" />
+            android:fontFamily="@font/spectral_sc"
+            android:gravity="left|center_vertical"
+            android:textSize="16sp"
+            android:paddingStart="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/checkBox8" />
 
         <TextView
             android:id="@+id/textView64"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="TextView"
-            tools:layout_editor_absoluteX="179dp"
-            tools:layout_editor_absoluteY="582dp" />
+            android:layout_width="0dp"
+            android:layout_height="24dp"
+            android:layout_marginTop="26dp"
+            android:layout_marginEnd="45dp"
+            android:text="Augalo pirkimas"
+            android:textStyle="bold"
+            android:fontFamily="@font/spectral_sc"
+            android:gravity="left|center_vertical"
+            android:textSize="16sp"
+            android:paddingStart="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/checkBox9"
+            app:layout_constraintTop_toBottomOf="@+id/textView63" />
 
         <TextView
             android:id="@+id/textView65"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="70dp"
+            android:layout_marginEnd="45dp"
             android:text="TextView"
-            tools:layout_editor_absoluteX="175dp"
-            tools:layout_editor_absoluteY="616dp" />
+            android:fontFamily="@font/spectral_sc"
+            android:gravity="left|center_vertical"
+            android:textSize="16sp"
+            android:paddingStart="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/checkBox9" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

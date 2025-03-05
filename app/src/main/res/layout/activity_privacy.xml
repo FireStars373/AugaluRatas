@@ -31,10 +31,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="80dp"
-            android:layout_marginEnd="300dp"
-            android:layout_marginStart="10dp"
+            android:layout_marginStart="45dp"
             android:background="@drawable/arrow_button"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -50,21 +48,30 @@
 
         <TextView
             android:id="@+id/textView66"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="TextView"
-            tools:layout_editor_absoluteX="180dp"
-            tools:layout_editor_absoluteY="207dp" />
+            android:layout_marginTop="30dp"
+            android:layout_marginStart="45dp"
+            android:layout_marginEnd="45dp"
+            android:background="@drawable/square_background_5"
+            android:text="Privatumo politika"
+            android:fontFamily="@font/spectral_sc"
+            android:gravity="center"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView28" />
 
         <TextView
             android:id="@+id/textView67"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="TextView"
-            tools:layout_editor_absoluteX="178dp"
-            tools:layout_editor_absoluteY="244dp" />
+            tools:layout_editor_absoluteX="176dp"
+            tools:layout_editor_absoluteY="327dp" />
 
         <ScrollView
+            android:id="@+id/scrollView4"
             android:layout_width="369dp"
             android:layout_height="141dp"
             tools:layout_editor_absoluteX="21dp"
@@ -81,7 +88,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="CheckBox"
-            tools:layout_editor_absoluteX="44dp"
+            app:layout_constraintStart_toStartOf="parent"
             tools:layout_editor_absoluteY="599dp" />
 
         <TextView
@@ -89,7 +96,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="TextView"
-            tools:layout_editor_absoluteX="201dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/checkBox10"
             tools:layout_editor_absoluteY="612dp" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
