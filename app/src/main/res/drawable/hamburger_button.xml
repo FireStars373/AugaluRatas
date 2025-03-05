@@ -3,7 +3,7 @@
     android:viewportWidth="640"
     android:height="32dp"
     android:width="32dp">
-      
+
     <path
         android:fillColor="#54473F"
         android:fillType="evenOdd"
