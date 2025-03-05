@@ -9,29 +9,7 @@
     tools:context=".AllPlants">
 
 
-    <ImageButton
-        android:id="@+id/imageButton15"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
-        android:layout_marginEnd="300dp"
-        android:layout_marginStart="10dp"
-        android:background="@drawable/hamburger_button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageButton
-        android:id="@+id/imageButton6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="300dp"
-        android:layout_marginStart="10dp"
-        android:background="@drawable/arrow_button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageButton15" />
 
     <View
         android:id="@+id/view18"
@@ -59,13 +37,10 @@
             android:gravity="center"
             android:orientation="vertical">
 
-
-
             <ImageView
                 android:id="@+id/imageView4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="45dp"
                 android:background="@drawable/lotus_icon"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -73,7 +48,7 @@
 
             <SearchView
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="60dp"
                 android:layout_marginEnd="60dp"
                 android:layout_marginTop="30dp"
@@ -85,6 +60,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
+
                 <TextView
                     android:id="@+id/textView50"
                     android:layout_width="match_parent"
@@ -108,10 +84,26 @@
                     android:textColor="#000000"
                     android:text="Astrad" />
             </LinearLayout>
-
-
-
-
         </LinearLayout>
     </ScrollView>
+
+        <ImageButton
+        android:id="@+id/imageButton15"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:layout_marginStart="45dp"
+        android:background="@drawable/hamburger_button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+        android:id="@+id/imageButton6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="45dp"
+        android:background="@drawable/arrow_button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageButton15" />
 </androidx.constraintlayout.widget.ConstraintLayout>

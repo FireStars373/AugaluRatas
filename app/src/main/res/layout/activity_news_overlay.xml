@@ -27,10 +27,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="80dp"
-        android:layout_marginEnd="300dp"
-        android:layout_marginStart="10dp"
+        android:layout_marginStart="45dp"
         android:background="@drawable/arrow_button"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -76,12 +74,13 @@
                 android:id="@+id/textView36"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Text"
-                android:layout_marginBottom="30dp"
                 android:layout_marginStart="45dp"
                 android:layout_marginEnd="45dp"
+                android:layout_marginBottom="30dp"
                 android:fontFamily="@font/spectral_sc"
-                android:textSize="20sp"/>
+                android:text="Text"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/textView37"
