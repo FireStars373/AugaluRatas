@@ -50,63 +50,126 @@
 
         <TextView
             android:id="@+id/textView70"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="TextView"
-            tools:layout_editor_absoluteX="174dp"
-            tools:layout_editor_absoluteY="200dp" />
+            android:layout_marginTop="30dp"
+            android:layout_marginStart="45dp"
+            android:layout_marginEnd="45dp"
+            android:background="@drawable/square_background_5"
+            android:text="Asmeniniai duomenys"
+            android:fontFamily="@font/spectral_sc"
+            android:gravity="center"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView30" />
 
         <EditText
             android:id="@+id/editTextText3"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="45dp"
+            android:layout_marginEnd="45dp"
+            android:background="@drawable/textbox_background_2"
             android:ems="10"
+            android:fontFamily="@font/spectral_sc"
             android:inputType="text"
-            android:text="Name"
-            tools:layout_editor_absoluteX="100dp"
-            tools:layout_editor_absoluteY="343dp" />
+            android:paddingStart="8dp"
+            android:text="Įveskite pavadinimą"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView54" />
 
         <TextView
             android:id="@+id/textView55"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="TextView"
-            tools:layout_editor_absoluteX="176dp"
-            tools:layout_editor_absoluteY="406dp" />
+            android:layout_marginTop="10dp"
+            android:text="Slaptažodis"
+            android:fontFamily="@font/spectral_sc"
+            android:gravity="center"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editTextText3" />
 
         <EditText
             android:id="@+id/editTextTextPassword4"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="45dp"
+            android:layout_marginEnd="45dp"
+            android:background="@drawable/textbox_background_2"
+            android:fontFamily="@font/spectral_sc"
             android:ems="10"
             android:inputType="textPassword"
-            tools:layout_editor_absoluteX="100dp"
-            tools:layout_editor_absoluteY="435dp" />
+            android:paddingStart="8dp"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView55" />
 
         <TextView
             android:id="@+id/textView54"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="TextView"
-            tools:layout_editor_absoluteX="176dp"
-            tools:layout_editor_absoluteY="296dp" />
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/spectral_sc"
+            android:gravity="center"
+            android:text="Vartotojo vardas"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView85" />
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/button48"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Button"
-            tools:layout_editor_absoluteX="160dp"
-            tools:layout_editor_absoluteY="500dp" />
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="100dp"
+            android:layout_marginEnd="100dp"
+            android:background="@drawable/button_background_1"
+            android:text="Pakeisti"
+            android:fontFamily="@font/spectral_sc"
+            android:textSize="20sp"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword4" />
 
-        <Button
-            android:id="@+id/button49"
+        <TextView
+            android:id="@+id/textView84"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Button"
-            tools:layout_editor_absoluteX="163dp"
-            tools:layout_editor_absoluteY="634dp" />
+            android:layout_marginTop="30dp"
+            android:fontFamily="@font/spectral_sc"
+            android:gravity="center"
+            android:text="El. Paštas"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView70" />
+
+        <TextView
+            android:id="@+id/textView85"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="45dp"
+            android:layout_marginEnd="45dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/spectral_sc"
+            android:text="gmail.com"
+            android:paddingStart="8dp"
+            android:textSize="20sp"
+            android:background="@drawable/textbox_background_2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView84" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 </androidx.constraintlayout.widget.ConstraintLayout>

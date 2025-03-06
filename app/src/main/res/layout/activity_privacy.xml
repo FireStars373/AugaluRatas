@@ -16,15 +16,17 @@
             android:id="@+id/view23"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom= "20dp"
             android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
             android:layout_marginEnd="20dp"
+            android:layout_marginBottom="20dp"
             android:background="@drawable/square_background_2"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
 
         <ImageButton
             android:id="@+id/imageButton24"
@@ -66,39 +68,78 @@
             android:id="@+id/textView67"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="TextView"
-            tools:layout_editor_absoluteX="176dp"
-            tools:layout_editor_absoluteY="327dp" />
+            android:layout_marginTop="30dp"
+            android:text="Taisyklės ir naudojimosi politika"
+            android:fontFamily="@font/spectral_sc"
+            android:gravity="center"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView66" />
 
         <ScrollView
             android:id="@+id/scrollView4"
-            android:layout_width="369dp"
-            android:layout_height="141dp"
-            tools:layout_editor_absoluteX="21dp"
-            tools:layout_editor_absoluteY="346dp">
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginStart="45dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="45dp"
+            android:layout_marginBottom="15dp"
+            app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView67">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical" />
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView83"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/spectral_sc"
+                    android:gravity="left|center_vertical"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:text="Hellooooo"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
         </ScrollView>
 
-        <CheckBox
-            android:id="@+id/checkBox10"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/linearLayout2"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="CheckBox"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:layout_editor_absoluteY="599dp" />
-
-        <TextView
-            android:id="@+id/textView68"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="TextView"
+            android:layout_marginStart="45dp"
+            android:layout_marginEnd="45dp"
+            android:layout_marginBottom="60dp"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/checkBox10"
-            tools:layout_editor_absoluteY="612dp" />
+            app:layout_constraintStart_toStartOf="parent">
+
+            <CheckBox
+                android:id="@+id/checkBox10"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/textView68"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Perskaičiau ir sutinku su privatumo politika."
+                android:fontFamily="@font/spectral_sc"
+                android:gravity="left|center_vertical"
+                android:textSize="16sp"
+                android:layout_marginStart="10dp" />
+        </LinearLayout>
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
