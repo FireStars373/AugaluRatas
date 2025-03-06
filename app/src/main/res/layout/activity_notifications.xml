@@ -119,17 +119,17 @@
             android:id="@+id/textView59"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
             android:layout_marginStart="70dp"
             android:layout_marginEnd="45dp"
-            android:text="TextView"
+            android:layout_marginTop="10dp"
             android:fontFamily="@font/spectral_sc"
             android:gravity="left|center_vertical"
-            android:textSize="16sp"
             android:paddingStart="16sp"
+            android:text="TextView"
+            android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/checkBox6" />
+            app:layout_constraintTop_toBottomOf="@+id/textView58" />
 
         <TextView
             android:id="@+id/textView60"
@@ -154,14 +154,14 @@
             android:layout_marginTop="10dp"
             android:layout_marginStart="70dp"
             android:layout_marginEnd="45dp"
-            android:text="TextView"
             android:fontFamily="@font/spectral_sc"
             android:gravity="left|center_vertical"
-            android:textSize="16sp"
             android:paddingStart="16sp"
+            android:text="TextView"
+            android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/checkBox7" />
+            app:layout_constraintTop_toBottomOf="@+id/textView60" />
 
         <TextView
             android:id="@+id/textView62"
@@ -186,14 +186,14 @@
             android:layout_marginTop="10dp"
             android:layout_marginStart="70dp"
             android:layout_marginEnd="45dp"
-            android:text="TextView"
             android:fontFamily="@font/spectral_sc"
             android:gravity="left|center_vertical"
-            android:textSize="16sp"
             android:paddingStart="16sp"
+            android:text="TextView"
+            android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/checkBox8" />
+            app:layout_constraintTop_toBottomOf="@+id/textView62" />
 
         <TextView
             android:id="@+id/textView64"
@@ -201,12 +201,12 @@
             android:layout_height="24dp"
             android:layout_marginTop="26dp"
             android:layout_marginEnd="45dp"
-            android:text="Augalo pirkimas"
-            android:textStyle="bold"
             android:fontFamily="@font/spectral_sc"
             android:gravity="left|center_vertical"
-            android:textSize="16sp"
             android:paddingStart="16sp"
+            android:text="Augalo pirkimas"
+            android:textSize="16sp"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/checkBox9"
             app:layout_constraintTop_toBottomOf="@+id/textView63" />
@@ -215,58 +215,18 @@
             android:id="@+id/textView65"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
             android:layout_marginStart="70dp"
+            android:layout_marginTop="10dp"
             android:layout_marginEnd="45dp"
-            android:text="TextView"
             android:fontFamily="@font/spectral_sc"
             android:gravity="left|center_vertical"
-            android:textSize="16sp"
             android:paddingStart="16sp"
+            android:text="TextView"
+            android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/checkBox9" />
+            app:layout_constraintTop_toBottomOf="@+id/textView64" />
 
-        <LinearLayout
-            android:layout_width="12dp"
-            android:layout_height="12dp"
-            android:orientation="horizontal"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:layout_editor_absoluteY="253dp">
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="18dp"
-            android:layout_height="18dp"
-            android:orientation="horizontal"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:layout_editor_absoluteY="341dp">
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="16dp"
-            android:layout_height="16dp"
-            android:orientation="horizontal"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:layout_editor_absoluteY="422dp">
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/linearLayout3"
-            android:layout_width="10dp"
-            android:layout_height="10dp"
-            android:orientation="horizontal"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:layout_editor_absoluteY="506dp">
-
-        </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
