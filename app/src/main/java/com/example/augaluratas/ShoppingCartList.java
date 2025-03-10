@@ -3,6 +3,7 @@ package com.example.augaluratas;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 
 import androidx.activity.EdgeToEdge;
@@ -24,11 +25,11 @@ public class ShoppingCartList extends AppCompatActivity {
             return insets;
         });
         ImageButton return_button = (ImageButton) findViewById(R.id.return_from_shopping_cart_list);
-        ImageButton shopping_cart = (ImageButton) findViewById(R.id.shopping_cart_list_shopping_cart);
+        Button shopping_cart = (Button) findViewById(R.id.shopping_cart_list_shopping_cart);
         return_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finishActivity(1);
+                finish();
             }
         });
         shopping_cart.setOnClickListener(new View.OnClickListener() {

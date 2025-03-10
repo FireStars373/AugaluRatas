@@ -3,6 +3,7 @@ package com.example.augaluratas;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 
 import androidx.activity.EdgeToEdge;
@@ -24,7 +25,7 @@ public class Subscription extends AppCompatActivity {
             return insets;
         });
         ImageButton sidebar = (ImageButton) findViewById(R.id.sidebar_from_subscription);
-        ImageButton subscribe = (ImageButton) findViewById(R.id.subscribe);
+        Button subscribe = (Button) findViewById(R.id.subscribe);
         sidebar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

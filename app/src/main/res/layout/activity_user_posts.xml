@@ -29,7 +29,7 @@
 
 
         <ImageButton
-            android:id="@+id/back_from_user_posts"
+            android:id="@+id/return_from_user_posts"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="80dp"
@@ -53,9 +53,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
-            android:text="Mano augalai"
             android:fontFamily="@font/spectral_sc"
             android:gravity="center"
+            android:text="Mano augalai"
+            android:textColor="#000000"
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -108,6 +109,7 @@
                         android:fontFamily="@font/spectral_sc"
                         android:gravity="center"
                         android:text="Pavadinimas"
+                        android:textColor="#000000"
                         android:textSize="16sp" />
 
                     <androidx.appcompat.widget.AppCompatButton
@@ -119,6 +121,7 @@
                         android:paddingStart="16dp"
                         android:paddingEnd="16dp"
                         android:text="Apie"
+                        android:textColor="#000000"
                         android:textSize="16sp" />
                 </LinearLayout>
 
@@ -147,6 +150,7 @@
                         android:fontFamily="@font/spectral_sc"
                         android:gravity="center"
                         android:text="Pavadinimas"
+                        android:textColor="#000000"
                         android:textSize="16sp" />
 
                     <androidx.appcompat.widget.AppCompatButton
@@ -158,6 +162,7 @@
                         android:paddingStart="16dp"
                         android:paddingEnd="16dp"
                         android:text="Apie"
+                        android:textColor="#000000"
                         android:textSize="16sp" />
                 </LinearLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>

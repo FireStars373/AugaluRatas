@@ -35,7 +35,7 @@ public class AllPosts extends AppCompatActivity {
         shopping_cart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getBaseContext(), ShoppingCart.class);
+                Intent intent = new Intent(getBaseContext(), ShoppingCartList.class);
                 startActivity(intent);
             }
         });

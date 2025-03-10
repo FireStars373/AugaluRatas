@@ -36,7 +36,7 @@ public class AddPost extends AppCompatActivity {
         return_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finishActivity(1);
+                finish();
             }
         });
     }

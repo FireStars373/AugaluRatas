@@ -34,7 +34,7 @@ public class UserProfile extends AppCompatActivity {
         return_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finishActivity(1);
+                finish();
             }
         });
         user_posts.setOnClickListener(new View.OnClickListener() {

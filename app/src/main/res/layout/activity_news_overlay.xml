@@ -57,9 +57,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="30dp"
-                android:text="Naujienos antraštė"
                 android:fontFamily="@font/spectral_sc"
-                android:textSize="24sp"/>
+                android:text="Naujienos antraštė"
+                android:textColor="#000000"
+                android:textSize="24sp" />
 
             <ImageView
                 android:id="@+id/imageView20"
@@ -79,6 +80,7 @@
                 android:layout_marginBottom="30dp"
                 android:fontFamily="@font/spectral_sc"
                 android:text="Text"
+                android:textColor="#000000"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
@@ -86,12 +88,13 @@
                 android:id="@+id/textView37"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Text"
-                android:layout_marginBottom="30dp"
                 android:layout_marginStart="45dp"
                 android:layout_marginEnd="45dp"
+                android:layout_marginBottom="30dp"
                 android:fontFamily="@font/spectral_sc"
-                android:textSize="20sp"/>
+                android:text="Text"
+                android:textColor="#000000"
+                android:textSize="20sp" />
 
 
         </LinearLayout>

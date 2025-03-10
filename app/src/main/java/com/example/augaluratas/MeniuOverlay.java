@@ -37,7 +37,7 @@ public class MeniuOverlay extends AppCompatActivity {
         remove_sidebar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finishActivity(1);
+                finish();
             }
         });
         main_menu.setOnClickListener(new View.OnClickListener() {

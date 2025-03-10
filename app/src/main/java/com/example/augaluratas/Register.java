@@ -35,7 +35,7 @@ public class Register extends AppCompatActivity {
         return_to_first_screen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getBaseContext(), FirstLoadScreen.class);
+                finish();
             }
         });
     }

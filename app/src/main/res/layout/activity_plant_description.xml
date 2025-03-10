@@ -45,9 +45,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
-                android:text="Augalo pavadinimas"
                 android:fontFamily="@font/spectral_sc"
                 android:gravity="left|center_vertical"
+                android:text="Augalo pavadinimas"
+                android:textColor="#000000"
                 android:textSize="24sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -68,11 +69,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="45dp"
-                android:text="Augalo kilmė"
+                android:layout_marginTop="40dp"
                 android:fontFamily="@font/spectral_sc"
                 android:gravity="left|center_vertical"
+                android:text="Augalo kilmė"
+                android:textColor="#000000"
                 android:textSize="21sp"
-                android:layout_marginTop="40dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/imageView6" />
 
@@ -85,6 +87,7 @@
                 android:layout_marginEnd="45dp"
                 android:fontFamily="@font/spectral_sc"
                 android:text="Kilme"
+                android:textColor="#000000"
                 android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -96,8 +99,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="45dp"
                 android:layout_marginTop="20dp"
-                android:text="Kaip prižiūrėti?"
                 android:fontFamily="@font/spectral_sc"
+                android:text="Kaip prižiūrėti?"
+                android:textColor="#000000"
                 android:textSize="21sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView21" />
@@ -106,15 +110,16 @@
                 android:id="@+id/textView78"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Priežiūra"
-                android:fontFamily="@font/spectral_sc"
-                android:textSize="16sp"
                 android:layout_marginStart="45dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="45dp"
+                android:fontFamily="@font/spectral_sc"
+                android:text="Priežiūra"
+                android:textColor="#000000"
+                android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView56"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView56" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

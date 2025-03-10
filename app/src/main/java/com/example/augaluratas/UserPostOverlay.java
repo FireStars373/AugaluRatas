@@ -28,7 +28,7 @@ public class UserPostOverlay extends AppCompatActivity {
         return_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finishActivity(1);
+                finish();
             }
         });
         sidebar.setOnClickListener(new View.OnClickListener() {

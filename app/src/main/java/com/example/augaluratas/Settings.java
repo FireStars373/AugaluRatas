@@ -35,7 +35,7 @@ public class Settings extends AppCompatActivity {
         return_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finishActivity(1);
+                finish();
             }
         });
         user_data.setOnClickListener(new View.OnClickListener() {
