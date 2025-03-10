@@ -183,7 +183,7 @@
             android:ems="10"
             android:fontFamily="@font/spectral_sc"
             android:inputType="phone"
-            app:layout_constraintBottom_toTopOf="@+id/button7"
+            app:layout_constraintBottom_toTopOf="@+id/register"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView10" />
@@ -206,7 +206,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/button8"
+            android:id="@+id/return_to_first_screen_from_register"
             android:layout_width="220dp"
             android:layout_height="32dp"
             android:layout_marginStart="8dp"
@@ -224,7 +224,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/button7"
+            android:id="@+id/register"
             android:layout_width="291dp"
             android:layout_height="39dp"
             android:layout_marginStart="8dp"

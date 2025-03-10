@@ -64,7 +64,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textView12" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/button5"
+            android:id="@+id/user_profile_user_posts"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="Mano augalai"
@@ -89,12 +89,12 @@
             android:layout_marginStart="45dp"
             android:layout_marginEnd="45dp"
             android:background="@drawable/lines_background_1"
-            app:layout_constraintTop_toBottomOf="@id/button5"
+            app:layout_constraintTop_toBottomOf="@id/user_profile_user_posts"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/button16"
+            android:id="@+id/user_profile_main_page"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -119,12 +119,12 @@
             android:layout_marginStart="45dp"
             android:layout_marginEnd="45dp"
             android:background="@drawable/lines_background_1"
-            app:layout_constraintTop_toBottomOf="@id/button16"
+            app:layout_constraintTop_toBottomOf="@id/user_profile_main_page"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/button17"
+            android:id="@+id/user_profile_settings"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -149,12 +149,12 @@
             android:layout_marginStart="45dp"
             android:layout_marginEnd="45dp"
             android:background="@drawable/lines_background_1"
-            app:layout_constraintTop_toBottomOf="@id/button17"
+            app:layout_constraintTop_toBottomOf="@id/user_profile_settings"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/button18"
+            android:id="@+id/user_profile_logout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -172,7 +172,7 @@
             app:layout_constraintTop_toBottomOf="@+id/view8"/>
 
         <ImageButton
-        android:id="@+id/imageButton7"
+        android:id="@+id/return_from_user_profile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="45dp"

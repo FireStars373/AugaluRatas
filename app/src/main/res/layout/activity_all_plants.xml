@@ -88,7 +88,7 @@
     </ScrollView>
 
         <ImageButton
-        android:id="@+id/imageButton15"
+        android:id="@+id/sidebar_from_all_plants"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="80dp"
@@ -97,13 +97,4 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageButton
-        android:id="@+id/imageButton6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginStart="45dp"
-        android:background="@drawable/arrow_button"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageButton15" />
 </androidx.constraintlayout.widget.ConstraintLayout>

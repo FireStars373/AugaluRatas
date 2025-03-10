@@ -29,7 +29,7 @@
 
 
         <ImageButton
-            android:id="@+id/imageButton11"
+            android:id="@+id/back_from_user_posts"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="80dp"

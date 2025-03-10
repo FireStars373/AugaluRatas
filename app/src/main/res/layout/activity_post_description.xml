@@ -31,25 +31,24 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageButton
-            android:id="@+id/imageButton14"
+            android:id="@+id/sidebar_from_post_description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="80dp"
-            android:layout_marginEnd="300dp"
             android:layout_marginStart="45dp"
+            android:layout_marginTop="80dp"
             android:background="@drawable/hamburger_button"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
-            android:id="@+id/imageView31"
+        <ImageButton
+            android:id="@+id/return_from_post_description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
             android:layout_marginStart="45dp"
+            android:layout_marginTop="24dp"
             android:background="@drawable/arrow_button"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageButton14" />
+            app:layout_constraintTop_toBottomOf="@+id/sidebar_from_post_description" />
 
         <ImageView
             android:id="@+id/imageView14"

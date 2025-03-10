@@ -27,7 +27,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageButton
-            android:id="@+id/imageButton"
+            android:id="@+id/return_from_settings"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="45dp"
@@ -47,7 +47,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/button19"
+            android:id="@+id/settings_user_data"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="160dp"
@@ -74,10 +74,10 @@
             android:background="@drawable/lines_background_1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/button19" />
+            app:layout_constraintTop_toBottomOf="@id/settings_user_data" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/button20"
+            android:id="@+id/settings_notifications"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -104,10 +104,10 @@
             android:background="@drawable/lines_background_1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/button20" />
+            app:layout_constraintTop_toBottomOf="@id/settings_notifications" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/button21"
+            android:id="@+id/settings_help"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -134,10 +134,10 @@
             android:background="@drawable/lines_background_1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/button21" />
+            app:layout_constraintTop_toBottomOf="@id/settings_help" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/button22"
+            android:id="@+id/settings_about"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -164,10 +164,10 @@
             android:background="@drawable/lines_background_1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/button22" />
+            app:layout_constraintTop_toBottomOf="@id/settings_about" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/button23"
+            android:id="@+id/settings_privacy"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"

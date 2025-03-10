@@ -40,11 +40,11 @@
             android:layout_marginEnd="45dp"
             android:background="@drawable/searchbox_background_1"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/imageButton21"
+            app:layout_constraintStart_toEndOf="@+id/remove_sidebar"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageButton
-            android:id="@+id/imageButton21"
+            android:id="@+id/remove_sidebar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="45dp"
@@ -54,7 +54,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/button6"
+            android:id="@+id/sidebar_main_page"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="45dp"
@@ -80,13 +80,13 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="45dp"
             android:background="@drawable/lines_background_1"
-            app:layout_constraintBottom_toTopOf="@+id/button9"
+            app:layout_constraintBottom_toTopOf="@+id/sidebar_all_posts"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/button6" />
+            app:layout_constraintTop_toBottomOf="@+id/sidebar_main_page" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/button9"
+            android:id="@+id/sidebar_all_posts"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="45dp"
@@ -112,13 +112,13 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="45dp"
             android:background="@drawable/lines_background_1"
-            app:layout_constraintBottom_toTopOf="@+id/button10"
+            app:layout_constraintBottom_toTopOf="@+id/sidebar_add_post"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/button9" />
+            app:layout_constraintTop_toBottomOf="@+id/sidebar_all_posts" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/button10"
+            android:id="@+id/sidebar_add_post"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="45dp"
@@ -144,13 +144,13 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="45dp"
             android:background="@drawable/lines_background_1"
-            app:layout_constraintBottom_toTopOf="@+id/button11"
+            app:layout_constraintBottom_toTopOf="@+id/sidebar_all_plants"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/button10" />
+            app:layout_constraintTop_toBottomOf="@+id/sidebar_add_post" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/button11"
+            android:id="@+id/sidebar_all_plants"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="45dp"
@@ -176,13 +176,13 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="45dp"
             android:background="@drawable/lines_background_1"
-            app:layout_constraintBottom_toTopOf="@+id/button12"
+            app:layout_constraintBottom_toTopOf="@+id/sidebar_cart_list"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/button11" />
+            app:layout_constraintTop_toBottomOf="@+id/sidebar_all_plants" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/button12"
+            android:id="@+id/sidebar_cart_list"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="45dp"
@@ -208,13 +208,13 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="45dp"
             android:background="@drawable/lines_background_1"
-            app:layout_constraintBottom_toTopOf="@+id/button13"
+            app:layout_constraintBottom_toTopOf="@+id/sidebar_user_profile"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/button12" />
+            app:layout_constraintTop_toBottomOf="@+id/sidebar_cart_list" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/button13"
+            android:id="@+id/sidebar_user_profile"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="45dp"
@@ -240,13 +240,13 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="45dp"
             android:background="@drawable/lines_background_1"
-            app:layout_constraintBottom_toTopOf="@+id/button14"
+            app:layout_constraintBottom_toTopOf="@+id/sidebar_subscription"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/button13" />
+            app:layout_constraintTop_toBottomOf="@+id/sidebar_user_profile" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/button14"
+            android:id="@+id/sidebar_subscription"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="45dp"
@@ -272,13 +272,13 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="45dp"
             android:background="@drawable/lines_background_1"
-            app:layout_constraintBottom_toTopOf="@+id/button15"
+            app:layout_constraintBottom_toTopOf="@+id/sidebar_logout"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/button14" />
+            app:layout_constraintTop_toBottomOf="@+id/sidebar_subscription" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/button15"
+            android:id="@+id/sidebar_logout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="45dp"

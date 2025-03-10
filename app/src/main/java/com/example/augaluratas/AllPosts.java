@@ -1,6 +1,9 @@
 package com.example.augaluratas;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageButton;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,6 +22,22 @@ public class AllPosts extends AppCompatActivity {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
+        });
+        ImageButton sidebar = (ImageButton) findViewById(R.id.sidebar_from_all_posts);
+        ImageButton shopping_cart = (ImageButton) findViewById(R.id.shopping_cart);
+        sidebar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getBaseContext(), MeniuOverlay.class);
+                startActivity(intent);
+            }
+        });
+        shopping_cart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getBaseContext(), ShoppingCart.class);
+                startActivity(intent);
+            }
         });
     }
 }
