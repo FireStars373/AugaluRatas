@@ -14,7 +14,12 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        vectorDrawables.useSupportLibrary = true
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments["room.schemaLocation"] = "$projectDir/schemas".toString()
+            }
+        }
     }
 
     buildTypes {
@@ -36,6 +41,9 @@ android {
 }
 
 dependencies {
+    val room_version = "2.2.5"
+    val lifecycle_version = "2.2.0"
+    val arch_version = "2.1.0"
 
     implementation(libs.appcompat)
     implementation(libs.material)
@@ -45,6 +53,18 @@ dependencies {
     implementation(libs.lifecycle.livedata.ktx)
     implementation(libs.lifecycle.viewmodel.ktx)
     implementation(libs.gridlayout)
+
+    // Room biblioteka
+    implementation("androidx.room:room-runtime:$room_version")
+    annotationProcessor("androidx.room:room-compiler:$room_version")
+    androidTestImplementation("androidx.room:room-testing:$room_version")
+
+    // Lifecycle komponentai
+    implementation("androidx.lifecycle:lifecycle-viewmodel:$lifecycle_version")
+    annotationProcessor("androidx.lifecycle:lifecycle-compiler:$lifecycle_version")
+    androidTestImplementation("androidx.arch.core:core-testing:$arch_version")
+
+    // Testavimo bibliotekos
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
