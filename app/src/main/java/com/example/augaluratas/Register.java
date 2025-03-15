@@ -13,18 +13,20 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class Register extends AppCompatActivity {
 
+    private Button register = (Button) findViewById(R.id.register);
+    private Button return_to_first_screen = (Button) findViewById(R.id.return_to_first_screen_from_register);
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_register);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.contstraint_layout), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        Button register = (Button) findViewById(R.id.register);
-        Button return_to_first_screen = (Button) findViewById(R.id.return_to_first_screen_from_register);
+
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

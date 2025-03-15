@@ -14,18 +14,20 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class Subscription extends AppCompatActivity {
 
+    private ImageButton sidebar = (ImageButton) findViewById(R.id.sidebar_from_subscription);
+    private Button subscribe = (Button) findViewById(R.id.subscribe);
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_subscription);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.contstraint_layout), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        ImageButton sidebar = (ImageButton) findViewById(R.id.sidebar_from_subscription);
-        Button subscribe = (Button) findViewById(R.id.subscribe);
+
         sidebar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -3,7 +3,10 @@ package com.example.augaluratas;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,18 +16,28 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class UserPostOverlay extends AppCompatActivity {
 
+
+    private ImageButton return_button = (ImageButton) findViewById(R.id.return_from_user_post_overlay);
+    private ImageButton sidebar = (ImageButton) findViewById(R.id.sidebar_from_user_post_overlay);
+    private ImageView photo = (ImageView) findViewById(R.id.user_post_photo);
+    private TextView title = (TextView) findViewById(R.id.user_post_title);
+    private TextView description = (TextView) findViewById(R.id.user_post_description);
+    private TextView price = (TextView) findViewById(R.id.user_post_price);
+    private Button change = (Button) findViewById(R.id.user_post_change);
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_user_post_overlay);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.contstraint_layout), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        ImageButton return_button = (ImageButton) findViewById(R.id.return_from_user_post_overlay);
-        ImageButton sidebar = (ImageButton) findViewById(R.id.sidebar_from_user_post_overlay);
+
+        //(FUTURE) Set data from database
+
         return_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -36,6 +49,13 @@ public class UserPostOverlay extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(getBaseContext(), MeniuOverlay.class);
                 startActivity(intent);
+            }
+        });
+        change.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //(FUTURE) Change data in database
+
             }
         });
     }

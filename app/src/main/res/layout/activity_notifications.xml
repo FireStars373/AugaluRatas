@@ -2,7 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
+    android:id="@+id/contstraint_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#CBD2A4"
@@ -65,7 +65,7 @@
 
 
         <CheckBox
-            android:id="@+id/checkBox6"
+            android:id="@+id/notification_post_viewed"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_marginTop="40dp"
@@ -74,31 +74,31 @@
             app:layout_constraintTop_toBottomOf="@+id/textView57" />
 
         <CheckBox
-            android:id="@+id/checkBox7"
+            android:id="@+id/notification_post_shared"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_marginTop="60dp"
             android:layout_marginStart="45dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/checkBox6" />
+            app:layout_constraintTop_toBottomOf="@+id/notification_post_viewed" />
 
         <CheckBox
-            android:id="@+id/checkBox8"
+            android:id="@+id/notification_post_liked"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_marginStart="45dp"
             android:layout_marginTop="60dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/checkBox7" />
+            app:layout_constraintTop_toBottomOf="@+id/notification_post_shared" />
 
         <CheckBox
-            android:id="@+id/checkBox9"
+            android:id="@+id/notification_plant_purchased"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_marginTop="60dp"
             android:layout_marginStart="45dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/checkBox8" />
+            app:layout_constraintTop_toBottomOf="@+id/notification_post_liked" />
 
         <TextView
             android:id="@+id/textView58"
@@ -114,7 +114,7 @@
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/checkBox6"
+            app:layout_constraintStart_toEndOf="@+id/notification_post_viewed"
             app:layout_constraintTop_toBottomOf="@+id/textView57" />
 
         <TextView
@@ -148,7 +148,7 @@
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/checkBox7"
+            app:layout_constraintStart_toEndOf="@+id/notification_post_shared"
             app:layout_constraintTop_toBottomOf="@+id/textView59" />
 
         <TextView
@@ -182,7 +182,7 @@
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/checkBox8"
+            app:layout_constraintStart_toEndOf="@+id/notification_post_liked"
             app:layout_constraintTop_toBottomOf="@+id/textView61" />
 
         <TextView
@@ -216,7 +216,7 @@
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/checkBox9"
+            app:layout_constraintStart_toEndOf="@+id/notification_plant_purchased"
             app:layout_constraintTop_toBottomOf="@+id/textView63" />
 
         <TextView

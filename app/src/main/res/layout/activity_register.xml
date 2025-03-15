@@ -2,7 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
+    android:id="@+id/contstraint_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#43352D"
@@ -36,10 +36,10 @@
             android:text="Pakartoto slaptažodį"
             android:textColor="#FFFFFF"
             android:textSize="20sp"
-            app:layout_constraintBottom_toTopOf="@+id/editTextTextPassword3"
+            app:layout_constraintBottom_toTopOf="@+id/register_password_repeat"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword2" />
+            app:layout_constraintTop_toBottomOf="@+id/register_password" />
 
         <TextView
             android:id="@+id/textView5"
@@ -67,13 +67,13 @@
             android:text="Vartotojo vardas"
             android:textColor="#FFFFFF"
             android:textSize="20sp"
-            app:layout_constraintBottom_toTopOf="@+id/editTextText2"
+            app:layout_constraintBottom_toTopOf="@+id/register_name"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
         <EditText
-            android:id="@+id/editTextText2"
+            android:id="@+id/register_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginEnd="70dp"
@@ -99,13 +99,13 @@
             android:text="El. Pašto adresas"
             android:textColor="#FFFFFF"
             android:textSize="20sp"
-            app:layout_constraintBottom_toTopOf="@+id/editTextTextEmailAddress2"
+            app:layout_constraintBottom_toTopOf="@+id/register_email"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextText2" />
+            app:layout_constraintTop_toBottomOf="@+id/register_name" />
 
         <EditText
-            android:id="@+id/editTextTextEmailAddress2"
+            android:id="@+id/register_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="70dp"
@@ -133,13 +133,13 @@
             android:text="Slaptažodis"
             android:textColor="#FFFFFF"
             android:textSize="20sp"
-            app:layout_constraintBottom_toTopOf="@+id/editTextTextPassword2"
+            app:layout_constraintBottom_toTopOf="@+id/register_password"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextTextEmailAddress2" />
+            app:layout_constraintTop_toBottomOf="@+id/register_email" />
 
         <EditText
-            android:id="@+id/editTextTextPassword3"
+            android:id="@+id/register_password_repeat"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="70dp"
@@ -166,13 +166,13 @@
             android:text="Telefono numeris"
             android:textColor="#FFFFFF"
             android:textSize="20sp"
-            app:layout_constraintBottom_toTopOf="@+id/editTextPhone"
+            app:layout_constraintBottom_toTopOf="@+id/register_phone_number"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword3" />
+            app:layout_constraintTop_toBottomOf="@+id/register_password_repeat" />
 
         <EditText
-            android:id="@+id/editTextPhone"
+            android:id="@+id/register_phone_number"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="70dp"
@@ -189,7 +189,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textView10" />
 
         <EditText
-            android:id="@+id/editTextTextPassword2"
+            android:id="@+id/register_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="70dp"

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,26 +14,27 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class MeniuOverlay extends AppCompatActivity {
 
+    private ImageButton remove_sidebar = (ImageButton) findViewById(R.id.remove_sidebar);
+    private Button main_menu = (Button) findViewById(R.id.sidebar_main_page);
+    private Button plant_gallery = (Button) findViewById(R.id.sidebar_all_posts);
+    private Button upload_plant = (Button) findViewById(R.id.sidebar_add_post);
+    private Button plant_maintenance = (Button) findViewById(R.id.sidebar_all_plants);
+    private Button cart = (Button) findViewById(R.id.sidebar_cart_list);
+    private Button account = (Button) findViewById(R.id.sidebar_user_profile);
+    private Button subscribe = (Button) findViewById(R.id.sidebar_subscription);
+    private Button logout = (Button) findViewById(R.id.sidebar_logout);
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_meniu_overlay);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.contstraint_layout), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
 
-        android.widget.ImageButton remove_sidebar = (android.widget.ImageButton) findViewById(R.id.remove_sidebar);
-        Button main_menu = (Button) findViewById(R.id.sidebar_main_page);
-        Button plant_gallery = (Button) findViewById(R.id.sidebar_all_posts);
-        Button upload_plant = (Button) findViewById(R.id.sidebar_add_post);
-        Button plant_maintenance = (Button) findViewById(R.id.sidebar_all_plants);
-        Button cart = (Button) findViewById(R.id.sidebar_cart_list);
-        Button account = (Button) findViewById(R.id.sidebar_user_profile);
-        Button subscribe = (Button) findViewById(R.id.sidebar_subscription);
-        Button logout = (Button) findViewById(R.id.sidebar_logout);
 
         remove_sidebar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,6 +87,12 @@ public class MeniuOverlay extends AppCompatActivity {
         subscribe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //(FUTURE) Check if user is subscribed
+//                if (subscribed){
+//                    Intent intent = new Intent(getBaseContext(), SubscriptionSuccess.class);
+//                    startActivity(intent);
+//                    return;
+//                }
                 Intent intent = new Intent(getBaseContext(), Subscription.class);
                 startActivity(intent);
             }
