@@ -11,25 +11,65 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.LinearLayout;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import java.util.List;
+
 public class AllPlants extends AppCompatActivity {
+    private PlantsDatabase db;
+    private PlantsDAO plantsDAO;
+    private LinearLayout plantListLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_all_plants);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
-        ImageButton sidebar = (ImageButton) findViewById(R.id.sidebar_from_all_plants);
-        sidebar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getBaseContext(), MeniuOverlay.class);
-                startActivity(intent);
-            }
-        });
+
+        db = PlantsDatabase.getDatabase(getApplicationContext());
+        plantsDAO = db.plantsDAO();
+
+        Plants plant = new Plants("Rožė", "Graži gėlė");
+        new Thread(() -> {
+            plantsDAO.insert(plant);
+        }).start();
+
+        plantListLayout = findViewById(R.id.plant_list_layout);
+
+        loadPlants();
     }
+
+    private void loadPlants() {
+        List<Plants> plants = plantsDAO.getAllPlants();
+        String currentCategory = "";
+
+        for (Plants plant : plants) {
+            // Add category button if a new category is encountered
+            if (!plant.getCategory().equals(currentCategory)) {
+                currentCategory = plant.getCategory();
+                Button categoryButton = new Button(this);
+                categoryButton.setText(currentCategory);
+                categoryButton.setEnabled(false);
+                plantListLayout.addView(categoryButton);
+            }
+
+            // Add plant button
+            Button plantButton = new Button(this);
+            plantButton.setText(plant.getName());
+            plantButton.setOnClickListener(v -> openPlantDetails(plant.getName()));
+            plantListLayout.addView(plantButton);
+        }
+    }
+
+    private void openPlantDetails(String plantName) {
+        Intent intent = new Intent(this, plant_maintanance.class);
+        intent.putExtra("PLANT_NAME", plantName);
+        startActivity(intent);
+    }
+
 }
