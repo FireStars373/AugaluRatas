@@ -23,7 +23,7 @@ public class MainPage extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        ImageButton sidebar = (android.widget.ImageButton) findViewById(R.id.sidebar_from_main_page);
+        ImageButton sidebar = findViewById(R.id.sidebar_from_main_page);
         sidebar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

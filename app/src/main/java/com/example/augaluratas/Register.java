@@ -13,8 +13,8 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class Register extends AppCompatActivity {
 
-    private Button register = (Button) findViewById(R.id.register);
-    private Button return_to_first_screen = (Button) findViewById(R.id.return_to_first_screen_from_register);
+    private final Button register = findViewById(R.id.register);
+    private final Button return_to_first_screen = findViewById(R.id.return_to_first_screen_from_register);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

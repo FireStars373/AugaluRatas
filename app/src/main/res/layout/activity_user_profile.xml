@@ -33,22 +33,25 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="60dp"
             android:layout_marginStart="60dp"
+            android:contentDescription="@string/user_icon"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:srcCompat="@tools:sample/avatars" />
 
         <TextView
             android:id="@+id/textView13"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
+            android:layout_marginEnd="45dp"
             android:fontFamily="@font/spectral_sc"
-            android:text="Username"
+            android:text="@string/username"
             android:textColor="@color/text_brown"
             android:textSize="28sp"
             app:layout_constraintBottom_toTopOf="@+id/user_profile_user_posts"
             app:layout_constraintStart_toEndOf="@+id/imageView"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/user_profile_user_posts"
@@ -59,8 +62,8 @@
             android:layout_marginEnd="45dp"
             android:background="@drawable/button_background_4"
             android:fontFamily="@font/spectral_sc"
-            android:gravity="left|center_vertical"
-            android:paddingStart="16dp"
+            android:gravity="start|center_vertical"
+            android:paddingHorizontal="16dp"
             android:text="@string/my_plants"
             android:textColor="@color/text_brown"
             android:textSize="24sp"
@@ -89,8 +92,8 @@
             android:layout_marginEnd="45dp"
             android:background="@drawable/button_background_4"
             android:fontFamily="@font/spectral_sc"
-            android:gravity="left|center_vertical"
-            android:paddingStart="16dp"
+            android:gravity="start|center_vertical"
+            android:paddingHorizontal="16dp"
             android:text="@string/main_page"
             android:textColor="@color/text_brown"
             android:textSize="24sp"
@@ -119,8 +122,8 @@
             android:layout_marginEnd="45dp"
             android:background="@drawable/button_background_4"
             android:fontFamily="@font/spectral_sc"
-            android:gravity="left|center_vertical"
-            android:paddingStart="16dp"
+            android:gravity="start|center_vertical"
+            android:paddingHorizontal="16dp"
             android:text="@string/settings"
             android:textColor="@color/text_brown"
             android:textSize="24sp"
@@ -149,8 +152,8 @@
             android:layout_marginEnd="45dp"
             android:background="@drawable/button_background_4"
             android:fontFamily="@font/spectral_sc"
-            android:gravity="left|center_vertical"
-            android:paddingStart="16dp"
+            android:gravity="start|center_vertical"
+            android:paddingHorizontal="16dp"
             android:text="@string/log_out"
             android:textColor="@color/text_brown"
             android:textSize="24sp"
@@ -159,14 +162,15 @@
             app:layout_constraintTop_toBottomOf="@+id/view8" />
 
         <ImageButton
-        android:id="@+id/return_from_user_profile"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="45dp"
-        android:background="@drawable/arrow_button"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+            android:id="@+id/return_from_user_profile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="45dp"
+            android:contentDescription="@string/back_btn"
+            android:background="@drawable/arrow_button"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

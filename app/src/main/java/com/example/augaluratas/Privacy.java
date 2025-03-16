@@ -14,8 +14,8 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class Privacy extends AppCompatActivity {
 
-    private ImageButton return_button = (ImageButton) findViewById(R.id.return_from_privacy);
-    private CheckBox agreement = (CheckBox) findViewById(R.id.privacy_agreement);
+    private final ImageButton return_button = findViewById(R.id.return_from_privacy);
+    private final CheckBox agreement = findViewById(R.id.privacy_agreement);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +38,6 @@ public class Privacy extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked){
                     //(FUTURE) Change settings
-                    return;
                 }
             }
         });

@@ -34,6 +34,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="80dp"
             android:layout_marginStart="45dp"
+            android:contentDescription="@string/back_btn"
             android:background="@drawable/arrow_button"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -44,6 +45,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="45dp"
             android:background="@drawable/lotus_icon"
+            android:contentDescription="@string/lotus_icn"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -99,6 +101,7 @@
                         android:id="@+id/imageView10"
                         android:layout_width="120dp"
                         android:layout_height="120dp"
+                        android:contentDescription="@string/plant_img"
                         tools:srcCompat="@tools:sample/avatars" />
 
                     <TextView
@@ -108,7 +111,7 @@
                         android:background="@drawable/square_background_5"
                         android:fontFamily="@font/spectral_sc"
                         android:gravity="center"
-                        android:text="Pavadinimas"
+                        android:text="@string/plant_name"
                         android:textColor="@color/text_brown"
                         android:textSize="16sp" />
 
@@ -120,7 +123,7 @@
                         android:fontFamily="@font/spectral_sc"
                         android:paddingStart="16dp"
                         android:paddingEnd="16dp"
-                        android:text="Apie"
+                        android:text="@string/about_plant"
                         android:textColor="@color/dark_brown"
                         android:textSize="16sp" />
                 </LinearLayout>
@@ -138,6 +141,7 @@
                         android:id="@+id/imageView11"
                         android:layout_width="120dp"
                         android:layout_height="120dp"
+                        android:contentDescription="@string/plant_img"
                         tools:srcCompat="@tools:sample/avatars" />
 
                     <TextView
@@ -147,7 +151,7 @@
                         android:background="@drawable/square_background_5"
                         android:fontFamily="@font/spectral_sc"
                         android:gravity="center"
-                        android:text="Pavadinimas"
+                        android:text="@string/plant_name"
                         android:textColor="@color/text_brown"
                         android:textSize="16sp" />
 
@@ -159,7 +163,7 @@
                         android:fontFamily="@font/spectral_sc"
                         android:paddingStart="16dp"
                         android:paddingEnd="16dp"
-                        android:text="Apie"
+                        android:text="@string/about_plant"
                         android:textColor="@color/dark_brown"
                         android:textSize="16sp" />
 

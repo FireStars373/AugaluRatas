@@ -33,6 +33,7 @@
             android:layout_marginTop="80dp"
             android:layout_marginEnd="300dp"
             android:layout_marginStart="45dp"
+            android:contentDescription="@string/hamburger_btn"
             android:background="@drawable/hamburger_button"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -44,6 +45,7 @@
             android:layout_marginTop="45dp"
             android:background="@drawable/lotus_icon"
             app:layout_constraintEnd_toEndOf="parent"
+            android:contentDescription="@string/lotus_icn"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -61,7 +63,7 @@
             android:paddingEnd="16dp"
             android:text="@string/successful_subscription"
             android:textColor="@color/dark_brown"
-            android:textSize="24dp"
+            android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView8" />
@@ -87,6 +89,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:layout_marginStart="45dp"
+            android:contentDescription="@string/back_btn"
             android:background="@drawable/arrow_button"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/sidebar_from_subscription_success" />

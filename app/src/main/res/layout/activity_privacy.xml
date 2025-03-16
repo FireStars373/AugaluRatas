@@ -32,6 +32,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="80dp"
             android:layout_marginStart="45dp"
+            android:contentDescription="@string/back_btn"
             android:background="@drawable/arrow_button"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -42,6 +43,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="45dp"
             android:background="@drawable/lotus_icon"
+            android:contentDescription="@string/lotus_icn"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -100,10 +102,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/spectral_sc"
-                    android:gravity="left|center_vertical"
+                    android:gravity="start|center_vertical"
                     android:paddingStart="16dp"
                     android:paddingEnd="16dp"
-                    android:text="Hellooooo"
+                    android:text="@string/privacy_text"
                     android:textColor="@color/text_brown"
                     android:textSize="16sp" />
 
@@ -136,7 +138,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:fontFamily="@font/spectral_sc"
-                android:gravity="left|center_vertical"
+                android:gravity="start|center_vertical"
                 android:text="@string/read_and_agreed_with_privacy"
                 android:textColor="@color/text_brown"
                 android:textSize="16sp" />

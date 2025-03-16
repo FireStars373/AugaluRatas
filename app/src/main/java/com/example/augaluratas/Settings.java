@@ -25,13 +25,13 @@ public class Settings extends AppCompatActivity {
             return insets;
         });
 
-        ImageButton return_button = (ImageButton) findViewById(R.id.return_from_settings);
-        Button main_page = (Button) findViewById(R.id.settings_main_page);
-        Button user_data = (Button) findViewById(R.id.settings_user_data);
-        Button notifications = (Button) findViewById(R.id.settings_notifications);
-        Button help = (Button) findViewById(R.id.settings_help);
-        Button about = (Button) findViewById(R.id.settings_about);
-        Button privacy = (Button) findViewById(R.id.settings_privacy);
+        ImageButton return_button = findViewById(R.id.return_from_settings);
+        Button main_page = findViewById(R.id.settings_main_page);
+        Button user_data = findViewById(R.id.settings_user_data);
+        Button notifications = findViewById(R.id.settings_notifications);
+        Button help = findViewById(R.id.settings_help);
+        Button about = findViewById(R.id.settings_about);
+        Button privacy = findViewById(R.id.settings_privacy);
 
         return_button.setOnClickListener(new View.OnClickListener() {
             @Override

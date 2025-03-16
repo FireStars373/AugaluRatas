@@ -23,8 +23,8 @@ public class AllPosts extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        ImageButton sidebar = (ImageButton) findViewById(R.id.sidebar_from_all_posts);
-        ImageButton shopping_cart = (ImageButton) findViewById(R.id.shopping_cart);
+        ImageButton sidebar = findViewById(R.id.sidebar_from_all_posts);
+        ImageButton shopping_cart = findViewById(R.id.shopping_cart);
         sidebar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

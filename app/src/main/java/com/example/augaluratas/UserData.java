@@ -14,12 +14,12 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class UserData extends AppCompatActivity {
 
-    private ImageButton return_button = (ImageButton) findViewById(R.id.return_from_user_data);
-    private TextView name = (TextView) findViewById(R.id.user_data_name);
-    private TextView email = (TextView) findViewById(R.id.user_data_email);
-    private TextView password = (TextView) findViewById(R.id.user_data_password);
-    private TextView phone_number = (TextView) findViewById(R.id.user_data_phone_number);
-    private Button change_data = (Button) findViewById(R.id.change_user_data);
+    private final ImageButton return_button = findViewById(R.id.return_from_user_data);
+    private final TextView name = findViewById(R.id.user_data_name);
+    private final TextView email = findViewById(R.id.user_data_email);
+    private final TextView password = findViewById(R.id.user_data_password);
+    private final TextView phone_number = findViewById(R.id.user_data_phone_number);
+    private final Button change_data = findViewById(R.id.change_user_data);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

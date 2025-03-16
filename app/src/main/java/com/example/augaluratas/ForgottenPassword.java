@@ -14,9 +14,9 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class ForgottenPassword extends AppCompatActivity {
 
-    private EditText email = (EditText) findViewById(R.id.forgotten_password_email);
-    private Button send = (Button) findViewById(R.id.forgotten_password_send);
-    private Button go_back = (Button) findViewById(R.id.return_from_forgotten_password);
+    private final EditText email = findViewById(R.id.forgotten_password_email);
+    private final Button send = findViewById(R.id.forgotten_password_send);
+    private final Button go_back = findViewById(R.id.return_from_forgotten_password);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +35,6 @@ public class ForgottenPassword extends AppCompatActivity {
                 String Email = email.getText().toString().trim();
                 if(Email.isEmpty()){
                     Toast.makeText(getApplicationContext(), "Turi būti įrašytas el. paštas", Toast.LENGTH_SHORT).show();
-                    return;
                 }
                 //(FUTURE) Check if email is in database
                 //(FUTURE) If yes, send email for recovery

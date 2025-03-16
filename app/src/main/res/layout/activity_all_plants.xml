@@ -40,6 +40,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/lotus_icon"
+                android:contentDescription="@string/lotus_icn"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -66,9 +67,9 @@
                     android:layout_marginStart="45dp"
                     android:layout_marginEnd="45dp"
                     android:fontFamily="@font/spectral_sc"
-                    android:text="A"
+                    android:text="@string/letter_for_filtering"
                     android:textColor="@color/text_brown"
-                    android:textSize="40dp" />
+                    android:textSize="40sp" />
 
                 <Button
                     android:id="@+id/button41"
@@ -78,10 +79,10 @@
                     android:layout_marginStart="45dp"
                     android:layout_marginEnd="45dp"
                     android:fontFamily="@font/spectral_sc"
-                    android:gravity="left|center_vertical"
+                    android:gravity="start|center_vertical"
                     android:textSize="24sp"
                     android:textColor="@color/text_brown"
-                    android:text="Astrad" />
+                    android:text="@string/plant_name" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
@@ -92,6 +93,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="45dp"
         android:layout_marginTop="80dp"
+        android:contentDescription="@string/back_btn"
         android:background="@drawable/hamburger_button"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

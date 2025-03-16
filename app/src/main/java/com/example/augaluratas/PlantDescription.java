@@ -22,7 +22,7 @@ public class PlantDescription extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        ImageButton return_button = (ImageButton) findViewById(R.id.return_from_plant_description);
+        ImageButton return_button = findViewById(R.id.return_from_plant_description);
         return_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

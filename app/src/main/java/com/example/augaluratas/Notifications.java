@@ -14,11 +14,11 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class Notifications extends AppCompatActivity {
 
-    private CheckBox viewed = (CheckBox) findViewById(R.id.notification_post_viewed);
-    private CheckBox shared = (CheckBox) findViewById(R.id.notification_post_shared);
-    private CheckBox liked = (CheckBox) findViewById(R.id.notification_post_liked);
-    private CheckBox purchased = (CheckBox) findViewById(R.id.notification_plant_purchased);
-    private ImageButton return_button = (ImageButton) findViewById(R.id.return_from_notifications);
+    private final CheckBox viewed = findViewById(R.id.notification_post_viewed);
+    private final CheckBox shared = findViewById(R.id.notification_post_shared);
+    private final CheckBox liked = findViewById(R.id.notification_post_liked);
+    private final CheckBox purchased = findViewById(R.id.notification_plant_purchased);
+    private final ImageButton return_button = findViewById(R.id.return_from_notifications);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +42,6 @@ public class Notifications extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
                     //(FUTURE) set notifications
-                    return;
                 }
             }
         });
@@ -51,7 +50,6 @@ public class Notifications extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked){
                     //(FUTURE) set notifications
-                    return;
                 }
             }
         });
@@ -60,7 +58,6 @@ public class Notifications extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked){
                     //(FUTURE) set notifications
-                    return;
                 }
             }
         });
@@ -69,7 +66,6 @@ public class Notifications extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked){
                     //(FUTURE) set notifications
-                    return;
                 }
             }
         });

@@ -14,8 +14,8 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class Subscription extends AppCompatActivity {
 
-    private ImageButton sidebar = (ImageButton) findViewById(R.id.sidebar_from_subscription);
-    private Button subscribe = (Button) findViewById(R.id.subscribe);
+    private final ImageButton sidebar = findViewById(R.id.sidebar_from_subscription);
+    private final Button subscribe = findViewById(R.id.subscribe);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

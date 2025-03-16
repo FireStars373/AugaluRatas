@@ -22,7 +22,7 @@ public class NewsOverlay extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        ImageButton return_button = (ImageButton) findViewById(R.id.return_from_news_overlay);
+        ImageButton return_button = findViewById(R.id.return_from_news_overlay);
         return_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

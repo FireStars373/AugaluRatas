@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <!-- General-->
     <string name="app_name">AUGALŲ RATAS</string>
     <string name="program_version_number">0.1.0</string>
@@ -91,10 +91,10 @@
     <string name="buy_selected">Pirkti pažymėtus</string>
     <!--Subscription-->
     <string name="monthly_subscription">Mėnesio prenumerata!</string>
-    <string name="subsciption_privilages">Ką gausite užsiprenumeravus?...</string>
-    <string name="subscription_price">Kaina...</string>
+    <string name="subsciption_privilages" tools:ignore="TypographyEllipsis">Ką gausite užsiprenumeravus?...</string>
+    <string name="subscription_price" tools:ignore="TypographyEllipsis">Kaina...</string>
     <string name="successful_subscription">Sėkmingai užprenumeruota!</string>
-    <string name="from_now_on">Nuo šiol galite naudotis šiomis funkcijomis...</string>
+    <string name="from_now_on" tools:ignore="TypographyEllipsis">Nuo šiol galite naudotis šiomis funkcijomis...</string>
     <!--User posts-->
     <string name="my_plants">Mano augalai</string>
     <!--Pop ups-->
@@ -102,7 +102,27 @@
     <string name="wrong_account">Neteisingas vardas ar slaptažodis</string>
 
     <!--BackButton To Do-->
-    <string name="back">Go back to previous screen</string>
+    <string name="back_btn">Back button icon</string>
+    <string name="lotus_icn">Lotus icon</string>
+    <string name="hamburger_btn">Hamburger icon</string>
+    <string name="plant_img">Plant image</string>
+    <string name="heart_icn">Heart icon</string>
+    <string name="naujienos_antraste">Naujienos antraštė</string>
+    <string name="news_highlight">Naujienos pagrindine pastraipa</string>
+    <string name="news_text">Naujienos tekstas</string>
+    <string name="privacy_text">Naudojimo ir privatumo politikos tekstas</string>
+    <string name="plant_name">Augalo Pavadinimas</string>
+    <string name="about_plant">Apie</string>
+    <string name="user_icon">user_icon</string>
+    <string name="price">Kaina</string>
+    <string name="seller_name">Pardavėjas vardas</string>
+    <string name="plant_seller_description">Augalo aprašymas</string>
+    <string name="plant_origin">Augalo kilmė</string>
+    <string name="origin">Kilme</string>
+    <string name="how_to_take_care_of">Kaip prižiūrėti?</string>
+    <string name="maintenance">Priežiūra</string>
+    <string name="letter_for_filtering">A</string>
+    <string name="news_img">News image</string>
 
 
 </resources>

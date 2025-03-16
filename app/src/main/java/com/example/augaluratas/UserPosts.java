@@ -13,8 +13,8 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class UserPosts extends AppCompatActivity {
 
-    private SearchView search = (SearchView) findViewById(R.id.user_posts_search);
-    private ImageButton return_button = (ImageButton) findViewById(R.id.return_from_user_posts);
+    private final SearchView search = findViewById(R.id.user_posts_search);
+    private final ImageButton return_button = findViewById(R.id.return_from_user_posts);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

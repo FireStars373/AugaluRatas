@@ -26,12 +26,12 @@ public class AddPost extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        ImageButton sidebar = (ImageButton) findViewById(R.id.sidebar_from_add_post);
-        ImageButton return_button = (ImageButton) findViewById(R.id.return_from_add_post);
-        Button upload_post = (Button) findViewById(R.id.upload_post);
-        EditText title = (EditText) findViewById(R.id.add_post_title);
-        EditText description = (EditText) findViewById(R.id.add_post_description);
-        EditText price = (EditText) findViewById(R.id.add_post_price);
+        ImageButton sidebar = findViewById(R.id.sidebar_from_add_post);
+        ImageButton return_button = findViewById(R.id.return_from_add_post);
+        Button upload_post = findViewById(R.id.upload_post);
+        EditText title = findViewById(R.id.add_post_title);
+        EditText description = findViewById(R.id.add_post_description);
+        EditText price = findViewById(R.id.add_post_price);
         sidebar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

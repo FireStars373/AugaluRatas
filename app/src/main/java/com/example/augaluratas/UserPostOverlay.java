@@ -17,13 +17,13 @@ import androidx.core.view.WindowInsetsCompat;
 public class UserPostOverlay extends AppCompatActivity {
 
 
-    private ImageButton return_button = (ImageButton) findViewById(R.id.return_from_user_post_overlay);
-    private ImageButton sidebar = (ImageButton) findViewById(R.id.sidebar_from_user_post_overlay);
-    private ImageView photo = (ImageView) findViewById(R.id.user_post_photo);
-    private TextView title = (TextView) findViewById(R.id.user_post_title);
-    private TextView description = (TextView) findViewById(R.id.user_post_description);
-    private TextView price = (TextView) findViewById(R.id.user_post_price);
-    private Button change = (Button) findViewById(R.id.user_post_change);
+    private final ImageButton return_button = findViewById(R.id.return_from_user_post_overlay);
+    private final ImageButton sidebar = findViewById(R.id.sidebar_from_user_post_overlay);
+    private final ImageView photo = findViewById(R.id.user_post_photo);
+    private final TextView title = findViewById(R.id.user_post_title);
+    private final TextView description = findViewById(R.id.user_post_description);
+    private final TextView price = findViewById(R.id.user_post_price);
+    private final Button change = findViewById(R.id.user_post_change);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

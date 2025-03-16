@@ -14,12 +14,12 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 public class PostDescription extends AppCompatActivity {
-    private ImageButton return_button = (ImageButton) findViewById(R.id.return_from_post_description);
-    private ImageButton sidebar = (ImageButton) findViewById(R.id.sidebar_from_post_description);
-    private ImageView photo = (ImageView) findViewById(R.id.post_description_photo);
-    private TextView title = (TextView) findViewById(R.id.post_description_title);
-    private TextView description = (TextView) findViewById(R.id.post_description_description);
-    private TextView price = (TextView) findViewById(R.id.post_description_price);
+    private final ImageButton return_button = findViewById(R.id.return_from_post_description);
+    private final ImageButton sidebar = findViewById(R.id.sidebar_from_post_description);
+    private final ImageView photo = findViewById(R.id.post_description_photo);
+    private final TextView title = findViewById(R.id.post_description_title);
+    private final TextView description = findViewById(R.id.post_description_description);
+    private final TextView price = findViewById(R.id.post_description_price);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -16,11 +16,11 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class Login extends AppCompatActivity {
 
-    private Button login = (Button) findViewById(R.id.login);
-    private Button return_to_first_screen = (Button) findViewById(R.id.return_to_first_screen_from_login);
-    private TextView forgotten_password = (TextView) findViewById(R.id.to_forgotten_password);
-    private EditText name = (EditText) findViewById(R.id.login_name);
-    private EditText password = (EditText) findViewById(R.id.login_password);
+    private final Button login = findViewById(R.id.login);
+    private final Button return_to_first_screen = findViewById(R.id.return_to_first_screen_from_login);
+    private final TextView forgotten_password = findViewById(R.id.to_forgotten_password);
+    private final EditText name = findViewById(R.id.login_name);
+    private final EditText password = findViewById(R.id.login_password);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

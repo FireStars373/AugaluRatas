@@ -28,6 +28,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="80dp"
         android:layout_marginStart="45dp"
+        android:contentDescription="@string/back_btn"
         android:background="@drawable/arrow_button"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -50,6 +51,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/lotus_icon"
+                android:contentDescription="@string/lotus_icn"
                 android:layout_marginBottom="20dp" />
 
             <TextView
@@ -58,7 +60,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="30dp"
                 android:fontFamily="@font/spectral_sc"
-                android:text="Naujienos antraštė"
+                android:text="@string/naujienos_antraste"
                 android:textColor="@color/text_brown"
                 android:textSize="24sp" />
 
@@ -69,6 +71,7 @@
                 android:layout_marginBottom="30dp"
                 android:layout_marginStart="45dp"
                 android:layout_marginEnd="45dp"
+                android:contentDescription="@string/plant_img"
                 tools:srcCompat="@tools:sample/avatars" />
 
             <TextView
@@ -79,7 +82,7 @@
                 android:layout_marginEnd="45dp"
                 android:layout_marginBottom="30dp"
                 android:fontFamily="@font/spectral_sc"
-                android:text="Text"
+                android:text="@string/news_highlight"
                 android:textColor="@color/text_brown"
                 android:textSize="20sp"
                 android:textStyle="bold" />
@@ -92,7 +95,7 @@
                 android:layout_marginEnd="45dp"
                 android:layout_marginBottom="30dp"
                 android:fontFamily="@font/spectral_sc"
-                android:text="Text"
+                android:text="@string/news_text"
                 android:textColor="@color/text_brown"
                 android:textSize="20sp" />
 

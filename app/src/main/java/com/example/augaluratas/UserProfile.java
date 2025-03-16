@@ -25,11 +25,11 @@ public class UserProfile extends AppCompatActivity {
             return insets;
         });
 
-        ImageButton return_button = (ImageButton) findViewById(R.id.return_from_user_profile);
-        Button user_posts = (Button) findViewById(R.id.user_profile_user_posts);
-        Button main_page = (Button) findViewById(R.id.user_profile_main_page);
-        Button settings = (Button) findViewById(R.id.user_profile_settings);
-        Button logout = (Button) findViewById(R.id.user_profile_logout);
+        ImageButton return_button = findViewById(R.id.return_from_user_profile);
+        Button user_posts = findViewById(R.id.user_profile_user_posts);
+        Button main_page = findViewById(R.id.user_profile_main_page);
+        Button settings = findViewById(R.id.user_profile_settings);
+        Button logout = findViewById(R.id.user_profile_logout);
 
         return_button.setOnClickListener(new View.OnClickListener() {
             @Override
