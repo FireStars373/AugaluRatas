@@ -5,7 +5,7 @@
     android:id="@+id/contstraint_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#CBD2A4"
+    android:background="@color/dark_green"
     tools:context=".About">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -30,9 +30,10 @@
             android:id="@+id/return_from_about"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="80dp"
             android:layout_marginStart="45dp"
+            android:layout_marginTop="80dp"
             android:background="@drawable/arrow_button"
+            android:contentDescription="@string/back"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -57,7 +58,7 @@
             android:fontFamily="@font/spectral_sc"
             android:gravity="center"
             android:text="@string/about"
-            android:textColor="#000000"
+            android:textColor="@color/text_brown"
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -72,7 +73,7 @@
             android:fontFamily="@font/spectral_sc"
             android:gravity="center"
             android:text="@string/program_version"
-            android:textColor="#000000"
+            android:textColor="@color/text_brown"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView53" />
@@ -86,10 +87,9 @@
             android:fontFamily="@font/spectral_sc"
             android:gravity="center"
             android:text="@string/program_version_number"
-            android:textColor="#000000"
+            android:textColor="@color/text_brown"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.37"
             app:layout_constraintStart_toEndOf="@+id/textView76"
             app:layout_constraintTop_toBottomOf="@+id/textView53" />
 
@@ -103,7 +103,7 @@
             android:fontFamily="@font/spectral_sc"
             android:gravity="center"
             android:text="@string/program_description"
-            android:textColor="#000000"
+            android:textColor="@color/text_brown"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

@@ -5,7 +5,7 @@
     android:id="@+id/contstraint_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#CBD2A4"
+    android:background="@color/dark_green"
     tools:context=".Subscription">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -23,10 +23,8 @@
             android:background="@drawable/square_background_2"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/imageView7"
@@ -47,7 +45,7 @@
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
             android:text="@string/monthly_subscription"
-            android:textColor="#000000"
+            android:textColor="@color/text_brown"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -63,7 +61,7 @@
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
             android:text="@string/subscribe"
-            android:textColor="#000000"
+            android:textColor="@color/text_brown"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -78,7 +76,7 @@
             android:layout_marginEnd="45dp"
             android:fontFamily="@font/spectral_sc"
             android:text="@string/subsciption_privilages"
-            android:textColor="#000000"
+            android:textColor="@color/text_brown"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -93,8 +91,8 @@
             android:layout_marginEnd="45dp"
             android:fontFamily="@font/spectral_sc"
             android:gravity="center"
-            android:text="@string/price"
-            android:textColor="#000000"
+            android:text="@string/subscription_price"
+            android:textColor="@color/text_brown"
             android:textSize="21sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"

@@ -5,7 +5,7 @@
     android:id="@+id/contstraint_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#CBD2A4"
+    android:background="@color/dark_green"
     tools:context=".PostDescription">
 
     <ScrollView
@@ -14,16 +14,15 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <View
             android:id="@+id/view22"
-            android:layout_width="374dp"
-            android:layout_height="622dp"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
             android:layout_marginStart="20dp"
             android:layout_marginTop="20dp"
             android:layout_marginEnd="20dp"
-            android:layout_marginBottom="20dp"
             android:background="@drawable/square_background_2"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -83,7 +82,7 @@
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
             android:text="Augalo pavadinimas"
-            android:textColor="#000000"
+            android:textColor="@color/text_brown"
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -102,7 +101,7 @@
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
             android:text="Pardavėjo aprašymas"
-            android:textColor="#000000"
+            android:textColor="@color/text_brown"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -121,7 +120,7 @@
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
             android:text="Kaina"
-            android:textColor="#000000"
+            android:textColor="@color/text_brown"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -134,13 +133,15 @@
             android:layout_marginStart="45dp"
             android:layout_marginTop="30dp"
             android:layout_marginEnd="45dp"
+            android:layout_marginBottom="8dp"
             android:background="@drawable/button_background_1"
             android:fontFamily="@font/spectral_sc"
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
             android:text="@string/add_to_cart"
-            android:textColor="#000000"
+            android:textColor="@color/text_brown"
             android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="@+id/view22"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/post_description_price" />

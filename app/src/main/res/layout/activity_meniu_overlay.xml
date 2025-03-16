@@ -5,7 +5,7 @@
     android:id="@+id/contstraint_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#CBD2A4"
+    android:background="@color/dark_green"
     tools:context=".MeniuOverlay">
 
 
@@ -19,12 +19,11 @@
 
         <View
             android:id="@+id/view17"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginStart="20dp"
             android:layout_marginTop="20dp"
             android:layout_marginEnd="20dp"
-            android:layout_marginBottom="20dp"
             android:background="@drawable/square_background_2"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -65,7 +64,7 @@
             android:gravity="left|center_vertical"
             android:paddingStart="16dp"
             android:text="@string/main_page"
-            android:textColor="#55473F"
+            android:textColor="@color/text_brown"
             android:textSize="24sp"
             app:layout_constraintBottom_toTopOf="@+id/view"
             app:layout_constraintEnd_toEndOf="parent"
@@ -97,7 +96,7 @@
             android:gravity="left|center_vertical"
             android:paddingStart="16dp"
             android:text="@string/plant_gallery"
-            android:textColor="#55473F"
+            android:textColor="@color/text_brown"
             android:textSize="24sp"
             app:layout_constraintBottom_toTopOf="@+id/view1"
             app:layout_constraintEnd_toEndOf="parent"
@@ -129,7 +128,7 @@
             android:gravity="left|center_vertical"
             android:paddingStart="16dp"
             android:text="@string/upload_plant"
-            android:textColor="#55473F"
+            android:textColor="@color/text_brown"
             android:textSize="24sp"
             app:layout_constraintBottom_toTopOf="@+id/view2"
             app:layout_constraintEnd_toEndOf="parent"
@@ -161,7 +160,7 @@
             android:gravity="left|center_vertical"
             android:paddingStart="16dp"
             android:text="@string/taking_care_of_plants"
-            android:textColor="#55473F"
+            android:textColor="@color/text_brown"
             android:textSize="24sp"
             app:layout_constraintBottom_toTopOf="@+id/view3"
             app:layout_constraintEnd_toEndOf="parent"
@@ -193,7 +192,7 @@
             android:gravity="left|center_vertical"
             android:paddingStart="16dp"
             android:text="@string/cart"
-            android:textColor="#55473F"
+            android:textColor="@color/text_brown"
             android:textSize="24sp"
             app:layout_constraintBottom_toTopOf="@+id/view4"
             app:layout_constraintEnd_toEndOf="parent"
@@ -225,7 +224,7 @@
             android:gravity="left|center_vertical"
             android:paddingStart="16dp"
             android:text="@string/account"
-            android:textColor="#55473F"
+            android:textColor="@color/text_brown"
             android:textSize="24sp"
             app:layout_constraintBottom_toTopOf="@+id/view5"
             app:layout_constraintEnd_toEndOf="parent"
@@ -257,7 +256,7 @@
             android:gravity="left|center_vertical"
             android:paddingStart="16dp"
             android:text="@string/subscribe"
-            android:textColor="#55473F"
+            android:textColor="@color/text_brown"
             android:textSize="24sp"
             app:layout_constraintBottom_toTopOf="@+id/view6"
             app:layout_constraintEnd_toEndOf="parent"
@@ -290,16 +289,12 @@
             android:gravity="left|center_vertical"
             android:paddingStart="16dp"
             android:text="@string/log_out"
-            android:textColor="#55473F"
+            android:textColor="@color/text_brown"
             android:textSize="24sp"
             app:layout_constraintBottom_toTopOf="@+id/view17"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/view6" />
-
-
-
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

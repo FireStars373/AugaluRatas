@@ -5,7 +5,7 @@
     android:id="@+id/contstraint_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#CBD2A4"
+    android:background="@color/dark_green"
     tools:context=".ShoppingCart">
 
     <ScrollView
@@ -18,10 +18,9 @@
 
         <View
             android:id="@+id/view25"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginTop="20dp"
-            android:layout_marginBottom= "20dp"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
             android:background="@drawable/square_background_2"
@@ -54,6 +53,7 @@
             android:id="@+id/constraintLayout4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/square_background_5"
             android:layout_marginStart="45dp"
             android:layout_marginEnd="45dp"
             android:layout_marginTop="10dp"
@@ -64,6 +64,9 @@
                 android:id="@+id/cart_photo"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@android:drawable/ic_menu_gallery" />
 
             <TextView
@@ -74,10 +77,11 @@
                 android:gravity="left"
                 android:paddingStart="16sp"
                 android:text="Kaina"
-                android:textColor="#000000"
+                android:textColor="@color/text_brown"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/cart_photo"
                 app:layout_constraintTop_toBottomOf="@+id/cart_description" />
 
             <TextView
@@ -88,10 +92,11 @@
                 android:gravity="left"
                 android:paddingStart="16sp"
                 android:text="Apie"
-                android:textColor="#000000"
+                android:textColor="@color/text_brown"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toTopOf="@+id/cart_price"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/cart_photo"
                 app:layout_constraintTop_toBottomOf="@+id/cart_seller" />
 
             <TextView
@@ -102,10 +107,11 @@
                 android:gravity="left"
                 android:paddingStart="16sp"
                 android:text="Pardavėjas"
-                android:textColor="#000000"
+                android:textColor="@color/text_brown"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toTopOf="@+id/cart_description"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/cart_photo"
                 app:layout_constraintTop_toTopOf="parent" />
 
 
@@ -130,7 +136,7 @@
                 android:fontFamily="@font/spectral_sc"
                 android:gravity="left|center_vertical"
                 android:text="@string/delivery_seller"
-                android:textColor="#000000"
+                android:textColor="@color/text_brown"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toTopOf="@+id/get_mail_from_drop_box"
                 app:layout_constraintStart_toStartOf="parent"
@@ -143,7 +149,7 @@
                 android:fontFamily="@font/spectral_sc"
                 android:gravity="left|center_vertical"
                 android:text="@string/delivery_post"
-                android:textColor="#000000"
+                android:textColor="@color/text_brown"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toTopOf="@+id/get_mail_from_carrier"
                 app:layout_constraintStart_toStartOf="parent"
@@ -156,25 +162,13 @@
                 android:fontFamily="@font/spectral_sc"
                 android:gravity="left|center_vertical"
                 android:text="@string/delivery_carrier"
-                android:textColor="#000000"
+                android:textColor="@color/text_brown"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/get_mail_from_drop_box" />
 
         </RadioGroup>
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraintLayout6"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="45dp"
-            android:layout_marginEnd="45dp"
-            android:layout_marginTop="10dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView46">
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout7"
@@ -199,7 +193,7 @@
                 android:gravity="left|center_vertical"
                 android:paddingStart="16sp"
                 android:text="@string/pay_card"
-                android:textColor="#000000"
+                android:textColor="@color/dark_brown"
                 android:textSize="12dp"
                 app:layout_constraintBottom_toTopOf="@+id/pay_by_apple_pay"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -216,7 +210,7 @@
                 android:gravity="left|center_vertical"
                 android:paddingStart="16sp"
                 android:text="@string/apple_pay"
-                android:textColor="#000000"
+                android:textColor="@color/dark_brown"
                 android:textSize="12dp"
                 app:layout_constraintBottom_toTopOf="@+id/pay_by_google_pay"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -232,7 +226,7 @@
                 android:gravity="left|center_vertical"
                 android:paddingStart="16sp"
                 android:text="@string/google_pay"
-                android:textColor="#000000"
+                android:textColor="@color/dark_brown"
                 android:textSize="12dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -249,7 +243,7 @@
             android:fontFamily="@font/spectral_sc"
             android:gravity="center"
             android:text="@string/delivery_methods"
-            android:textColor="#000000"
+            android:textColor="@color/text_brown"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -263,7 +257,7 @@
             android:fontFamily="@font/spectral_sc"
             android:gravity="center"
             android:text="@string/payment_method"
-            android:textColor="#000000"
+            android:textColor="@color/text_brown"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -278,15 +272,11 @@
             android:fontFamily="@font/spectral_sc"
             android:gravity="center"
             android:text="@string/cart"
-            android:textColor="#000000"
+            android:textColor="@color/text_brown"
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView24" />
-
-
-
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

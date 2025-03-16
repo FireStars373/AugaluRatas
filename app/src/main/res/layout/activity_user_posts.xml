@@ -5,7 +5,7 @@
     android:id="@+id/contstraint_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#CBD2A4"
+    android:background="@color/dark_green"
     tools:context=".UserPosts">
 
 
@@ -56,7 +56,7 @@
             android:fontFamily="@font/spectral_sc"
             android:gravity="center"
             android:text="@string/my_plants"
-            android:textColor="#000000"
+            android:textColor="@color/text_brown"
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -84,7 +84,7 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content">
 
                 <LinearLayout
                     android:id="@+id/linearLayout4"
@@ -109,7 +109,7 @@
                         android:fontFamily="@font/spectral_sc"
                         android:gravity="center"
                         android:text="Pavadinimas"
-                        android:textColor="#000000"
+                        android:textColor="@color/text_brown"
                         android:textSize="16sp" />
 
                     <androidx.appcompat.widget.AppCompatButton
@@ -121,7 +121,7 @@
                         android:paddingStart="16dp"
                         android:paddingEnd="16dp"
                         android:text="Apie"
-                        android:textColor="#000000"
+                        android:textColor="@color/dark_brown"
                         android:textSize="16sp" />
                 </LinearLayout>
 
@@ -138,8 +138,6 @@
                         android:id="@+id/imageView11"
                         android:layout_width="120dp"
                         android:layout_height="120dp"
-                        tools:layout_editor_absoluteX="225dp"
-                        tools:layout_editor_absoluteY="264dp"
                         tools:srcCompat="@tools:sample/avatars" />
 
                     <TextView
@@ -150,7 +148,7 @@
                         android:fontFamily="@font/spectral_sc"
                         android:gravity="center"
                         android:text="Pavadinimas"
-                        android:textColor="#000000"
+                        android:textColor="@color/text_brown"
                         android:textSize="16sp" />
 
                     <androidx.appcompat.widget.AppCompatButton
@@ -162,8 +160,9 @@
                         android:paddingStart="16dp"
                         android:paddingEnd="16dp"
                         android:text="Apie"
-                        android:textColor="#000000"
+                        android:textColor="@color/dark_brown"
                         android:textSize="16sp" />
+
                 </LinearLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>

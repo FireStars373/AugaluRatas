@@ -5,7 +5,7 @@
     android:id="@+id/contstraint_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#CBD2A4"
+    android:background="@color/dark_green"
     tools:context=".Settings">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -23,10 +23,8 @@
             android:background="@drawable/square_background_2"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageButton
             android:id="@+id/return_from_settings"
@@ -60,10 +58,9 @@
             android:gravity="left|center_vertical"
             android:paddingStart="16dp"
             android:text="@string/main_page"
-            android:textColor="#55473F"
+            android:textColor="@color/text_brown"
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -91,7 +88,7 @@
             android:gravity="left|center_vertical"
             android:paddingStart="16dp"
             android:text="@string/user_data"
-            android:textColor="#55473F"
+            android:textColor="@color/text_brown"
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -121,7 +118,7 @@
             android:gravity="left|center_vertical"
             android:paddingStart="16dp"
             android:text="@string/notifications"
-            android:textColor="#55473F"
+            android:textColor="@color/text_brown"
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -151,7 +148,7 @@
             android:gravity="left|center_vertical"
             android:paddingStart="16dp"
             android:text="@string/help"
-            android:textColor="#55473F"
+            android:textColor="@color/text_brown"
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -181,7 +178,7 @@
             android:gravity="left|center_vertical"
             android:paddingStart="16dp"
             android:text="@string/about"
-            android:textColor="#55473F"
+            android:textColor="@color/text_brown"
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -211,7 +208,7 @@
             android:gravity="left|center_vertical"
             android:paddingStart="16dp"
             android:text="@string/privacy_policy"
-            android:textColor="#55473F"
+            android:textColor="@color/text_brown"
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

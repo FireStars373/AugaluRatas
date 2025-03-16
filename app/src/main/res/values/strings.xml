@@ -21,7 +21,7 @@
     <!--First load screen-->
     <string name="have_an_account">Jau turi paskyrą?</string>
     <!--Forgotten password-->
-    <string name="forgotten_password">Pamirštas slaptažodis</string>
+    <string name="forgotten_password">Pamiršai slaptažodį?</string>
     <string name="used_email">Naudotas el. paštas</string>
     <string name="send_forgotten_password_email">Siųsti slaptažodžio atnaujinimo laišką</string>
     <!--Help-->
@@ -101,6 +101,8 @@
     <string name="empty_fields">Visi laukai turi būti išpildyti</string>
     <string name="wrong_account">Neteisingas vardas ar slaptažodis</string>
 
+    <!--BackButton To Do-->
+    <string name="back">Go back to previous screen</string>
 
 
 </resources>

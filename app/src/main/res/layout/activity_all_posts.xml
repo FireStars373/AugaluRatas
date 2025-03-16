@@ -2,10 +2,10 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/contstraint_layout"
+    android:id="@+id/constraint_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#CBD2A4"
+    android:background="@color/dark_green"
     tools:context=".AllPosts">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -28,10 +28,10 @@
 
         <ImageButton
             android:id="@+id/shopping_cart"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginTop="80dp"
-            android:layout_marginEnd="44dp"
+            android:layout_marginEnd="45dp"
             android:background="@drawable/baseline_shopping_cart_24"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -78,7 +78,7 @@
             android:fontFamily="@font/spectral_sc"
             android:gravity="center"
             android:text=",,, augalai"
-            android:textColor="#000000"
+            android:textColor="@color/text_brown"
             android:textSize="18sp"
             app:layout_constraintEnd_toStartOf="@+id/spinner3"
             app:layout_constraintStart_toStartOf="parent"
@@ -132,7 +132,7 @@
                         android:fontFamily="@font/spectral_sc"
                         android:gravity="center"
                         android:text="Pavadinimas"
-                        android:textColor="#000000"
+                        android:textColor="@color/text_brown"
                         android:textSize="16sp"
                         app:layout_constraintStart_toStartOf="@id/constraintlayout8"
                         app:layout_constraintTop_toBottomOf="@id/imageView17" />
@@ -145,7 +145,7 @@
                         android:paddingStart="16dp"
                         android:paddingEnd="16dp"
                         android:text="Apie"
-                        android:textColor="#000000"
+                        android:textColor="@color/black"
                         android:textSize="16sp"
                         app:layout_constraintStart_toStartOf="@id/constraintlayout8"
                         app:layout_constraintTop_toBottomOf="@id/textView31" />
@@ -154,6 +154,8 @@
                         android:id="@+id/imageButton28"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginEnd="5dp"
+                        android:layout_marginBottom="5dp"
                         android:background="@drawable/empty_heart_icon"
                         app:layout_constraintEnd_toEndOf="@id/imageView17"
                         app:layout_constraintBottom_toBottomOf="@id/imageView17"/>
@@ -184,7 +186,7 @@
                         android:fontFamily="@font/spectral_sc"
                         android:gravity="center"
                         android:text="Pavadinimas"
-                        android:textColor="#000000"
+                        android:textColor="@color/text_brown"
                         android:textSize="16sp"
                         app:layout_constraintEnd_toEndOf="@id/constraintlayout9"
                         app:layout_constraintTop_toBottomOf="@id/imageView18" />
@@ -198,7 +200,7 @@
                         android:paddingStart="16dp"
                         android:paddingEnd="16dp"
                         android:text="Apie"
-                        android:textColor="#000000"
+                        android:textColor="@color/black"
                         android:textSize="16sp"
                         app:layout_constraintEnd_toEndOf="@id/constraintlayout9"
                         app:layout_constraintTop_toBottomOf="@id/textView34" />
@@ -207,6 +209,8 @@
                         android:id="@+id/imageButton29"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginEnd="5dp"
+                        android:layout_marginBottom="5dp"
                         android:background="@drawable/empty_heart_icon"
                         app:layout_constraintEnd_toEndOf="@id/imageView18"
                         app:layout_constraintBottom_toBottomOf="@id/imageView18"/>
