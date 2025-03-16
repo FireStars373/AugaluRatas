@@ -26,6 +26,7 @@ public class Settings extends AppCompatActivity {
         });
 
         ImageButton return_button = (ImageButton) findViewById(R.id.return_from_settings);
+        Button main_page = (Button) findViewById(R.id.settings_main_page);
         Button user_data = (Button) findViewById(R.id.settings_user_data);
         Button notifications = (Button) findViewById(R.id.settings_notifications);
         Button help = (Button) findViewById(R.id.settings_help);
@@ -36,6 +37,13 @@ public class Settings extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 finish();
+            }
+        });
+        main_page.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getBaseContext(), MainPage.class);
+                startActivity(intent);
             }
         });
         user_data.setOnClickListener(new View.OnClickListener() {

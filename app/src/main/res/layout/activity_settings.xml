@@ -16,15 +16,17 @@
             android:id="@+id/view24"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom= "20dp"
             android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
             android:layout_marginEnd="20dp"
+            android:layout_marginBottom="20dp"
             android:background="@drawable/square_background_2"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
 
         <ImageButton
             android:id="@+id/return_from_settings"
@@ -47,22 +49,53 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/settings_user_data"
+            android:id="@+id/settings_main_page"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="160dp"
             android:layout_marginStart="45dp"
+            android:layout_marginTop="160dp"
             android:layout_marginEnd="45dp"
             android:background="@drawable/button_background_4"
             android:fontFamily="@font/spectral_sc"
             android:gravity="left|center_vertical"
             android:paddingStart="16dp"
+            android:text="@string/main_page"
             android:textColor="#55473F"
             android:textSize="24sp"
-            android:text="Asmeniniai duomenys"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/view32"
+            android:layout_width="0dp"
+            android:layout_height="5dp"
+            android:layout_marginStart="45dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="45dp"
+            android:background="@drawable/lines_background_1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/settings_main_page" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/settings_user_data"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="45dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="45dp"
+            android:background="@drawable/button_background_4"
+            android:fontFamily="@font/spectral_sc"
+            android:gravity="left|center_vertical"
+            android:paddingStart="16dp"
+            android:text="@string/user_data"
+            android:textColor="#55473F"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view32" />
 
         <View
             android:id="@+id/view10"
@@ -80,19 +113,19 @@
             android:id="@+id/settings_notifications"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
             android:layout_marginStart="45dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="45dp"
             android:background="@drawable/button_background_4"
             android:fontFamily="@font/spectral_sc"
             android:gravity="left|center_vertical"
             android:paddingStart="16dp"
-            android:text="Pranešimai"
+            android:text="@string/notifications"
             android:textColor="#55473F"
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/view10"/>
+            app:layout_constraintTop_toBottomOf="@id/view10" />
 
         <View
             android:id="@+id/view11"
@@ -110,19 +143,19 @@
             android:id="@+id/settings_help"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
             android:layout_marginStart="45dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="45dp"
             android:background="@drawable/button_background_4"
             android:fontFamily="@font/spectral_sc"
             android:gravity="left|center_vertical"
             android:paddingStart="16dp"
-            android:text="Pagalba"
+            android:text="@string/help"
             android:textColor="#55473F"
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/view11"/>
+            app:layout_constraintTop_toBottomOf="@id/view11" />
 
         <View
             android:id="@+id/view12"
@@ -140,19 +173,19 @@
             android:id="@+id/settings_about"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
             android:layout_marginStart="45dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="45dp"
             android:background="@drawable/button_background_4"
             android:fontFamily="@font/spectral_sc"
             android:gravity="left|center_vertical"
             android:paddingStart="16dp"
-            android:text="Apie"
+            android:text="@string/about"
             android:textColor="#55473F"
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/view12"/>
+            app:layout_constraintTop_toBottomOf="@id/view12" />
 
         <View
             android:id="@+id/view13"
@@ -170,19 +203,19 @@
             android:id="@+id/settings_privacy"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
             android:layout_marginStart="45dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="45dp"
             android:background="@drawable/button_background_4"
             android:fontFamily="@font/spectral_sc"
             android:gravity="left|center_vertical"
             android:paddingStart="16dp"
-            android:text="Privatumo politika"
+            android:text="@string/privacy_policy"
             android:textColor="#55473F"
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/view13"/>
+            app:layout_constraintTop_toBottomOf="@id/view13" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

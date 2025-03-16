@@ -1,12 +1,106 @@
 <resources>
-    <string name="app_name">Augalu ratas</string>
+    <!-- General-->
+    <string name="app_name">AUGALŲ RATAS</string>
+    <string name="program_version_number">0.1.0</string>
+    <string name="upload">Įkelti</string>
+    <string name="go_back">Grįžti</string>
+    <string name="send">Siųsti</string>
+    <string name="change">Redaguoti</string>
     <string name="title_activity_login">LoginActivity</string>
-    <string name="prompt_email">Email</string>
-    <string name="prompt_password">Password</string>
-    <string name="action_sign_in">Sign in or register</string>
-    <string name="action_sign_in_short">Sign in</string>
-    <string name="welcome">"Welcome !"</string>
-    <string name="invalid_username">Not a valid username</string>
-    <string name="invalid_password">Password must be >5 characters</string>
-    <string name="login_failed">"Login failed"</string>
+
+    <!--About-->
+    <string name="about">Apie</string>
+    <string name="program_version">Programos versija</string>
+    <string name="program_description">Programos aprašymas</string>
+    <!--Add post-->
+    <string name="sell_plant">Parduoti augalą</string>
+    <string name="type_in_title">Įveskite pavadinimą</string>
+    <string name="type_in_plant_description">Įveskite augalo pavadinimą</string>
+    <string name="type_in_price">Įveskite kainą</string>
+    <string name="upload_photo">Įkelkite nuotrauką</string>
+    <!--First load screen-->
+    <string name="have_an_account">Jau turi paskyrą?</string>
+    <!--Forgotten password-->
+    <string name="forgotten_password">Pamirštas slaptažodis</string>
+    <string name="used_email">Naudotas el. paštas</string>
+    <string name="send_forgotten_password_email">Siųsti slaptažodžio atnaujinimo laišką</string>
+    <!--Help-->
+    <string name="faq">DUK</string>
+    <string name="question1">Klausimas 1</string>
+    <string name="question2">Klausimas 2</string>
+    <string name="question3">Klausimas 3</string>
+    <string name="answer1">Atsakymas 1</string>
+    <string name="answer2">Atsakymas 2</string>
+    <string name="answer3">Atsakymas 3</string>
+    <string name="have_problems">Turite problemų? Pasiūlymų? Prašom parašyti mums!</string>
+    <string name="problem">Įrašykite problemą ar pasiūlymą</string>
+    <!--Login-->
+    <string name="hello">Labas!</string>
+    <string name="sign_in">Prisijungti</string>
+    <string name="forgot_my_password">Pamiršau slaptažodį</string>
+    <!--Main page-->
+    <string name="welcome">"Sveiki atvykę,"</string>
+    <string name="news">Naujienos</string>
+    <!--Menu overlay-->
+    <string name="main_page">Pagrindinis puslapis</string>
+    <string name="plant_gallery">Augalų galerija</string>
+    <string name="upload_plant">Įkelti augalą</string>
+    <string name="taking_care_of_plants">Augalų priežiūra</string>
+    <string name="cart">Pirkinių krepšelis</string>
+    <string name="account">Paskyra</string>
+    <string name="subscribe">Prenumeruoti</string>
+    <string name="log_out">Atsijungti</string>
+    <!--Notifications-->
+    <string name="notifications">Pranešimai</string>
+    <string name="post_viewed">Skelbimo peržiūra</string>
+    <string name="post_shared">Skelbimo pasidalinimas</string>
+    <string name="post_liked">Patinka skelbimas</string>
+    <string name="plant_bought">Augalo pirkimas</string>
+    <string name="post_viewed_description">Skelbimo peržiūra aprašymas</string>
+    <string name="post_shared_description">Skelbimo pasidalinimas aprašymas</string>
+    <string name="post_liked_description">Patinka skelbimas aprašymas</string>
+    <string name="plant_bought_description">Augalo pirkimas aprašymas</string>
+    <!--Post description-->
+    <string name="add_to_cart">Pridėti į pirkinių krepšelį</string>
+    <!--Privacy-->
+    <string name="privacy_policy">Privatumo politika</string>
+    <string name="rules">Taisyklės ir naudojimosi politika</string>
+    <string name="read_and_agreed_with_privacy">Perskaičiau ir sutinku su privatumo politika</string>
+    <!--Register-->
+    <string name="register">Registruotis</string>
+    <string name="do_register">Registruokis</string>
+    <string name="tagline">Ir mainykis augalais lengvai!</string>
+    <string name="email">el. paštas</string>
+    <string name="username">Vartotojo vardas</string>
+    <string name="password">Slaptažodis</string>
+    <string name="repeat_password">Pakartoti slaptažodį</string>
+    <string name="phone_number">Telefono numeris</string>
+    <!--Settings-->
+    <string name="user_data">Asmeniniai duomenys</string>
+    <string name="help">Pagalba</string>
+    <string name="settings">Nustatymai</string>
+    <!--Cart-->
+    <string name="delivery_methods">Pristatymo būdai</string>
+    <string name="delivery_seller">Atsiėmimas tiesiai iš pardavėjo</string>
+    <string name="delivery_post">Atsiėmimas paštomate</string>
+    <string name="delivery_carrier">Pristatymas kurjeriu</string>
+    <string name="payment_method">Mokėjimo būdas</string>
+    <string name="pay_card">Mokėjimas kortele</string>
+    <string name="apple_pay">Apple pay</string>
+    <string name="google_pay">Google pay</string>
+    <string name="buy_selected">Pirkti pažymėtus</string>
+    <!--Subscription-->
+    <string name="monthly_subscription">Mėnesio prenumerata!</string>
+    <string name="subsciption_privilages">Ką gausite užsiprenumeravus?...</string>
+    <string name="subscription_price">Kaina...</string>
+    <string name="successful_subscription">Sėkmingai užprenumeruota!</string>
+    <string name="from_now_on">Nuo šiol galite naudotis šiomis funkcijomis...</string>
+    <!--User posts-->
+    <string name="my_plants">Mano augalai</string>
+    <!--Pop ups-->
+    <string name="empty_fields">Visi laukai turi būti išpildyti</string>
+    <string name="wrong_account">Neteisingas vardas ar slaptažodis</string>
+
+
+
 </resources>
