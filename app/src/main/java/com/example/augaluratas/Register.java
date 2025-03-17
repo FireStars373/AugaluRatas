@@ -13,8 +13,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class Register extends AppCompatActivity {
 
-    private final Button register = findViewById(R.id.register);
-    private final Button return_to_first_screen = findViewById(R.id.return_to_first_screen_from_register);
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +25,8 @@ public class Register extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-
+        Button register = findViewById(R.id.register);
+        Button return_to_first_screen = findViewById(R.id.return_to_first_screen_from_register);
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

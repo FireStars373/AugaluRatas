@@ -16,11 +16,6 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class Login extends AppCompatActivity {
 
-    private final Button login = findViewById(R.id.login);
-    private final Button return_to_first_screen = findViewById(R.id.return_to_first_screen_from_login);
-    private final TextView forgotten_password = findViewById(R.id.to_forgotten_password);
-    private final EditText name = findViewById(R.id.login_name);
-    private final EditText password = findViewById(R.id.login_password);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +27,12 @@ public class Login extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        Button login = findViewById(R.id.login);
+        Button return_to_first_screen = findViewById(R.id.return_to_first_screen_from_login);
+        TextView forgotten_password = findViewById(R.id.to_forgotten_password);
+        EditText name = findViewById(R.id.login_name);
+        EditText password = findViewById(R.id.login_password);
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override

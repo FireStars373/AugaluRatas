@@ -14,15 +14,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class MeniuOverlay extends AppCompatActivity {
 
-    private final ImageButton remove_sidebar = findViewById(R.id.remove_sidebar);
-    private final Button main_menu = findViewById(R.id.sidebar_main_page);
-    private final Button plant_gallery = findViewById(R.id.sidebar_all_posts);
-    private final Button upload_plant = findViewById(R.id.sidebar_add_post);
-    private final Button plant_maintenance = findViewById(R.id.sidebar_all_plants);
-    private final Button cart = findViewById(R.id.sidebar_cart_list);
-    private final Button account = findViewById(R.id.sidebar_user_profile);
-    private final Button subscribe = findViewById(R.id.sidebar_subscription);
-    private final Button logout = findViewById(R.id.sidebar_logout);
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +26,15 @@ public class MeniuOverlay extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-
+         ImageButton remove_sidebar = findViewById(R.id.remove_sidebar);
+         Button main_menu = findViewById(R.id.sidebar_main_page);
+         Button plant_gallery = findViewById(R.id.sidebar_all_posts);
+         Button upload_plant = findViewById(R.id.sidebar_add_post);
+         Button plant_maintenance = findViewById(R.id.sidebar_all_plants);
+         Button cart = findViewById(R.id.sidebar_cart_list);
+         Button account = findViewById(R.id.sidebar_user_profile);
+         Button subscribe = findViewById(R.id.sidebar_subscription);
+         Button logout = findViewById(R.id.sidebar_logout);
 
         remove_sidebar.setOnClickListener(new View.OnClickListener() {
             @Override
