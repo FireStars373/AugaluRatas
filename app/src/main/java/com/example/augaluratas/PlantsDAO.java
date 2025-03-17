@@ -15,4 +15,11 @@ public interface PlantsDAO {
 
     @Delete
     void delete(Plants plant);
+
+    @Query("DELETE FROM augalai")
+    void deleteAll();
+
+    // Panaudojame užklausą pagal pavadinimą, kad gautume visą augalo informaciją
+    @Query("SELECT * FROM augalai WHERE plant_name = :name LIMIT 1")
+    Plants getPlantByName(String name);
 }

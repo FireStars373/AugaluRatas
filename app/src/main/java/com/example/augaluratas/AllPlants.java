@@ -1,30 +1,47 @@
 package com.example.augaluratas;
 
-import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
-
-import androidx.activity.EdgeToEdge;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import android.content.Intent;
+import android.widget.Toast;
 
 public class AllPlants extends AppCompatActivity {
+    private LinearLayout plantsContainer;
+    private PlantsDatabase database;
+    private ExecutorService executorService = Executors.newSingleThreadExecutor();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_all_plants);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.contstraint_layout), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
-        ImageButton sidebar = findViewById(R.id.sidebar_from_all_plants);
-        sidebar.setOnClickListener(new View.OnClickListener() {
+
+        plantsContainer = findViewById(R.id.plantsContainer);
+        database = PlantsDatabase.getDatabase(this);
+        /*executorService.execute(() -> {
+            database.plantsDAO().insert(new Plants("Aguona", "Gražus raudonas augalas"));
+            database.plantsDAO().insert(new Plants("Bananmedis", "Atogrąžų medis su bananais"));
+        });*/
+
+        loadPlants();
+
+        ImageButton menu = findViewById(R.id.sidebar_from_all_plants);
+        menu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getBaseContext(), MeniuOverlay.class);
@@ -32,4 +49,74 @@ public class AllPlants extends AppCompatActivity {
             }
         });
     }
+
+    private void loadPlants() {
+        executorService.execute(() -> {
+            // Užklausa į duomenų bazę
+            List<Plants> plantList = database.plantsDAO().getAllPlants();
+            if (plantList == null || plantList.isEmpty()) return;
+
+            // Naudojame LinkedHashSet, kad pašalintume pasikartojančius pavadinimus
+            Set<String> uniquePlantNames = new LinkedHashSet<>();
+            for (Plants plant : plantList) {
+                uniquePlantNames.add(plant.getName());
+            }
+
+            // Paverčiame atgal į sąrašą ir surūšiuojame pagal pavadinimą
+            List<String> sortedPlantNames = new ArrayList<>(uniquePlantNames);
+            Collections.sort(sortedPlantNames, String.CASE_INSENSITIVE_ORDER);
+
+            // Atliksime UI atnaujinimus pagrindiniame gije
+            runOnUiThread(() -> {
+                plantsContainer.removeAllViews(); // Išvalome senus duomenis
+                char lastLetter = '\0'; // Laikome paskutinę įtrauktą raidę
+
+                for (String plantName : sortedPlantNames) {
+                    char firstLetter = Character.toUpperCase(plantName.charAt(0));
+
+                    // Pridėti naują raidės antraštę, jei ši raidė dar nebuvo pridėta
+                    if (firstLetter != lastLetter) {
+                        TextView letterHeader = new TextView(this);
+                        letterHeader.setText(String.valueOf(firstLetter));
+                        letterHeader.setTextSize(20);
+                        letterHeader.setTypeface(null, Typeface.BOLD);
+                        letterHeader.setPadding(20, 20, 20, 10);
+                        plantsContainer.addView(letterHeader);
+                        lastLetter = firstLetter;
+                    }
+
+                    // Sukuriame Button kiekvienam unikaliam augalui
+                    Button plantButton = new Button(this);
+                    plantButton.setText(plantName);
+                    plantButton.setTextSize(18);
+                    plantButton.setPadding(40, 10, 20, 10);
+                    plantButton.setAllCaps(false); // Kad būtų natūralus tekstas
+                    plantButton.setBackgroundColor(Color.parseColor("#DDDDDD")); // Šviesiai pilkas fonas
+                    plantButton.setOnClickListener(v -> {
+                        // Užklausa į duomenų bazę, kad gauti konkretaus augalo informaciją
+                        executorService.execute(() -> {
+                            Plants selectedPlant = database.plantsDAO().getPlantByName(plantName);
+                            if (selectedPlant != null) {
+                                runOnUiThread(() -> {
+                                    // Pereiti į kitą aktyvumą su pasirinktu augalu
+                                    Intent intent = new Intent(getBaseContext(), PlantDescription.class);
+                                    intent.putExtra("augalas", selectedPlant);
+                                    startActivity(intent);
+                                    Toast.makeText(this, "Paspausta: " + plantName, Toast.LENGTH_SHORT).show();
+                                });
+                            }
+                        });
+                    });
+
+                    plantsContainer.addView(plantButton);
+                }
+            });
+        });
+
+
+    }
+
+
+
+
 }

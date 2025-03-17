@@ -3,6 +3,7 @@ package com.example.augaluratas;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -28,6 +29,15 @@ public class PlantDescription extends AppCompatActivity {
             public void onClick(View v) {
                 finish();
             }
+
         });
+        TextView plantName = findViewById(R.id.textView18);
+        TextView description = findViewById(R.id.textView78);
+        Plants plant = getIntent().getParcelableExtra("augalas");
+        if (plant != null) {
+            plantName.setText(plant.getName());
+            description.setText(plant.getDescription());
+        }
+
     }
 }

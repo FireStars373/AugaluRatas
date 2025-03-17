@@ -1,89 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/contstraint_layout"
+    android:id="@+id/constraint_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/dark_green"
     tools:context=".AllPlants">
 
-    <View
-        android:id="@+id/view18"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom= "20dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:background="@drawable/square_background_2"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
+    <!-- Augalų sąrašas -->
     <ScrollView
-        android:id="@+id/scrollView3"
+        android:id="@+id/scrollView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:fillViewport="true"
+        tools:ignore="MissingConstraints">
 
         <LinearLayout
-            android:layout_width="match_parent"
             android:id="@+id/plant_list_layout"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="45dp"
-            android:gravity="center"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:gravity="center">
 
+            <!-- Viršuje esantis paveikslėlis -->
             <ImageView
                 android:id="@+id/imageView4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/lotus_icon"
-                android:contentDescription="@string/lotus_icn"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:src="@drawable/lotus_icon"
+                android:contentDescription="@string/lotus_icn"/>
 
+            <!-- Paieškos laukelis -->
             <SearchView
+                android:id="@+id/searchView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="60dp"
-                android:layout_marginEnd="60dp"
-                android:layout_marginTop="30dp"
-                android:layout_marginBottom="30dp"
+                android:layout_margin="20dp"
                 android:background="@drawable/searchbox_background_1"/>
 
-
+            <!-- Augalų sąrašas bus čia dinamiškai pridėtas -->
             <LinearLayout
+                android:id="@+id/plantsContainer"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/textView50"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="45dp"
-                    android:layout_marginEnd="45dp"
-                    android:fontFamily="@font/spectral_sc"
-                    android:text="@string/letter_for_filtering"
-                    android:textColor="@color/text_brown"
-                    android:textSize="40sp" />
-
-                <Button
-                    android:id="@+id/button41"
-                    style="@style/Widget.Material3.Button.TextButton"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="45dp"
-                    android:layout_marginEnd="45dp"
-                    android:fontFamily="@font/spectral_sc"
-                    android:gravity="start|center_vertical"
-                    android:textSize="24sp"
-                    android:textColor="@color/text_brown"
-                    android:text="@string/plant_name" />
-            </LinearLayout>
+                android:layout_height="wrap_content"
+                android:orientation="vertical"/>
         </LinearLayout>
     </ScrollView>
 
