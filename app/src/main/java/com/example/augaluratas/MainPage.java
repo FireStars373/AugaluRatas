@@ -1,9 +1,12 @@
 package com.example.augaluratas;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -25,6 +28,11 @@ public class MainPage extends AppCompatActivity {
         });
 
         ImageButton sidebar = findViewById(R.id.sidebar_from_main_page);
+        TextView username = findViewById(R.id.main_page_username);
+
+        SharedPreferences sharedPref = getBaseContext().getSharedPreferences("augalu_ratas.CURRENT_USER_KEY", Context.MODE_PRIVATE);
+        String current_username = sharedPref.getString("current_user_username", getString(R.string.username));
+        username.setText(current_username);
 
         sidebar.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -1,6 +1,7 @@
 package com.example.augaluratas;
 
 import android.os.Bundle;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -28,6 +29,7 @@ public class ForgottenPassword extends AppCompatActivity {
         EditText email = findViewById(R.id.forgotten_password_email);
         Button send = findViewById(R.id.forgotten_password_send);
         Button go_back = findViewById(R.id.return_from_forgotten_password);
+        UsersDatabase database = AppActivity.getUsersDatabase();
 
         send.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -35,9 +37,18 @@ public class ForgottenPassword extends AppCompatActivity {
                 String Email = email.getText().toString().trim();
                 if(Email.isEmpty()){
                     Toast.makeText(getApplicationContext(), "Turi būti įrašytas el. paštas", Toast.LENGTH_SHORT).show();
+                    return;
                 }
-                //(FUTURE) Check if email is in database
-                //(FUTURE) If yes, send email for recovery
+                if(!Patterns.EMAIL_ADDRESS.matcher(Email).matches()){
+                    Toast.makeText(getApplicationContext(), "Neteisingas el. pašto formatas", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if(database.usersDAO().getUserByEmail(Email) == null){
+                    Toast.makeText(getApplicationContext(), "Registruoto vartotojo su tokiu el. paštu nėra", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                Toast.makeText(getApplicationContext(), "Sėkmingai išsiūstas laiškas!", Toast.LENGTH_SHORT).show();
+                //(FUTURE) Send email for recovery
             }
         });
         go_back.setOnClickListener(new View.OnClickListener() {

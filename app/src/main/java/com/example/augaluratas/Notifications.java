@@ -42,6 +42,7 @@ public class Notifications extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
+                    
                     //(FUTURE) set notifications
                 }
             }
