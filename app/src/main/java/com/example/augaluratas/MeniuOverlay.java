@@ -1,6 +1,8 @@
 package com.example.augaluratas;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -101,6 +103,11 @@ public class MeniuOverlay extends AppCompatActivity {
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //Removing current user
+                SharedPreferences sharedPref = getBaseContext().getSharedPreferences("augalu_ratas.CURRENT_USER_KEY", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPref.edit();
+                editor.putString("current_user_username", getString(R.string.username));
+                editor.apply();
                 Intent intent = new Intent(getBaseContext(), FirstLoadScreen.class);
                 startActivity(intent);
             }

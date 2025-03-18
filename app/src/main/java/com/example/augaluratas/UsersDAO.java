@@ -4,6 +4,8 @@ import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Delete;
+import androidx.room.Update;
+
 @Dao
 public interface UsersDAO {
     @Insert
@@ -21,4 +23,10 @@ public interface UsersDAO {
     // Panaudojame užklausą pagal pavadinimą, kad gautume visą augalo informaciją
     @Query("SELECT * FROM users WHERE username = :username LIMIT 1")
     Users getUserByUsername(String username);
+
+    @Query("SELECT * FROM users WHERE email = :email LIMIT 1")
+    Users getUserByEmail(String email);
+
+    @Update
+    void Update(Users user);
 }
