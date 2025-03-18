@@ -99,7 +99,7 @@
     <string name="my_plants">Mano augalai</string>
     <!--Pop ups-->
     <string name="empty_fields">Visi laukai turi būti išpildyti</string>
-    <string name="wrong_account">Neteisingas vardas ar slaptažodis</string>
+    <string name="wrong_account">Neteisingas vardas ar slaptažodis</string>n
 
     <!--BackButton To Do-->
     <string name="back_btn">Back button icon</string>

@@ -13,9 +13,6 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class UserPosts extends AppCompatActivity {
 
-    private final SearchView search = findViewById(R.id.user_posts_search);
-    private final ImageButton return_button = findViewById(R.id.return_from_user_posts);
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,6 +23,9 @@ public class UserPosts extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        SearchView search = findViewById(R.id.user_posts_search);
+        ImageButton return_button = findViewById(R.id.return_from_user_posts);
 
         search.setOnSearchClickListener(new View.OnClickListener() {
             @Override

@@ -22,8 +22,10 @@ public class FirstLoadScreen extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
         Button register = findViewById(R.id.to_register_screen);
         Button login = findViewById(R.id.to_login_screen);
+
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view){

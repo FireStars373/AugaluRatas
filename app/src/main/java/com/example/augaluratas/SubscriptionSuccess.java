@@ -13,9 +13,6 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class SubscriptionSuccess extends AppCompatActivity {
 
-    private final ImageButton sidebar = findViewById(R.id.sidebar_from_subscription_success);
-    private final ImageButton return_button = findViewById(R.id.return_from_subscription_success);
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,6 +23,10 @@ public class SubscriptionSuccess extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        ImageButton sidebar = findViewById(R.id.sidebar_from_subscription_success);
+        ImageButton return_button = findViewById(R.id.return_from_subscription_success);
+
         sidebar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

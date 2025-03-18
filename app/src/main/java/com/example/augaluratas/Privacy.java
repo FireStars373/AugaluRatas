@@ -14,8 +14,6 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class Privacy extends AppCompatActivity {
 
-    private final ImageButton return_button = findViewById(R.id.return_from_privacy);
-    private final CheckBox agreement = findViewById(R.id.privacy_agreement);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +25,10 @@ public class Privacy extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        ImageButton return_button = findViewById(R.id.return_from_privacy);
+        CheckBox agreement = findViewById(R.id.privacy_agreement);
+
         return_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

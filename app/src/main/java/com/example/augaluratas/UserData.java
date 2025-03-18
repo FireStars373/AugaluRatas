@@ -14,13 +14,6 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class UserData extends AppCompatActivity {
 
-    private final ImageButton return_button = findViewById(R.id.return_from_user_data);
-    private final TextView name = findViewById(R.id.user_data_name);
-    private final TextView email = findViewById(R.id.user_data_email);
-    private final TextView password = findViewById(R.id.user_data_password);
-    private final TextView phone_number = findViewById(R.id.user_data_phone_number);
-    private final Button change_data = findViewById(R.id.change_user_data);
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,6 +24,13 @@ public class UserData extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        ImageButton return_button = findViewById(R.id.return_from_user_data);
+        TextView name = findViewById(R.id.user_data_name);
+        TextView email = findViewById(R.id.user_data_email);
+        TextView password = findViewById(R.id.user_data_password);
+        TextView phone_number = findViewById(R.id.user_data_phone_number);
+        Button change_data = findViewById(R.id.change_user_data);
 
         //(FUTURE) Set data from database
 

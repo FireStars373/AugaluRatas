@@ -14,12 +14,6 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 public class PostDescription extends AppCompatActivity {
-    private final ImageButton return_button = findViewById(R.id.return_from_post_description);
-    private final ImageButton sidebar = findViewById(R.id.sidebar_from_post_description);
-    private final ImageView photo = findViewById(R.id.post_description_photo);
-    private final TextView title = findViewById(R.id.post_description_title);
-    private final TextView description = findViewById(R.id.post_description_description);
-    private final TextView price = findViewById(R.id.post_description_price);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +25,13 @@ public class PostDescription extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        ImageButton return_button = findViewById(R.id.return_from_post_description);
+        ImageButton sidebar = findViewById(R.id.sidebar_from_post_description);
+        ImageView photo = findViewById(R.id.post_description_photo);
+        TextView title = findViewById(R.id.post_description_title);
+        TextView description = findViewById(R.id.post_description_description);
+        TextView price = findViewById(R.id.post_description_price);
 
         //(FUTURE) Set variables from database
 

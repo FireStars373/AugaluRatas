@@ -18,16 +18,6 @@ import org.w3c.dom.Text;
 
 public class ShoppingCart extends AppCompatActivity {
 
-    private final ImageButton return_button = findViewById(R.id.return_from_shopping_cart);
-    private final TextView seller = findViewById(R.id.cart_seller);
-    private final TextView description = findViewById(R.id.cart_description);
-    private final TextView price = findViewById(R.id.cart_price);
-    private final ImageView photo = findViewById(R.id.cart_photo);
-    private final RadioGroup mail_options = findViewById(R.id.get_mail_options);
-    private final Button pay_by_card = findViewById(R.id.pay_by_card);
-    private final Button pay_by_apple_pay = findViewById(R.id.pay_by_apple_pay);
-    private final Button pay_by_google_pay = findViewById(R.id.pay_by_google_pay);
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +28,16 @@ public class ShoppingCart extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        ImageButton return_button = findViewById(R.id.return_from_shopping_cart);
+        TextView seller = findViewById(R.id.cart_seller);
+        TextView description = findViewById(R.id.cart_description);
+        TextView price = findViewById(R.id.cart_price);
+        ImageView photo = findViewById(R.id.cart_photo);
+        RadioGroup mail_options = findViewById(R.id.get_mail_options);
+        Button pay_by_card = findViewById(R.id.pay_by_card);
+        Button pay_by_apple_pay = findViewById(R.id.pay_by_apple_pay);
+        Button pay_by_google_pay = findViewById(R.id.pay_by_google_pay);
 
         return_button.setOnClickListener(new View.OnClickListener() {
             @Override

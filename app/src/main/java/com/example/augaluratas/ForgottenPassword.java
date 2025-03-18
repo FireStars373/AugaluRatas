@@ -14,9 +14,6 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class ForgottenPassword extends AppCompatActivity {
 
-    private final EditText email = findViewById(R.id.forgotten_password_email);
-    private final Button send = findViewById(R.id.forgotten_password_send);
-    private final Button go_back = findViewById(R.id.return_from_forgotten_password);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +25,9 @@ public class ForgottenPassword extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        EditText email = findViewById(R.id.forgotten_password_email);
+        Button send = findViewById(R.id.forgotten_password_send);
+        Button go_back = findViewById(R.id.return_from_forgotten_password);
 
         send.setOnClickListener(new View.OnClickListener() {
             @Override

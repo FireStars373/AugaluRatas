@@ -14,11 +14,6 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class Notifications extends AppCompatActivity {
 
-    private final CheckBox viewed = findViewById(R.id.notification_post_viewed);
-    private final CheckBox shared = findViewById(R.id.notification_post_shared);
-    private final CheckBox liked = findViewById(R.id.notification_post_liked);
-    private final CheckBox purchased = findViewById(R.id.notification_plant_purchased);
-    private final ImageButton return_button = findViewById(R.id.return_from_notifications);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +25,12 @@ public class Notifications extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        CheckBox viewed = findViewById(R.id.notification_post_viewed);
+        CheckBox shared = findViewById(R.id.notification_post_shared);
+        CheckBox liked = findViewById(R.id.notification_post_liked);
+        CheckBox purchased = findViewById(R.id.notification_plant_purchased);
+        ImageButton return_button = findViewById(R.id.return_from_notifications);
 
         return_button.setOnClickListener(new View.OnClickListener() {
             @Override

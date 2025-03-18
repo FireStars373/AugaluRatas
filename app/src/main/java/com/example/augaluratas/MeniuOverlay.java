@@ -26,6 +26,7 @@ public class MeniuOverlay extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
          ImageButton remove_sidebar = findViewById(R.id.remove_sidebar);
          Button main_menu = findViewById(R.id.sidebar_main_page);
          Button plant_gallery = findViewById(R.id.sidebar_all_posts);
