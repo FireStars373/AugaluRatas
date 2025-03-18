@@ -1,14 +1,18 @@
 package com.example.augaluratas;
 
+import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+import androidx.core.content.res.ResourcesCompat;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -33,10 +37,10 @@ public class AllPlants extends AppCompatActivity {
 
         plantsContainer = findViewById(R.id.plantsContainer);
         database = PlantsDatabase.getDatabase(this);
-        /*executorService.execute(() -> {
+        executorService.execute(() -> {
             database.plantsDAO().insert(new Plants("Aguona", "Gražus raudonas augalas"));
             database.plantsDAO().insert(new Plants("Bananmedis", "Atogrąžų medis su bananais"));
-        });*/
+        });
 
         loadPlants();
 
@@ -78,9 +82,9 @@ public class AllPlants extends AppCompatActivity {
                     if (firstLetter != lastLetter) {
                         TextView letterHeader = new TextView(this);
                         letterHeader.setText(String.valueOf(firstLetter));
-                        letterHeader.setTextSize(20);
-                        letterHeader.setTypeface(null, Typeface.BOLD);
-                        letterHeader.setPadding(20, 20, 20, 10);
+                        letterHeader.setTextSize(24);
+                        letterHeader.setTextColor(ContextCompat.getColor(this, R.color.text_brown));
+                        letterHeader.setTypeface(ResourcesCompat.getCachedFont(this, R.font.spectral_sc), Typeface.BOLD);
                         plantsContainer.addView(letterHeader);
                         lastLetter = firstLetter;
                     }
@@ -88,10 +92,11 @@ public class AllPlants extends AppCompatActivity {
                     // Sukuriame Button kiekvienam unikaliam augalui
                     Button plantButton = new Button(this);
                     plantButton.setText(plantName);
-                    plantButton.setTextSize(18);
-                    plantButton.setPadding(40, 10, 20, 10);
-                    plantButton.setAllCaps(false); // Kad būtų natūralus tekstas
-                    plantButton.setBackgroundColor(Color.parseColor("#DDDDDD")); // Šviesiai pilkas fonas
+                    plantButton.setTextSize(20);
+                    plantButton.setTextColor(ContextCompat.getColor(this, R.color.text_brown));
+                    plantButton.setTypeface(ResourcesCompat.getCachedFont(this, R.font.spectral_sc));
+                    plantButton.setBackgroundColor(Color.TRANSPARENT); // Be fono
+                    plantButton.setGravity(Gravity.START | Gravity.CENTER_VERTICAL);
                     plantButton.setOnClickListener(v -> {
                         // Užklausa į duomenų bazę, kad gauti konkretaus augalo informaciją
                         executorService.execute(() -> {
@@ -112,11 +117,5 @@ public class AllPlants extends AppCompatActivity {
                 }
             });
         });
-
-
     }
-
-
-
-
 }

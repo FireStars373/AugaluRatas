@@ -8,6 +8,11 @@
     android:background="@color/dark_green"
     tools:context=".Notifications">
 
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -80,31 +85,31 @@
             android:id="@+id/notification_post_shared"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="25dp"
             android:layout_marginStart="45dp"
             android:buttonTint="@color/heart_grey"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/notification_post_viewed" />
+            app:layout_constraintTop_toBottomOf="@+id/textView59" />
 
         <CheckBox
             android:id="@+id/notification_post_liked"
             android:layout_width="24dp"
             android:layout_height="24dp"
+            android:layout_marginTop="25dp"
             android:layout_marginStart="45dp"
-            android:layout_marginTop="83dp"
             android:buttonTint="@color/heart_grey"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/notification_post_shared" />
+            app:layout_constraintTop_toBottomOf="@+id/textView61" />
 
         <CheckBox
             android:id="@+id/notification_plant_purchased"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="25dp"
             android:layout_marginStart="45dp"
             android:buttonTint="@color/heart_grey"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/notification_post_liked" />
+            app:layout_constraintTop_toBottomOf="@+id/textView63" />
 
         <TextView
             android:id="@+id/textView58"
@@ -178,7 +183,7 @@
             android:id="@+id/textView62"
             android:layout_width="0dp"
             android:layout_height="24dp"
-            android:layout_marginTop="26dp"
+            android:layout_marginTop="25dp"
             android:layout_marginEnd="45dp"
             android:fontFamily="@font/spectral_sc"
             android:gravity="start|center_vertical"
@@ -212,7 +217,7 @@
             android:id="@+id/textView64"
             android:layout_width="0dp"
             android:layout_height="24dp"
-            android:layout_marginTop="26dp"
+            android:layout_marginTop="25dp"
             android:layout_marginEnd="45dp"
             android:fontFamily="@font/spectral_sc"
             android:gravity="start|center_vertical"
@@ -242,5 +247,10 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView64" />
 
+
+
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -28,7 +28,6 @@ public class AddPost extends AppCompatActivity {
         });
 
         ImageButton sidebar = findViewById(R.id.sidebar_from_add_post);
-        ImageButton return_button = findViewById(R.id.return_from_add_post);
         Button upload_post = findViewById(R.id.upload_post);
         EditText title = findViewById(R.id.add_post_title);
         EditText description = findViewById(R.id.add_post_description);
@@ -39,12 +38,6 @@ public class AddPost extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(getBaseContext(), MeniuOverlay.class);
                 startActivity(intent);
-            }
-        });
-        return_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
             }
         });
         upload_post.setOnClickListener(new View.OnClickListener() {

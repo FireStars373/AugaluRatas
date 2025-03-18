@@ -8,6 +8,11 @@
     android:background="@color/dark_brown"
     tools:context=".Register">
 
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -16,10 +21,10 @@
             android:id="@+id/textView51"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginStart="45dp"
-            android:layout_marginTop="45dp"
-            android:layout_marginEnd="45dp"
-            android:layout_marginBottom="45dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="20dp"
             android:background="@drawable/square_background_1"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -60,8 +65,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="45dp"
             android:layout_marginEnd="8dp"
+
             android:fontFamily="@font/spectral_sc"
             android:text="@string/username"
             android:textColor="@color/white"
@@ -75,8 +81,8 @@
             android:id="@+id/register_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="70dp"
-            android:layout_marginStart="70dp"
+            android:layout_marginEnd="45dp"
+            android:layout_marginStart="45dp"
             android:background="@drawable/textbox_background_1"
             android:ems="10"
             android:fontFamily="@font/spectral_sc"
@@ -110,8 +116,8 @@
             android:id="@+id/register_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="70dp"
-            android:layout_marginEnd="70dp"
+            android:layout_marginStart="45dp"
+            android:layout_marginEnd="45dp"
             android:background="@drawable/textbox_background_1"
             android:ems="10"
             android:fontFamily="@font/spectral_sc"
@@ -145,8 +151,8 @@
             android:id="@+id/register_password_repeat"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="70dp"
-            android:layout_marginEnd="70dp"
+            android:layout_marginStart="45dp"
+            android:layout_marginEnd="45dp"
             android:background="@drawable/textbox_background_1"
             android:fontFamily="@font/spectral_sc"
             android:inputType="textPassword"
@@ -179,17 +185,17 @@
             android:id="@+id/register_phone_number"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="70dp"
-            android:layout_marginEnd="70dp"
-            android:layout_marginBottom="20dp"
+            android:layout_marginStart="45dp"
+            android:layout_marginEnd="45dp"
+            android:layout_marginBottom="45dp"
+            android:autofillHints="phone"
             android:background="@drawable/textbox_background_1"
             android:ems="10"
             android:fontFamily="@font/spectral_sc"
-            android:inputType="phone"
-            android:textColor="@color/black"
-            android:autofillHints="phone"
             android:hint="@string/phone_number"
+            android:inputType="phone"
             android:paddingHorizontal="16sp"
+            android:textColor="@color/black"
             android:textColorHint="@color/hint_grey"
             app:layout_constraintBottom_toTopOf="@+id/register"
             app:layout_constraintEnd_toEndOf="parent"
@@ -200,8 +206,8 @@
             android:id="@+id/register_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="70dp"
-            android:layout_marginEnd="70dp"
+            android:layout_marginStart="45dp"
+            android:layout_marginEnd="45dp"
             android:background="@drawable/textbox_background_1"
             android:ems="10"
             android:fontFamily="@font/spectral_sc"
@@ -218,12 +224,11 @@
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/return_to_first_screen_from_register"
-            android:layout_width="220dp"
-            android:layout_height="32dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="600dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="100dp"
+            android:layout_marginEnd="100dp"
+            android:layout_marginBottom="40dp"
             android:background="@drawable/button_background_2"
             android:fontFamily="@font/spectral_sc"
             android:text="@string/go_back"
@@ -231,8 +236,7 @@
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintStart_toStartOf="parent" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/register"
@@ -268,5 +272,10 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

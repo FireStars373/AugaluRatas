@@ -23,7 +23,7 @@
     <!--Forgotten password-->
     <string name="forgotten_password">Pamiršai slaptažodį?</string>
     <string name="used_email">Naudotas el. paštas</string>
-    <string name="send_forgotten_password_email">Siųsti slaptažodžio atnaujinimo laišką</string>
+    <string name="send_forgotten_password_email">Siųsti laišką</string>
     <!--Help-->
     <string name="faq">DUK</string>
     <string name="question1">Klausimas 1</string>
@@ -67,7 +67,7 @@
     <string name="rules">Taisyklės ir naudojimosi politika</string>
     <string name="read_and_agreed_with_privacy">Perskaičiau ir sutinku su privatumo politika</string>
     <!--Register-->
-    <string name="register">Registruotis</string>
+    <string name="register">Registruokis</string>
     <string name="do_register">Registruokis</string>
     <string name="tagline">Ir mainykis augalais lengvai!</string>
     <string name="email">el. paštas</string>
@@ -123,6 +123,7 @@
     <string name="maintenance">Priežiūra</string>
     <string name="letter_for_filtering">A</string>
     <string name="news_img">News image</string>
+    <string name="delete_user">Ištrinti vartotoją</string>
 
 
 </resources>
