@@ -20,7 +20,6 @@ public interface UsersDAO {
     @Query("DELETE FROM users")
     void deleteAll();
 
-    // Panaudojame užklausą pagal pavadinimą, kad gautume visą augalo informaciją
     @Query("SELECT * FROM users WHERE username = :username LIMIT 1")
     Users getUserByUsername(String username);
 

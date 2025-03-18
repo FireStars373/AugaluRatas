@@ -52,6 +52,7 @@ public class AddPost extends AppCompatActivity {
                     return;
                 }
                 //(FUTURE)New post is uploaded to database
+
                 Intent intent = new Intent(getBaseContext(), AllPosts.class);
                 startActivity(intent);
             }
