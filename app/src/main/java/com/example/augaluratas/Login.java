@@ -34,6 +34,8 @@ public class Login extends AppCompatActivity {
         EditText name = findViewById(R.id.login_name);
         EditText password = findViewById(R.id.login_password);
 
+        UsersDatabase usersDatabase = AppActivity.getUsersDatabase();
+
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -47,7 +49,11 @@ public class Login extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Neįrašytas slaptažodis", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                //(FUTURE) Check if name and password is in database
+                Users user = usersDatabase.usersDAO().getUserByUsername(Name);
+                if(user == null || !user.getPassword().equals(Password)){
+                    Toast.makeText(getApplicationContext(), "Vartotojo vardas arba slaptažodis neteisingas", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 Intent intent = new Intent(getBaseContext(), MainPage.class);
                 startActivity(intent);
             }

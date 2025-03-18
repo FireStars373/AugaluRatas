@@ -21,4 +21,7 @@ public interface UsersDAO {
     // Panaudojame užklausą pagal pavadinimą, kad gautume visą augalo informaciją
     @Query("SELECT * FROM users WHERE username = :username LIMIT 1")
     Users getUserByUsername(String username);
+
+    @Query("SELECT * FROM users WHERE email = :email LIMIT 1")
+    Users getUserByEmail(String email);
 }
