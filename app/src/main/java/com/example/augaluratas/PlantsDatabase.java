@@ -3,7 +3,7 @@ import android.content.Context;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
-@Database(entities = {Plants.class}, version = 1, exportSchema = false)
+@Database(entities = {Plants.class}, version = 2, exportSchema = true)
 public abstract class PlantsDatabase extends RoomDatabase {
     private static volatile PlantsDatabase INSTANCE;
 
@@ -14,8 +14,7 @@ public abstract class PlantsDatabase extends RoomDatabase {
             synchronized (PlantsDatabase.class) {
                 if (INSTANCE == null) {
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
-                                    PlantsDatabase.class, "plants_database")
-                            .build();
+                                    PlantsDatabase.class, "plants_database").build();
                 }
             }
         }
