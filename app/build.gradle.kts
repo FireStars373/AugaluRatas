@@ -42,6 +42,7 @@ android {
 
 dependencies {
 
+    implementation(libs.legacy.support.v4)
     val room_version = "2.2.5"
     val lifecycle_version = "2.2.0"
     val arch_version = "2.1.0"

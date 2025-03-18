@@ -26,7 +26,6 @@ public class PostDescription extends AppCompatActivity {
             return insets;
         });
 
-        ImageButton return_button = findViewById(R.id.return_from_post_description);
         ImageButton sidebar = findViewById(R.id.sidebar_from_post_description);
         ImageView photo = findViewById(R.id.post_description_photo);
         TextView title = findViewById(R.id.post_description_title);
@@ -35,12 +34,6 @@ public class PostDescription extends AppCompatActivity {
 
         //(FUTURE) Set variables from database
 
-        return_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
         sidebar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

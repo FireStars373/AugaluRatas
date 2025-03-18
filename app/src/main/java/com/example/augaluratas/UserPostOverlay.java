@@ -27,7 +27,6 @@ public class UserPostOverlay extends AppCompatActivity {
             return insets;
         });
 
-        ImageButton return_button = findViewById(R.id.return_from_user_post_overlay);
         ImageButton sidebar = findViewById(R.id.sidebar_from_user_post_overlay);
         ImageView photo = findViewById(R.id.user_post_photo);
         TextView title = findViewById(R.id.user_post_title);
@@ -37,12 +36,6 @@ public class UserPostOverlay extends AppCompatActivity {
 
         //(FUTURE) Set data from database
 
-        return_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
         sidebar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -8,6 +8,11 @@
     android:background="@color/dark_green"
     tools:context=".UserProfile">
 
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
@@ -29,8 +34,8 @@
 
         <ImageView
             android:id="@+id/imageView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:layout_marginTop="60dp"
             android:layout_marginStart="60dp"
             android:contentDescription="@string/user_icon"
@@ -44,11 +49,11 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="45dp"
+            android:layout_marginTop="60dp"
             android:fontFamily="@font/spectral_sc"
             android:text="@string/username"
             android:textColor="@color/text_brown"
             android:textSize="28sp"
-            app:layout_constraintBottom_toTopOf="@+id/user_profile_user_posts"
             app:layout_constraintStart_toEndOf="@+id/imageView"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
@@ -58,8 +63,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="45dp"
-            android:layout_marginTop="210dp"
             android:layout_marginEnd="45dp"
+            android:layout_marginTop="30dp"
             android:background="@drawable/button_background_4"
             android:fontFamily="@font/spectral_sc"
             android:gravity="start|center_vertical"
@@ -69,49 +74,19 @@
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
         <View
             android:id="@+id/view6"
             android:layout_width="0dp"
             android:layout_height="5dp"
-            android:layout_marginTop="8dp"
             android:layout_marginStart="45dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="45dp"
             android:background="@drawable/lines_background_1"
-            app:layout_constraintTop_toBottomOf="@id/user_profile_user_posts"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/user_profile_main_page"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="45dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="45dp"
-            android:background="@drawable/button_background_4"
-            android:fontFamily="@font/spectral_sc"
-            android:gravity="start|center_vertical"
-            android:paddingHorizontal="16dp"
-            android:text="@string/main_page"
-            android:textColor="@color/text_brown"
-            android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/view6" />
-
-        <View
-            android:id="@+id/view7"
-            android:layout_width="0dp"
-            android:layout_height="5dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginStart="45dp"
-            android:layout_marginEnd="45dp"
-            android:background="@drawable/lines_background_1"
-            app:layout_constraintTop_toBottomOf="@id/user_profile_main_page"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintTop_toBottomOf="@id/user_profile_user_posts" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/user_profile_settings"
@@ -129,7 +104,7 @@
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/view7" />
+            app:layout_constraintTop_toBottomOf="@+id/view6" />
 
         <View
             android:id="@+id/view8"
@@ -154,7 +129,7 @@
             android:fontFamily="@font/spectral_sc"
             android:gravity="start|center_vertical"
             android:paddingHorizontal="16dp"
-            android:text="@string/log_out"
+            android:text="@string/delete_user"
             android:textColor="@color/text_brown"
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -172,8 +147,10 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
+
+
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
+</androidx.core.widget.NestedScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

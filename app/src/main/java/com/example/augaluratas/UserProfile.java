@@ -30,7 +30,6 @@ public class UserProfile extends AppCompatActivity {
 
         ImageButton return_button = findViewById(R.id.return_from_user_profile);
         Button user_posts = findViewById(R.id.user_profile_user_posts);
-        Button main_page = findViewById(R.id.user_profile_main_page);
         Button settings = findViewById(R.id.user_profile_settings);
         Button logout = findViewById(R.id.user_profile_logout);
         TextView username = findViewById(R.id.user_profile_username);
@@ -49,13 +48,6 @@ public class UserProfile extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getBaseContext(), UserPosts.class);
-                startActivity(intent);
-            }
-        });
-        main_page.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getBaseContext(), MainPage.class);
                 startActivity(intent);
             }
         });
