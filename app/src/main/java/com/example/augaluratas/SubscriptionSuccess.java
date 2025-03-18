@@ -25,19 +25,11 @@ public class SubscriptionSuccess extends AppCompatActivity {
         });
 
         ImageButton sidebar = findViewById(R.id.sidebar_from_subscription_success);
-        ImageButton return_button = findViewById(R.id.return_from_subscription_success);
 
         sidebar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getBaseContext(), MeniuOverlay.class);
-                startActivity(intent);
-            }
-        });
-        return_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getBaseContext(), MainPage.class);
                 startActivity(intent);
             }
         });

@@ -8,6 +8,11 @@
     android:background="#CBD2A4"
     tools:context=".Subscription">
 
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -108,9 +113,9 @@
             android:layout_marginTop="80dp"
             android:layout_marginEnd="300dp"
             android:layout_marginStart="45dp"
-            android:background="@drawable/hamburger_button"
+            android:background="@drawable/arrow_button"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
