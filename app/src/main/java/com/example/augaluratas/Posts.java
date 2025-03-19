@@ -46,6 +46,7 @@ public class Posts {
         this.price = price;
     }
 
+
     public void setId(@NonNull long id) {this.id = id;}
     public long getId() {return this.id;}
     public void setUserId(@NonNull long userId) {this.userId = userId;}

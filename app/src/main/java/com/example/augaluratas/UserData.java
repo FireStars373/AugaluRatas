@@ -38,7 +38,7 @@ public class UserData extends AppCompatActivity {
 
         SharedPreferences sharedPref = getBaseContext().getSharedPreferences("augalu_ratas.CURRENT_USER_KEY", Context.MODE_PRIVATE);
         Long current_id = sharedPref.getLong("current_user_id", 0);
-        UsersDatabase database = AppActivity.getUsersDatabase();
+        User_PostDatabase database = AppActivity.getUser_PostDatabase();
         Users user = database.usersDAO().getUserById(current_id);
         name.setText(user.getUsername());
         email.setText(user.getEmail());
