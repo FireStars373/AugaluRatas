@@ -70,4 +70,7 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
+
+    //Notification biblioteka
+    implementation("com.android.support:support-compat:28.0.0")
 }
