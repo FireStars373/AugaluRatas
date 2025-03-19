@@ -1,9 +1,12 @@
 package com.example.augaluratas;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -14,6 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.res.ResourcesCompat;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -37,10 +41,17 @@ public class AllPlants extends AppCompatActivity {
 
         plantsContainer = findViewById(R.id.plantsContainer);
         database = PlantsDatabase.getDatabase(this);
-        executorService.execute(() -> {
-            database.plantsDAO().insert(new Plants("Aguona", "Gražus raudonas augalas"));
-            database.plantsDAO().insert(new Plants("Bananmedis", "Atogrąžų medis su bananais"));
-        });
+        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.bananmedis);
+        if (bitmap == null) {
+            Log.e("BitmapError", "Nepavyko užkrauti lotus_icon");
+            return;
+        }
+        byte[] imageBytes = ImageUtils.bitmapToByteArray(bitmap);
+       /* executorService.execute(() -> {
+            database.plantsDAO().insert(new Plants("Aguona", "Reikia daug laistyti", "Latvija", imageBytes));
+            database.plantsDAO().insert(new Plants("Bananmedis", "Daug saules reikia", "Azija", imageBytes));
+            database.plantsDAO().insert(new Plants("Tikras medis", "Daug saules reikia", "Azija", imageBytes));
+        });*/
 
         loadPlants();
 
@@ -53,7 +64,6 @@ public class AllPlants extends AppCompatActivity {
             }
         });
     }
-
     private void loadPlants() {
         executorService.execute(() -> {
             // Užklausa į duomenų bazę

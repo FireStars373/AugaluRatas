@@ -1,6 +1,8 @@
 package com.example.augaluratas;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -16,6 +18,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class AddPost extends AppCompatActivity {
 
+    private PostsDatabase database;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,6 +55,10 @@ public class AddPost extends AppCompatActivity {
                     return;
                 }
                 //(FUTURE)New post is uploaded to database
+                long currentUserId = 1; //Reiks pakeisti i userID
+                Posts post = new Posts(currentUserId, Title, Description, new byte[0], Double.parseDouble(Price)); // reikia vietoj new byte ideti nuotrauka
+                database.postsDAO().insert(post);
+
                 Intent intent = new Intent(getBaseContext(), AllPosts.class);
                 startActivity(intent);
             }
