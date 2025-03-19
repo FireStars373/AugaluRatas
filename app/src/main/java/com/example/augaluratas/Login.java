@@ -59,7 +59,7 @@ public class Login extends AppCompatActivity {
                 }
                 SharedPreferences sharedPref = getBaseContext().getSharedPreferences("augalu_ratas.CURRENT_USER_KEY", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPref.edit();
-                editor.putString("current_user_username", Name);
+                editor.putLong("current_user_id", user.getId());
                 editor.apply();
                 Intent intent = new Intent(getBaseContext(), MainPage.class);
                 startActivity(intent);

@@ -31,7 +31,8 @@ public class ShoppingCartList extends AppCompatActivity {
         return_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                Intent intent = new Intent(getBaseContext(), MeniuOverlay.class);
+                startActivity(intent);
             }
         });
         shopping_cart.setOnClickListener(new View.OnClickListener() {

@@ -37,9 +37,9 @@ public class UserData extends AppCompatActivity {
         Button change_data = findViewById(R.id.change_user_data);
 
         SharedPreferences sharedPref = getBaseContext().getSharedPreferences("augalu_ratas.CURRENT_USER_KEY", Context.MODE_PRIVATE);
-        String current_username = sharedPref.getString("current_user_username", getString(R.string.username));
+        Long current_id = sharedPref.getLong("current_user_id", 0);
         UsersDatabase database = AppActivity.getUsersDatabase();
-        Users user = database.usersDAO().getUserByUsername(current_username);
+        Users user = database.usersDAO().getUserById(current_id);
         name.setText(user.getUsername());
         email.setText(user.getEmail());
         password.setText(user.getPassword());
@@ -83,7 +83,7 @@ public class UserData extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Šis el. paštas jau panaudotas", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                Users user = database.usersDAO().getUserByUsername(current_username);
+                Users user = database.usersDAO().getUserById(current_id);
                 user.setUsername(Name);
                 user.setEmail(Email);
                 user.setPassword(Password);
