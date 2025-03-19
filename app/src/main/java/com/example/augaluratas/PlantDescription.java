@@ -27,6 +27,7 @@ public class PlantDescription extends AppCompatActivity {
             return insets;
         });
 
+
         ImageButton return_button = findViewById(R.id.return_from_plant_description);
 
         return_button.setOnClickListener(new View.OnClickListener() {
