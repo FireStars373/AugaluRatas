@@ -1,45 +1,57 @@
 package com.example.augaluratas;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.ImageButton;
-
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import java.util.List;
+import android.os.AsyncTask;
+import android.widget.ImageButton;
+import android.widget.Toast;
+import java.util.List;
 
 public class AllPosts extends AppCompatActivity {
+    private PostsDatabase db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_all_posts);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.constraint_layout), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
+
+        db = PostsDatabase.getDatabase(this);
+        db.postsDAO().insert(new Posts(1,"Bananmedis", "fainas medis", new byte[1], 2));
+        // Gauname visus įrašus foninėje gijoje
+        new GetPostsTask().execute();
 
         ImageButton sidebar = findViewById(R.id.sidebar_from_all_posts);
         ImageButton shopping_cart = findViewById(R.id.shopping_cart);
 
-        sidebar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getBaseContext(), MeniuOverlay.class);
-                startActivity(intent);
-            }
+        sidebar.setOnClickListener(v -> {
+            Intent intent = new Intent(getBaseContext(), MeniuOverlay.class);
+            startActivity(intent);
         });
-        shopping_cart.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getBaseContext(), ShoppingCartList.class);
-                startActivity(intent);
-            }
+
+        shopping_cart.setOnClickListener(v -> {
+            Intent intent = new Intent(getBaseContext(), ShoppingCartList.class);
+            startActivity(intent);
         });
     }
+
+    // AsyncTask klasė duomenų gavimui foninėje gijoje
+    private class GetPostsTask extends AsyncTask<Void, Void, List<Posts>> {
+        @Override
+        protected List<Posts> doInBackground(Void... voids) {
+            return db.postsDAO().getAllPosts();  // Kreipiamės į duombazę fone
+        }
+
+        @Override
+        protected void onPostExecute(List<Posts> posts) {
+            if (posts != null) {
+                Toast.makeText(AllPosts.this, "Gauta įrašų: " + posts.size(), Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
 }
+
