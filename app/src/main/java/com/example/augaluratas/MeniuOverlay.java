@@ -106,7 +106,7 @@ public class MeniuOverlay extends AppCompatActivity {
                 //Removing current user
                 SharedPreferences sharedPref = getBaseContext().getSharedPreferences("augalu_ratas.CURRENT_USER_KEY", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPref.edit();
-                editor.putString("current_user_username", getString(R.string.username));
+                editor.putLong("current_user_id", 0);
                 editor.apply();
                 Intent intent = new Intent(getBaseContext(), FirstLoadScreen.class);
                 startActivity(intent);

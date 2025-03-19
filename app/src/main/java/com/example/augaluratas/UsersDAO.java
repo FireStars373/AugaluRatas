@@ -27,6 +27,9 @@ public interface UsersDAO {
     @Query("SELECT * FROM users WHERE email = :email LIMIT 1")
     Users getUserByEmail(String email);
 
+    @Query("SELECT * FROM users WHERE id = :id LIMIT 1")
+    Users getUserById(long id);
+
     @Update
     void Update(Users user);
 }
