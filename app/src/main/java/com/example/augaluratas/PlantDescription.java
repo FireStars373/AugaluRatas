@@ -1,8 +1,11 @@
 package com.example.augaluratas;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
@@ -35,10 +38,17 @@ public class PlantDescription extends AppCompatActivity {
         });
         TextView plantName = findViewById(R.id.textView18);
         TextView description = findViewById(R.id.textView78);
+        TextView origin = findViewById(R.id.textView21);
+        ImageView image = findViewById(R.id.imageView6);
+
         Plants plant = getIntent().getParcelableExtra("augalas");
         if (plant != null) {
             plantName.setText(plant.getName());
             description.setText(plant.getDescription());
+            origin.setText(plant.getOrigin());
+            byte[] imageBytes = plant.getImage(); // Gauname byte[] iš duomenų bazės
+            Bitmap bitmap = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
+            image.setImageBitmap(bitmap);
         }
 
     }

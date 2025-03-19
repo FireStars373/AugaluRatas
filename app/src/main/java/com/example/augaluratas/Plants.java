@@ -23,17 +23,19 @@ public class Plants implements Parcelable {
     @ColumnInfo(name = "category")
     private String category;
 
-    /*@NonNull
+    @NonNull
     @ColumnInfo(name = "origin")
     private String origin;
 
     @NonNull
     @ColumnInfo(name = "image")
-    private byte[] image;*/
+    private byte[] image;
 
-    public Plants(@NonNull String name, @NonNull String description) {
+    public Plants(@NonNull String name, @NonNull String description, @NonNull String origin, @NonNull byte[] image) {
         this.name = name;
         this.description = description;
+        this.origin = origin;
+        this.image = image;
         this.category = name.substring(0, 1).toUpperCase(); // Pasiima pirmąją raidę ir paverčia ją didžiąja
     }
     // Getteriai ir setteriai
@@ -42,8 +44,8 @@ public class Plants implements Parcelable {
         name = in.readString();
         description = in.readString();
         category = in.readString();
-        /*origin = in.readString();
-        image = in.createByteArray();*/
+        origin = in.readString();
+        image = in.createByteArray();
     }
 
     public static final Creator<Plants> CREATOR = new Creator<Plants>() {
@@ -68,8 +70,8 @@ public class Plants implements Parcelable {
         dest.writeString(name);
         dest.writeString(description);
         dest.writeString(category);
-        /*dest.writeString(origin);
-        dest.writeByteArray(image);*/
+        dest.writeString(origin);
+        dest.writeByteArray(image);
     }
     public void setId(@NonNull long name) {this.id = id;}
     public long getId() {return this.id;}
@@ -80,8 +82,8 @@ public class Plants implements Parcelable {
     public void setCategory(@NonNull String category) {this.category = category;}
     public String getCategory() {return  this.category;}
 
-    /*public void setOrigin(@NonNull String origin) {this.origin = origin;}
+    public void setOrigin(@NonNull String origin) {this.origin = origin;}
     public String getOrigin() {return this.origin;}
     public void setImage(@NonNull byte[] image) {this.image = image;}
-    public byte[] getImage() {return this.image;}*/
+    public byte[] getImage() {return this.image;}
 }
