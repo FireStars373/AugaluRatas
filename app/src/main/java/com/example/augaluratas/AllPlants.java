@@ -47,7 +47,7 @@ public class AllPlants extends AppCompatActivity {
             return;
         }
         byte[] imageBytes = ImageUtils.bitmapToByteArray(bitmap);
-       /* executorService.execute(() -> {
+        /*executorService.execute(() -> {
             database.plantsDAO().insert(new Plants("Aguona", "Reikia daug laistyti", "Latvija", imageBytes));
             database.plantsDAO().insert(new Plants("Bananmedis", "Daug saules reikia", "Azija", imageBytes));
             database.plantsDAO().insert(new Plants("Tikras medis", "Daug saules reikia", "Azija", imageBytes));

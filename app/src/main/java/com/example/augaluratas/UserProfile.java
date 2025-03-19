@@ -31,17 +31,19 @@ public class UserProfile extends AppCompatActivity {
         ImageButton return_button = findViewById(R.id.return_from_user_profile);
         Button user_posts = findViewById(R.id.user_profile_user_posts);
         Button settings = findViewById(R.id.user_profile_settings);
-        Button logout = findViewById(R.id.user_profile_logout);
+        Button delete_user = findViewById(R.id.user_profile_delete_user);
         TextView username = findViewById(R.id.user_profile_username);
 
         SharedPreferences sharedPref = getBaseContext().getSharedPreferences("augalu_ratas.CURRENT_USER_KEY", Context.MODE_PRIVATE);
-        String current_username = sharedPref.getString("current_user_username", getString(R.string.username));
-        username.setText(current_username);
+        Long current_id= sharedPref.getLong("current_user_id", 0);
+        UsersDatabase database = AppActivity.getUsersDatabase();
+        username.setText(database.usersDAO().getUserById(current_id).getUsername());
 
         return_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                Intent intent = new Intent(getBaseContext(), MeniuOverlay.class);
+                startActivity(intent);
             }
         });
         user_posts.setOnClickListener(new View.OnClickListener() {
@@ -58,12 +60,17 @@ public class UserProfile extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        logout.setOnClickListener(new View.OnClickListener() {
+        delete_user.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //Deleting from database
                 SharedPreferences sharedPref = getBaseContext().getSharedPreferences("augalu_ratas.CURRENT_USER_KEY", Context.MODE_PRIVATE);
+                Long current_id = sharedPref.getLong("current_user_id", 0);
+                Users user = database.usersDAO().getUserById(current_id);
+                database.usersDAO().delete(user);
+                //Signing out
                 SharedPreferences.Editor editor = sharedPref.edit();
-                editor.putString("current_user_username", getString(R.string.username));
+                editor.putLong("current_user_id", 0);
                 editor.apply();
                 Intent intent = new Intent(getBaseContext(), FirstLoadScreen.class);
                 startActivity(intent);
