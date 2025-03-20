@@ -70,4 +70,7 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
+
+    //gson
+    implementation ("com.google.code.gson:gson:2.11.0")
 }

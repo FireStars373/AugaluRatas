@@ -49,6 +49,7 @@ public class Subscription extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 user.setSubscribed(true);
+                database.usersDAO().Update(user);
                 Intent intent = new Intent(getBaseContext(), SubscriptionSuccess.class);
                 startActivity(intent);
             }
