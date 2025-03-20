@@ -15,7 +15,6 @@ import android.util.Log;
 
 public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder> {
     private List<Posts> postList;
-
     public PostAdapter(List<Posts> postList) {
         this.postList = postList;
     }
