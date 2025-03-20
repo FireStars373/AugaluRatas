@@ -8,8 +8,6 @@
     android:background="@color/dark_green"
     tools:context=".MainPage">
 
-
-
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
