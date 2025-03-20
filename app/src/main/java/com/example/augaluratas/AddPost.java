@@ -60,7 +60,7 @@ public class AddPost extends AppCompatActivity {
 
                 SharedPreferences sharedPref = getBaseContext().getSharedPreferences("augalu_ratas.CURRENT_USER_KEY", Context.MODE_PRIVATE);
                 Long currentUserId = sharedPref.getLong("current_user_id", 0);
-                Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.bananmedis);
+                Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.plant);
                 if (bitmap == null) {
                     Log.e("BitmapError", "Nepavyko užkrauti lotus_icon");
                     return;

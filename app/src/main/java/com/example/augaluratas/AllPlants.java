@@ -41,16 +41,16 @@ public class AllPlants extends AppCompatActivity {
 
         plantsContainer = findViewById(R.id.plantsContainer);
         database = PlantsDatabase.getDatabase(this);
-        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.bananmedis);
+        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.plant);
         if (bitmap == null) {
             Log.e("BitmapError", "Nepavyko užkrauti lotus_icon");
             return;
         }
         byte[] imageBytes = ImageUtils.bitmapToByteArray(bitmap);
         executorService.execute(() -> {
-            database.plantsDAO().insert(new Plants("Aguona", "Reikia daug laistyti", "Latvija", imageBytes));
-            database.plantsDAO().insert(new Plants("Bananmedis", "Daug saules reikia", "Azija", imageBytes));
-            database.plantsDAO().insert(new Plants("Tikras medis", "Daug saules reikia", "Azija", imageBytes));
+            database.plantsDAO().insert(new Plants("NaujaAguona", "Reikia daug laistyti", "Latvija", imageBytes));
+            database.plantsDAO().insert(new Plants("NaujasBananmedis", "Daug saules reikia", "Azija", imageBytes));
+            database.plantsDAO().insert(new Plants("NaujasTikras medis", "Daug saules reikia", "Azija", imageBytes));
         });
 
         loadPlants();
