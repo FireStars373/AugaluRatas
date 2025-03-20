@@ -1,7 +1,10 @@
 package com.example.augaluratas;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -14,6 +17,8 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 public class PostDescription extends AppCompatActivity {
+
+    private User_PostDatabase db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,13 +38,26 @@ public class PostDescription extends AppCompatActivity {
         TextView price = findViewById(R.id.post_description_price);
 
         //(FUTURE) Set variables from database
+        db = AppActivity.getUser_PostDatabase();
+        long id = getIntent().getLongExtra("POST_ID", -1);
+        if (id != -1) {
+            Posts post = db.postsDAO().getPostById(id);
+            if (post != null) {
 
-        sidebar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getBaseContext(), MeniuOverlay.class);
-                startActivity(intent);
+                byte[] imageBytes = db.postsDAO().getPostById(id).getImage();
+                Bitmap bitmap = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
+                photo.setImageBitmap(bitmap);
+                title.setText(post.getPlantName());
+                description.setText(post.getDescription());
+                price.setText(String.format("%.2f €", post.getPrice()));
             }
-        });
+            sidebar.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(getBaseContext(), AllPosts.class);
+                    startActivity(intent);
+                }
+            });
+        }
     }
 }

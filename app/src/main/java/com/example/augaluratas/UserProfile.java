@@ -36,7 +36,7 @@ public class UserProfile extends AppCompatActivity {
 
         SharedPreferences sharedPref = getBaseContext().getSharedPreferences("augalu_ratas.CURRENT_USER_KEY", Context.MODE_PRIVATE);
         Long current_id= sharedPref.getLong("current_user_id", 0);
-        UsersDatabase database = AppActivity.getUsersDatabase();
+        User_PostDatabase database = AppActivity.getUser_PostDatabase();
         username.setText(database.usersDAO().getUserById(current_id).getUsername());
 
         return_button.setOnClickListener(new View.OnClickListener() {

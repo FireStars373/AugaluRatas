@@ -1,4 +1,6 @@
 package com.example.augaluratas;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;

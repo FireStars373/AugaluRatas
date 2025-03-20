@@ -36,7 +36,7 @@ public class Login extends AppCompatActivity {
         EditText name = findViewById(R.id.login_name);
         EditText password = findViewById(R.id.login_password);
 
-        UsersDatabase usersDatabase = AppActivity.getUsersDatabase();
+        User_PostDatabase usersDatabase = AppActivity.getUser_PostDatabase();
 
 
         login.setOnClickListener(new View.OnClickListener() {
