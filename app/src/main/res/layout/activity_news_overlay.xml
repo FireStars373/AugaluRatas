@@ -55,7 +55,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/textView35"
+                android:id="@+id/news_headline"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
@@ -68,18 +68,18 @@
                 app:layout_constraintTop_toBottomOf="@id/imageView19" />
 
             <ImageView
-                android:id="@+id/imageView20"
+                android:id="@+id/news_image"
                 android:layout_width="180dp"
                 android:layout_height="180dp"
                 android:layout_marginTop="10dp"
                 android:contentDescription="@string/plant_img"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/textView35"
+                app:layout_constraintTop_toBottomOf="@id/news_headline"
                 tools:srcCompat="@tools:sample/avatars" />
 
             <TextView
-                android:id="@+id/textView36"
+                android:id="@+id/news_main_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
@@ -94,24 +94,24 @@
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/imageView20"/>
+                app:layout_constraintTop_toBottomOf="@id/news_image"/>
 
             <TextView
-                android:id="@+id/textView37"
+                android:id="@+id/news_full_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:breakStrategy="simple"
-                android:paddingHorizontal="45dp"
-                android:inputType="textMultiLine"
                 android:fontFamily="@font/spectral_sc"
                 android:gravity="start"
+                android:inputType="textMultiLine"
+                android:paddingHorizontal="45dp"
                 android:text="@string/news_text"
                 android:textColor="@color/text_brown"
-                android:textSize="20sp"
-                app:layout_constraintStart_toStartOf="parent"
+                android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/textView36"/>
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/news_main_text" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>

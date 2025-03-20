@@ -2,7 +2,18 @@ package com.example.augaluratas;
 
 import android.app.Application;
 
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Log;
+
+
+import androidx.annotation.NonNull;
 import androidx.room.Room;
+import androidx.room.RoomDatabase;
+import androidx.sqlite.db.SupportSQLiteDatabase;
+
+import java.io.ByteArrayOutputStream;
 
 public class AppActivity extends Application {
     static PlantsDatabase db;
@@ -26,5 +37,12 @@ public class AppActivity extends Application {
     {
         return db2;
     }
-
+    public static PostsDatabase getPostsDatabase()
+    {
+        return db3;
+    }
+    public static NewsDatabase getNewsDatabase()
+    {
+        return db4;
+    }
 }
