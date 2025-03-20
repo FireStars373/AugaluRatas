@@ -15,7 +15,7 @@
     <!--Add post-->
     <string name="sell_plant">Parduoti augalą</string>
     <string name="type_in_title">Įveskite pavadinimą</string>
-    <string name="type_in_plant_description">Įveskite augalo pavadinimą</string>
+    <string name="type_in_plant_description">Įveskite augalo aprašymą</string>
     <string name="type_in_price">Įveskite kainą</string>
     <string name="upload_photo">Įkelkite nuotrauką</string>
     <!--First load screen-->
@@ -124,6 +124,11 @@
     <string name="letter_for_filtering">A</string>
     <string name="news_img">News image</string>
     <string name="delete_user">Ištrinti vartotoją</string>
+
+    <string-array name="spinner_names">
+        <item>Mano skelbimai</item>
+        <item>Kitų žmonių skelbimai</item>
+    </string-array>
 
 
 </resources>

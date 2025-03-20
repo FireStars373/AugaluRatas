@@ -27,7 +27,6 @@ public class Help extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_help);
 
-
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.contstraint_layout), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -36,8 +35,6 @@ public class Help extends AppCompatActivity {
 
         ImageButton return_button = findViewById(R.id.return_from_help);
         return_button.setOnClickListener(v -> finish());
-
-
 
     }
     private void createNotificationChannel() {

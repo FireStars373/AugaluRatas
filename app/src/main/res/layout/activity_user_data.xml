@@ -213,15 +213,11 @@
             android:inputType="textEmailAddress"
             android:paddingStart="8dp"
             android:text="gmail.com"
-            android:textColor="@color/text_brown"
+            android:textColor="@color/hint_grey"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView84" />
-
-
-
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>
