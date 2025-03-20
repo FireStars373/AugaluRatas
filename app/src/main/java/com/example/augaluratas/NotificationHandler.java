@@ -28,13 +28,13 @@ public class NotificationHandler {
             channel.setDescription(description);
 
             //Uncomment lines below if notifications not showing
-            /*NotificationManager notificationManager = context.getSystemService(NotificationManager.class);
+            NotificationManager notificationManager = context.getSystemService(NotificationManager.class);
             if (notificationManager != null) {
                 notificationManager.createNotificationChannel(channel);
                 Log.d("NotificationHandler", "Notification channel created successfully.");
             } else {
                 Log.e("NotificationHandler", "NotificationManager is null, channel not created.");
-            }*/
+            }
         }
     }
 
