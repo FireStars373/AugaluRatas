@@ -57,7 +57,7 @@ public class MeniuOverlay extends AppCompatActivity {
         plant_gallery.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getBaseContext(), AllPosts.class);
+                Intent intent = new Intent(getBaseContext(), AllPosts_Gynimas.class);
                 startActivity(intent);
             }
         });

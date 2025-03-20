@@ -66,7 +66,7 @@
 
         <TextView
             android:id="@+id/post_description_title"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="45dp"
             android:layout_marginTop="40dp"
@@ -85,7 +85,7 @@
 
         <TextView
             android:id="@+id/post_description_description"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="45dp"
             android:layout_marginTop="15dp"
@@ -123,12 +123,12 @@
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/button30"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="45dp"
             android:layout_marginTop="30dp"
             android:layout_marginEnd="45dp"
-            android:layout_marginBottom="40dp"
+            android:layout_marginBottom="45dp"
             android:background="@drawable/button_background_1"
             android:fontFamily="@font/spectral_sc"
             android:paddingStart="16dp"
@@ -136,18 +136,18 @@
             android:text="@string/add_to_cart"
             android:textColor="@color/text_brown"
             android:textSize="20sp"
-            app:layout_constraintBottom_toBottomOf="@+id/view22"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
-        <ImageView
-            android:id="@+id/imageView32"
+
+        <ImageButton
+            android:id="@+id/imageButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="5dp"
             android:layout_marginBottom="5dp"
             android:background="@drawable/empty_heart_icon"
-            android:contentDescription="@string/heart_icn"
             app:layout_constraintBottom_toBottomOf="@+id/post_description_photo"
             app:layout_constraintEnd_toEndOf="@+id/post_description_photo" />
 

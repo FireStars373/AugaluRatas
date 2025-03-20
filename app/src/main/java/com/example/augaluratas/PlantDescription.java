@@ -51,6 +51,5 @@ public class PlantDescription extends AppCompatActivity {
             Bitmap bitmap = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
             image.setImageBitmap(bitmap);
         }
-
     }
 }

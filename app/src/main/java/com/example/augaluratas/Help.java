@@ -21,13 +21,12 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class Help extends AppCompatActivity {
 
-    private ActivityResultLauncher<String> requestPermissionLauncher;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_help);
+
 
         // Create notification channel FIRST
         createNotificationChannel();
@@ -41,6 +40,7 @@ public class Help extends AppCompatActivity {
         ImageButton return_button = findViewById(R.id.return_from_help);
         return_button.setOnClickListener(v -> finish());
 
+
         requestPermissionLauncher = registerForActivityResult(new ActivityResultContracts.RequestPermission(), isGranted -> {});
 
         Button sendButton = findViewById(R.id.button45);
@@ -53,6 +53,7 @@ public class Help extends AppCompatActivity {
                 }
             }
         });
+
     }
     private void createNotificationChannel() {
         // Create the NotificationChannel, but only on API 26+ because

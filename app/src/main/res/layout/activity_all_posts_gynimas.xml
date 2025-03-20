@@ -2,12 +2,11 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/contstraint_layout"
+    android:id="@+id/constraint_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/dark_green"
-    tools:context=".NewsOverlay">
-
+    tools:context=".AllPosts">
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -19,9 +18,9 @@
             android:layout_height="match_parent">
 
             <View
-                android:id="@+id/view19"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
+                android:id="@+id/view14"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="20dp"
@@ -33,88 +32,86 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageButton
-                android:id="@+id/return_from_news_overlay"
+                android:id="@+id/shopping_cart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="80dp"
+                android:layout_marginEnd="45dp"
+                android:background="@drawable/baseline_shopping_cart_24"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageButton
+                android:id="@+id/sidebar_from_all_posts"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="45dp"
                 android:layout_marginTop="80dp"
                 android:background="@drawable/arrow_button"
-                android:contentDescription="@string/back_btn"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
-                android:id="@+id/imageView19"
+                android:id="@+id/imageView16"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="45dp"
                 android:background="@drawable/lotus_icon"
-                android:contentDescription="@string/lotus_icn"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+            <SearchView
+                android:id="@id/searchView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="45dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="45dp"
+                android:background="@drawable/searchbox_background_1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/spinner3" />
+
             <TextView
-                android:id="@+id/news_headline"
+                android:id="@+id/textView29"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="45dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginEnd="45dp"
+                android:fontFamily="@font/spectral_sc"
+                android:gravity="center"
+                android:text=",,, augalai"
+                android:textColor="@color/text_brown"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toStartOf="@+id/spinner3"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageView16" />
+
+            <Spinner
+                android:id="@+id/spinner3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="45dp"
                 android:layout_marginTop="30dp"
                 android:fontFamily="@font/spectral_sc"
-                android:text="@string/naujienos_antraste"
-                android:textColor="@color/text_brown"
-                android:textSize="24sp"
+                android:gravity="center"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/imageView19" />
+                app:layout_constraintStart_toEndOf="@+id/textView29"
+                app:layout_constraintTop_toBottomOf="@+id/imageView16" />
 
-            <ImageView
-                android:id="@+id/news_image"
-                android:layout_width="180dp"
-                android:layout_height="180dp"
-                android:layout_marginTop="10dp"
-                android:contentDescription="@string/plant_img"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/news_headline"
-                tools:srcCompat="@tools:sample/avatars" />
-
-            <TextView
-                android:id="@+id/news_main_text"
-                android:layout_width="match_parent"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="30dp"
                 android:layout_marginStart="45dp"
                 android:layout_marginEnd="45dp"
-                android:fontFamily="@font/spectral_sc"
-                android:text="@string/news_highlight"
-                android:textColor="@color/text_brown"
-                android:breakStrategy="simple"
-                android:gravity="start"
-                android:inputType="textMultiLine"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/news_image"/>
-
-            <TextView
-                android:id="@+id/news_full_text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="45dp"
-                android:layout_marginEnd="45dp"
-                android:layout_marginTop="10dp"
-                android:paddingBottom="45dp"
-                android:breakStrategy="simple"
-                android:fontFamily="@font/spectral_sc"
-                android:gravity="start"
-                android:inputType="textMultiLine"
-                android:text="@string/news_text"
-                android:textColor="@color/text_brown"
-                android:textSize="16sp"
+                android:scrollbars="vertical"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/news_main_text" />
+                app:layout_constraintTop_toBottomOf="@+id/searchView" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
