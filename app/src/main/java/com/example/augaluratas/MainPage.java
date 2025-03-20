@@ -45,10 +45,11 @@ public class MainPage extends AppCompatActivity {
 
         SharedPreferences sharedPref = getBaseContext().getSharedPreferences("augalu_ratas.CURRENT_USER_KEY", Context.MODE_PRIVATE);
         Long current_id = sharedPref.getLong("current_user_id", 0);
-        Users user = AppActivity.getUsersDatabase().usersDAO().getUserById(current_id);
+        Users user = AppActivity.getUser_PostDatabase().usersDAO().getUserById(current_id);
         username.setText(user.getUsername());
         NewsDao newsDao = AppActivity.getNewsDatabase().newsDao();
-        newsDao.deleteAll();
+        //Deleting example data
+        //newsDao.deleteAll();
         if (newsDao.getAllNews().isEmpty()){
             //Inserting example data if empty
             newsDao.insert(new News("Naujienos 1!!!!", "Čia yra naujienos.", "Naujienos tekstas. Naujienos tekstas. Naujienos tekstas. Naujienos tekstas. Naujienos tekstas. Naujienos tekstas. Naujienos tekstas. Naujienos tekstas. Naujienos tekstas. Naujienos tekstas. Naujienos tekstas. Naujienos tekstas. Naujienos tekstas. Naujienos tekstas. Naujienos tekstas. Naujienos tekstas. Naujienos tekstas. Naujienos tekstas. Naujienos tekstas. Naujienos tekstas. Naujienos tekstas. Naujienos tekstas. ", convertDrawableToByteArray(R.drawable.baseline_filter_24)));
@@ -56,7 +57,7 @@ public class MainPage extends AppCompatActivity {
             newsDao.insert(new News("Naujienos 3!", "Čia smagios naujienos!", "Naujienos tekstas. Naujienos tekstas. Naujienos tekstas. Naujienos tekstas. Naujienos tekstas. Naujienos tekstas. Naujienos tekstas. Naujienos tekstas. Naujienos tekstas. Naujienos tekstas. Naujienos tekstas. Naujienos tekstas. Naujienos tekstas. Naujienos tekstas. Naujienos tekstas. Naujienos tekstas. Naujienos tekstas. Naujienos tekstas. Naujienos tekstas. Naujienos tekstas. Naujienos tekstas. Naujienos tekstas. ", convertDrawableToByteArray(R.drawable.baseline_filter_24)));
         }
 
-        //Deleting example data
+
 
 
         loadNews();

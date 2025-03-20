@@ -1,5 +1,7 @@
 package com.example.augaluratas;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.CheckBox;
@@ -29,6 +31,11 @@ public class Privacy extends AppCompatActivity {
         ImageButton return_button = findViewById(R.id.return_from_privacy);
         CheckBox agreement = findViewById(R.id.privacy_agreement);
 
+        SharedPreferences sharedPref = getBaseContext().getSharedPreferences("augalu_ratas.SETTINGS", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+
+        agreement.setChecked(sharedPref.getBoolean("privacy", true));
+
         return_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -38,9 +45,8 @@ public class Privacy extends AppCompatActivity {
         agreement.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked){
-                    //(FUTURE) Change settings
-                }
+                editor.putBoolean("privacy", isChecked);
+                editor.apply();
             }
         });
     }

@@ -34,10 +34,9 @@ public class Notifications extends AppCompatActivity {
         CheckBox purchased = findViewById(R.id.notification_plant_purchased);
         ImageButton return_button = findViewById(R.id.return_from_notifications);
 
-        SharedPreferences sharedPref = getBaseContext().getSharedPreferences("augalu_ratas.NOTIFICATION_SETTINGS", Context.MODE_PRIVATE);
+        SharedPreferences sharedPref = getBaseContext().getSharedPreferences("augalu_ratas.SETTINGS", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
         //Displaying settings
-        Boolean a  =sharedPref.getBoolean("viewed", true);
         viewed.setChecked(sharedPref.getBoolean("viewed", true));
         shared.setChecked(sharedPref.getBoolean("shared", true));
         liked.setChecked(sharedPref.getBoolean("liked", true));
