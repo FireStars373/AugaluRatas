@@ -27,7 +27,7 @@ public class Subscription extends AppCompatActivity {
         });
         SharedPreferences sharedPref = getBaseContext().getSharedPreferences("augalu_ratas.CURRENT_USER_KEY", Context.MODE_PRIVATE);
         Long current_id = sharedPref.getLong("current_user_id", 0);
-        UsersDatabase database = AppActivity.getUsersDatabase();
+        User_PostDatabase database = AppActivity.getUser_PostDatabase();
         Users user = database.usersDAO().getUserById(current_id);
 
         ImageButton sidebar = findViewById(R.id.sidebar_from_subscription);
@@ -49,6 +49,7 @@ public class Subscription extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 user.setSubscribed(true);
+                database.usersDAO().Update(user);
                 Intent intent = new Intent(getBaseContext(), SubscriptionSuccess.class);
                 startActivity(intent);
             }

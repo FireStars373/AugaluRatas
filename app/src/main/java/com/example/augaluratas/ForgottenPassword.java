@@ -1,6 +1,5 @@
 package com.example.augaluratas;
 
-import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
@@ -30,7 +29,7 @@ public class ForgottenPassword extends AppCompatActivity {
         EditText email = findViewById(R.id.forgotten_password_email);
         Button send = findViewById(R.id.forgotten_password_send);
         Button go_back = findViewById(R.id.return_from_forgotten_password);
-        UsersDatabase database = AppActivity.getUsersDatabase();
+        User_PostDatabase database = AppActivity.getUser_PostDatabase();
 
         send.setOnClickListener(new View.OnClickListener() {
             @Override

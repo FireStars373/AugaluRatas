@@ -1,5 +1,6 @@
 package com.example.augaluratas;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
+import android.util.Log;
 
 public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder> {
     private List<Posts> postList;
@@ -35,6 +37,13 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
         // Konvertuoja byte[] į Bitmap
         Bitmap bitmap = BitmapFactory.decodeByteArray(post.getImage(), 0, post.getImage().length);
         holder.imageView.setImageBitmap(bitmap);
+
+        holder.itemView.setOnClickListener(v -> {
+            // Perduoti post ID į kitą aktyvumą
+            Intent intent = new Intent(v.getContext(), PostDescription.class);
+            intent.putExtra("POST_ID", post.getId()); // Įrašome post ID į Intent
+            v.getContext().startActivity(intent);
+        });
     }
 
     @Override

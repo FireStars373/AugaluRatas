@@ -35,7 +35,8 @@ public class Register extends AppCompatActivity {
         EditText repeat_password = findViewById(R.id.register_password_repeat);
         EditText number = findViewById(R.id.register_phone_number);
 
-        UsersDatabase usersDatabase = AppActivity.getUsersDatabase();
+        User_PostDatabase usersDatabase = AppActivity.getUser_PostDatabase();
+
 
         register.setOnClickListener(new View.OnClickListener() {
             @Override
