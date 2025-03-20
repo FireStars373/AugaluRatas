@@ -64,7 +64,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/imageView12"
                 tools:srcCompat="@tools:sample/avatars" />
 
-            <TextView
+            <EditText
                 android:id="@+id/user_post_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -83,7 +83,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/user_post_photo" />
 
-            <TextView
+            <EditText
                 android:id="@+id/user_post_description"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -102,7 +102,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/user_post_title" />
 
-            <TextView
+            <EditText
                 android:id="@+id/user_post_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -112,6 +112,7 @@
                 android:background="@drawable/textbox_background_2"
                 android:fontFamily="@font/spectral_sc"
                 android:gravity="center"
+                android:inputType="numberDecimal"
                 android:paddingStart="16dp"
                 android:paddingEnd="16dp"
                 android:text="@string/price"

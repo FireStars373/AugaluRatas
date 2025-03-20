@@ -1,5 +1,6 @@
 package com.example.augaluratas;
 
+import android.app.Application;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -15,8 +16,14 @@ import android.util.Log;
 
 public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder> {
     private List<Posts> postList;
+    boolean belongs_to_user;
+
     public PostAdapter(List<Posts> postList) {
+        this(postList, false); // Calls the other constructor with `false`
+    }
+    public PostAdapter(List<Posts> postList, boolean belongs_to_user) {
         this.postList = postList;
+        this.belongs_to_user = belongs_to_user;
     }
 
     @NonNull
@@ -39,6 +46,13 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
 
         holder.itemView.setOnClickListener(v -> {
             // Perduoti post ID į kitą aktyvumą
+            String a = this.getClass().getSimpleName();
+            if (belongs_to_user){
+                Intent intent = new Intent(v.getContext(), UserPostOverlay.class);
+                intent.putExtra("POST_ID", post.getId()); // Įrašome post ID į Intent
+                v.getContext().startActivity(intent);
+                return;
+            }
             Intent intent = new Intent(v.getContext(), PostDescription.class);
             intent.putExtra("POST_ID", post.getId()); // Įrašome post ID į Intent
             v.getContext().startActivity(intent);
