@@ -1,12 +1,19 @@
 package com.example.augaluratas;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -29,12 +36,33 @@ public class UserPostOverlay extends AppCompatActivity {
 
         ImageButton sidebar = findViewById(R.id.sidebar_from_user_post_overlay);
         ImageView photo = findViewById(R.id.user_post_photo);
-        TextView title = findViewById(R.id.user_post_title);
-        TextView description = findViewById(R.id.user_post_description);
-        TextView price = findViewById(R.id.user_post_price);
+        EditText title = findViewById(R.id.user_post_title);
+        EditText description = findViewById(R.id.user_post_description);
+        EditText price = findViewById(R.id.user_post_price);
         Button change = findViewById(R.id.user_post_change);
 
         //(FUTURE) Set data from database
+        User_PostDatabase db = AppActivity.getUser_PostDatabase();
+        long id = getIntent().getLongExtra("POST_ID", -1);
+        if (id != -1) {
+            Posts post = db.postsDAO().getPostById(id);
+            if (post != null) {
+
+                byte[] imageBytes = db.postsDAO().getPostById(id).getImage();
+                Bitmap bitmap = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
+                photo.setImageBitmap(bitmap);
+                title.setText(post.getPlantName());
+                description.setText(post.getDescription());
+                price.setText(String.format("%.2f €", post.getPrice()));
+            }
+            sidebar.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(getBaseContext(), AllPosts.class);
+                    startActivity(intent);
+                }
+            });
+        }
 
         sidebar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -46,9 +74,28 @@ public class UserPostOverlay extends AppCompatActivity {
         change.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //(FUTURE) Change data in database
+                //(FUTURE) Photo selector
+                String Title = title.getText().toString().trim();
+                String Description = description.getText().toString().trim();
+                String Price = price.getText().toString().trim();
 
+                if (Title.isEmpty() || Description.isEmpty() || Price.isEmpty()){
+                    Toast.makeText(getApplicationContext(), "Laukai negali būti tušti", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                SharedPreferences sharedPref = getBaseContext().getSharedPreferences("augalu_ratas.CURRENT_USER_KEY", Context.MODE_PRIVATE);
+                Long currentUserId = sharedPref.getLong("current_user_id", 0);
+
+                Posts post = db.postsDAO().getPostById(id);
+                post.setPlantName(Title);
+                post.setDescription(Description);
+                String cleaned = Price.replaceAll("[^\\d.]", "");
+                post.setPrice(Double.parseDouble(cleaned));
+                db.postsDAO().updatePost(post);
+                Toast.makeText(getBaseContext(), "Sėkmingai pakeistas turinys!", Toast.LENGTH_SHORT).show();
             }
+
         });
     }
 }
