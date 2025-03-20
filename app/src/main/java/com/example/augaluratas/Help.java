@@ -21,16 +21,12 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class Help extends AppCompatActivity {
 
-    private ActivityResultLauncher<String> requestPermissionLauncher;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_help);
-
-        // Create notification channel FIRST
-        createNotificationChannel();
+        
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.contstraint_layout), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
@@ -41,18 +37,8 @@ public class Help extends AppCompatActivity {
         ImageButton return_button = findViewById(R.id.return_from_help);
         return_button.setOnClickListener(v -> finish());
 
-        requestPermissionLauncher = registerForActivityResult(new ActivityResultContracts.RequestPermission(), isGranted -> {});
 
-        Button sendButton = findViewById(R.id.button45);
-        sendButton.setOnClickListener(v -> {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                if (checkSelfPermission(android.Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
-                    requestPermissionLauncher.launch(android.Manifest.permission.POST_NOTIFICATIONS);
-                } else {
-                    NotificationHandler.sendNotification(Help.this, "app_channel_id", "Jūsų skelbimas buvo įsimintas!", Help.class, 1);
-                }
-            }
-        });
+
     }
     private void createNotificationChannel() {
         // Create the NotificationChannel, but only on API 26+ because
