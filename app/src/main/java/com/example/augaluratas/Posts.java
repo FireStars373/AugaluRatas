@@ -59,4 +59,13 @@ public class Posts {
     public double getPrice() {return this.price;}
     public void setDescription(@NonNull String description) {this.description = description;}
     public String getDescription() {return this.description;}
+
+    @Override
+    public boolean equals(Object anObject) {
+        if (!(anObject instanceof Posts)) {
+            return false;
+        }
+        Posts otherPost = (Posts) anObject;
+        return otherPost.getId() == getId();
+    }
 }
