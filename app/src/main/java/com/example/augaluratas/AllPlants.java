@@ -117,7 +117,6 @@ public class AllPlants extends AppCompatActivity {
                                     Intent intent = new Intent(getBaseContext(), PlantDescription.class);
                                     intent.putExtra("augalas", selectedPlant);
                                     startActivity(intent);
-                                    Toast.makeText(this, "Paspausta: " + plantName, Toast.LENGTH_SHORT).show();
                                 });
                             }
                         });

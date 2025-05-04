@@ -3,6 +3,7 @@ package com.example.augaluratas;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -29,13 +30,13 @@ public class Login extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-
         Button login = findViewById(R.id.login);
         Button return_to_first_screen = findViewById(R.id.return_to_first_screen_from_login);
         TextView forgotten_password = findViewById(R.id.to_forgotten_password);
         EditText name = findViewById(R.id.login_name);
         EditText password = findViewById(R.id.login_password);
-
+        MediaPlayer mp = MediaPlayer.create(this, R.raw.bad_info);
+        mp.setVolume(0.8f,0.8f);
         User_PostDatabase usersDatabase = AppActivity.getUser_PostDatabase();
 
 
@@ -45,16 +46,22 @@ public class Login extends AppCompatActivity {
                 String Name = name.getText().toString().trim();
                 String Password = password.getText().toString().trim();
                 if (Name.isEmpty()){
+                    login.setSoundEffectsEnabled(false);
                     Toast.makeText(getApplicationContext(), "Neįrašytas vardas", Toast.LENGTH_SHORT).show();
+                    mp.start();
                     return;
                 }
                 if (Password.isEmpty()){
+                    login.setSoundEffectsEnabled(false);
                     Toast.makeText(getApplicationContext(), "Neįrašytas slaptažodis", Toast.LENGTH_SHORT).show();
+                    mp.start();
                     return;
                 }
                 Users user = usersDatabase.usersDAO().getUserByUsername(Name);
                 if(user == null || !user.getPassword().equals(Password)){
+                    login.setSoundEffectsEnabled(false);
                     Toast.makeText(getApplicationContext(), "Vartotojo vardas arba slaptažodis neteisingas", Toast.LENGTH_SHORT).show();
+                    mp.start();
                     return;
                 }
                 SharedPreferences sharedPref = getBaseContext().getSharedPreferences("augalu_ratas.CURRENT_USER_KEY", Context.MODE_PRIVATE);
@@ -68,6 +75,7 @@ public class Login extends AppCompatActivity {
         return_to_first_screen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 finish();
             }
         });
