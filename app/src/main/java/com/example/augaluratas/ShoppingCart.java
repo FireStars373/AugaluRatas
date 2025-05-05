@@ -1,5 +1,8 @@
 package com.example.augaluratas;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -7,6 +10,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,6 +19,9 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import org.w3c.dom.Text;
+
+import java.util.HashSet;
+import java.util.Set;
 
 public class ShoppingCart extends BaseActivity {
 
@@ -65,19 +72,46 @@ public class ShoppingCart extends BaseActivity {
             @Override
             public void onClick(View v) {
                 //(FUTURE) Take to pay
+                buy();
+
             }
         });
         pay_by_apple_pay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //(FUTURE) Take to pay
+                buy();
+
             }
         });
         pay_by_google_pay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //(FUTURE) Take to pay
+                buy();
             }
         });
     }
+    public void buy(){
+        User_PostDatabase database = AppActivity.getUser_PostDatabase();
+        SharedPreferences prefs = getBaseContext().getSharedPreferences("cart", Context.MODE_PRIVATE);
+        Set<String> all_in_cart = prefs.getStringSet("items", new HashSet<>());
+        Set<String> buying = prefs.getStringSet("buying_items", new HashSet<>());
+        if(buying.isEmpty()){
+            Toast.makeText(getBaseContext(), "Nepasirinkti pirkiniai", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        for (String id : buying){
+            if (database.postsDAO().getPostById(Long.parseLong(id)) != null){
+                database.postsDAO().delete(database.postsDAO().getPostById(Long.parseLong(id)));
+            }
+        }
+        all_in_cart.removeAll(buying);
+
+        prefs.edit().putStringSet("items", all_in_cart).apply();
+        Toast.makeText(getBaseContext(), "Pirkimas sėkmingai įvykdytas!", Toast.LENGTH_SHORT).show();
+
+        finish();
+    }
+
 }

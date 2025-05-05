@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -45,6 +46,10 @@ public class Privacy extends BaseActivity {
         agreement.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (!isChecked){
+                    Toast.makeText(getBaseContext(),"Naudojant programą, būtina priimti privatumo politiką", Toast.LENGTH_SHORT).show();
+                    agreement.setChecked(true);
+                }
                 editor.putBoolean("privacy", isChecked);
                 editor.apply();
             }

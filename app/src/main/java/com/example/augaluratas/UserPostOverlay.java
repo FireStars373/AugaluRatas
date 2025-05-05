@@ -1,5 +1,7 @@
 package com.example.augaluratas;
 
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -67,8 +69,9 @@ public class UserPostOverlay extends BaseActivity {
         sidebar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getBaseContext(), MeniuOverlay.class);
-                startActivity(intent);
+//                Intent intent = new Intent(getBaseContext(), MeniuOverlay.class);
+//                startActivity(intent);
+                finish();
             }
         });
         change.setOnClickListener(new View.OnClickListener() {
@@ -81,6 +84,12 @@ public class UserPostOverlay extends BaseActivity {
 
                 if (Title.isEmpty() || Description.isEmpty() || Price.isEmpty()){
                     Toast.makeText(getApplicationContext(), "Laukai negali būti tušti", Toast.LENGTH_SHORT).show();
+                    ObjectAnimator animator = ObjectAnimator.ofFloat(change, "translationX",  0f, 25f, -25f, 15f, -15f, 5f, -5f, 0f);
+                    animator.setDuration(600);
+
+                    AnimatorSet set = new AnimatorSet();
+                    set.playSequentially(animator);
+                    set.start();
                     return;
                 }
 

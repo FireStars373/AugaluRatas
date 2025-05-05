@@ -1,7 +1,9 @@
 package com.example.augaluratas;
 
 import android.app.Application;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
@@ -16,8 +18,13 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.interpolator.view.animation.LinearOutSlowInInterpolator;
 import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+
 import android.util.Log;
+import android.widget.Toast;
 
 public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder> {
     private List<Posts> postList;
@@ -34,7 +41,8 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
     @NonNull
     @Override
     public PostViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.post_item_buyable, parent, false);
+        int layoutRes = (viewType == 1) ? R.layout.post_item : R.layout.post_item_buyable;
+        View view = LayoutInflater.from(parent.getContext()).inflate(layoutRes, parent, false);
         return new PostViewHolder(view);
     }
 
@@ -62,51 +70,64 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
             intent.putExtra("POST_ID", post.getId()); // Įrašome post ID į Intent
             v.getContext().startActivity(intent);
         });
-        holder.addToCart.setOnClickListener(v -> {
-            // Animate imageView to cart icon
-            int[] originalPos = new int[2];
-            holder.imageView.getLocationOnScreen(originalPos);
+        if (holder.addToCart != null){
+            holder.addToCart.setOnClickListener(v -> {
 
-            // Clone image
-            ImageView clone = new ImageView(v.getContext());
-            clone.setImageDrawable(holder.imageView.getDrawable());
+                SharedPreferences prefs = v.getContext().getSharedPreferences("cart", Context.MODE_PRIVATE);
+                Set<String> current = prefs.getStringSet("items", new HashSet<>());
+                if (current.contains(Long.toString(post.getId()))){
+                    Toast.makeText(v.getContext(), "Šis augalas jau jūsų krepšelyje", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                current.add(Long.toString(post.getId()));
+                prefs.edit().putStringSet("items", current).apply();
 
-            FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(
-                    holder.imageView.getWidth(), holder.imageView.getHeight());
-            params.leftMargin = originalPos[0];
-            params.topMargin = originalPos[1];
+                // Animate imageView to cart icon
+                int[] originalPos = new int[2];
+                holder.imageView.getLocationOnScreen(originalPos);
 
-            // Get activity context and root layout
-            android.app.Activity activity = (android.app.Activity) v.getContext();
-            FrameLayout rootLayout = (FrameLayout) activity.getWindow().getDecorView();
-            rootLayout.addView(clone, params);
+                // Clone image
+                ImageView clone = new ImageView(v.getContext());
+                clone.setImageDrawable(holder.imageView.getDrawable());
 
-            // Find cart icon position
-            ImageView cartIcon = activity.findViewById(R.id.shopping_cart); // make sure it exists
-            if (cartIcon == null) {
-                Log.e("PostAdapter", "Cart icon not found!");
-                return;
-            }
+                FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(
+                        holder.imageView.getWidth(), holder.imageView.getHeight());
+                params.leftMargin = originalPos[0];
+                params.topMargin = originalPos[1];
 
-            int[] targetPos = new int[2];
-            cartIcon.getLocationOnScreen(targetPos);
-            targetPos[0] -= cartIcon.getWidth()/2;
-            targetPos[1] -= cartIcon.getHeight()/2;
+                // Get activity context and root layout
+                android.app.Activity activity = (android.app.Activity) v.getContext();
+                FrameLayout rootLayout = (FrameLayout) activity.getWindow().getDecorView();
+                rootLayout.addView(clone, params);
 
-            float deltaX = targetPos[0] - originalPos[0];
-            float deltaY = targetPos[1] - originalPos[1];
+                // Find cart icon position
+                ImageView cartIcon = activity.findViewById(R.id.shopping_cart); // make sure it exists
+                if (cartIcon == null) {
+                    Log.e("PostAdapter", "Cart icon not found!");
+                    return;
+                }
 
-            clone.animate()
-                    .translationX(deltaX)
-                    .translationY(deltaY)
-                    .scaleX(0.2f)
-                    .scaleY(0.2f)
-                    .alpha(0.0f)
-                    .setDuration(1000)
-                    .setInterpolator(new AccelerateDecelerateInterpolator())
-                    .withEndAction(() -> rootLayout.removeView(clone))
-                    .start();
-        });
+                int[] targetPos = new int[2];
+                cartIcon.getLocationOnScreen(targetPos);
+                targetPos[0] -= cartIcon.getWidth()/2;
+                targetPos[1] -= cartIcon.getHeight()/2;
+
+                float deltaX = targetPos[0] - originalPos[0];
+                float deltaY = targetPos[1] - originalPos[1];
+
+                clone.animate()
+                        .translationX(deltaX)
+                        .translationY(deltaY)
+                        .scaleX(0.2f)
+                        .scaleY(0.2f)
+                        .alpha(0.0f)
+                        .setDuration(1000)
+                        .setInterpolator(new AccelerateDecelerateInterpolator())
+                        .withEndAction(() -> rootLayout.removeView(clone))
+                        .start();
+            });
+        }
+
     }
 
     @Override
@@ -127,6 +148,11 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
             imageView = itemView.findViewById(R.id.image_plant);
             addToCart = itemView.findViewById(R.id.add_to_cart_btn);
         }
+    }
+    @Override
+    public int getItemViewType(int position) {
+        // Return different view types based on `belongs_to_user`
+        return belongs_to_user ? 1 : 0;
     }
 }
 

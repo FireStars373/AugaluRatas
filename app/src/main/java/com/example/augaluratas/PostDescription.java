@@ -1,20 +1,24 @@
 package com.example.augaluratas;
 
-import android.content.Intent;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
+import java.util.HashSet;
+import java.util.Set;
 
 public class PostDescription extends BaseActivity {
 
@@ -37,9 +41,26 @@ public class PostDescription extends BaseActivity {
         TextView description = findViewById(R.id.post_description_description);
         TextView price = findViewById(R.id.post_description_price);
 
-        //(FUTURE) Set variables from database
+        Button add_to_cart = findViewById(R.id.add_to_cart_from_desc);
+
         db = AppActivity.getUser_PostDatabase();
         long id = getIntent().getLongExtra("POST_ID", -1);
+
+        add_to_cart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SharedPreferences prefs = v.getContext().getSharedPreferences("cart", Context.MODE_PRIVATE);
+                Set<String> current = prefs.getStringSet("items", new HashSet<>());
+                if (current.contains(Long.toString(id))){
+                    Toast.makeText(v.getContext(), "Šis augalas jau jūsų krepšelyje", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                Toast.makeText(v.getContext(), "Augalas sėkmingai pridėtas!", Toast.LENGTH_SHORT).show();
+                current.add(Long.toString(id));
+                prefs.edit().putStringSet("items", current).apply();
+            }
+        });
+
         if (id != -1) {
             Posts post = db.postsDAO().getPostById(id);
             if (post != null) {
@@ -54,8 +75,9 @@ public class PostDescription extends BaseActivity {
             sidebar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(getBaseContext(), AllPosts.class);
-                    startActivity(intent);
+//                    Intent intent = new Intent(getBaseContext(), AllPosts.class);
+//                    startActivity(intent);
+                    finish();
                 }
             });
         }

@@ -122,7 +122,7 @@
             app:layout_constraintTop_toBottomOf="@+id/post_description_description" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/button30"
+            android:id="@+id/add_to_cart_from_desc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="45dp"

@@ -1,5 +1,7 @@
 package com.example.augaluratas;
 
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Patterns;
@@ -46,32 +48,46 @@ public class Register extends BaseActivity {
                 String Password = password.getText().toString().trim();
                 String Repeat_password = repeat_password.getText().toString().trim();
                 String Number = number.getText().toString().trim();
+
+                ObjectAnimator animator = ObjectAnimator.ofFloat(register, "translationX",  0f, 25f, -25f, 15f, -15f, 5f, -5f, 0f);
+                animator.setDuration(600);
+
+                AnimatorSet set = new AnimatorSet();
+                set.playSequentially(animator);
+
                 if ( Name.isEmpty() || Email.isEmpty() || Password.isEmpty() || Repeat_password.isEmpty() || Number.isEmpty()){
                     Toast.makeText(getApplicationContext(), "Visi laukai turi būti išpildyti", Toast.LENGTH_SHORT).show();
+                    set.start();
                     return;
                 }
                 if(Password.length() < 5 || !Password.matches(".*\\d.*")){
                     Toast.makeText(getApplicationContext(), "Slaptažodį turi sudaryti bent 5 simboliai, su bent vienu skaičiu", Toast.LENGTH_LONG).show();
+                    set.start();
                     return;
                 }
                 if (!Password.equals(Repeat_password)){
                     Toast.makeText(getApplicationContext(), "Slaptažodžiai nesutampa", Toast.LENGTH_SHORT).show();
+                    set.start();
                     return;
                 }
                 if(!Patterns.EMAIL_ADDRESS.matcher(Email).matches()){
                     Toast.makeText(getApplicationContext(), "Neteisingas el. pašto formatas", Toast.LENGTH_SHORT).show();
+                    set.start();
                     return;
                 }
                 if(!Patterns.PHONE.matcher(Number).matches()){
                     Toast.makeText(getApplicationContext(), "Neteisingas tel. numerio formatas", Toast.LENGTH_SHORT).show();
+                    set.start();
                     return;
                 }
                 if(usersDatabase.usersDAO().getUserByUsername(Name) != null){
                     Toast.makeText(getApplicationContext(), "Jau yra vartotojas su šiuo vardu", Toast.LENGTH_SHORT).show();
+                    set.start();
                     return;
                 }
                 if(usersDatabase.usersDAO().getUserByEmail(Email) != null){
                     Toast.makeText(getApplicationContext(), "Šis el. paštas jau panaudotas", Toast.LENGTH_SHORT).show();
+                    set.start();
                     return;
                 }
                 Users user = new Users(Name, Password, Number, Email);

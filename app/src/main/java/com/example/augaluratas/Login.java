@@ -1,5 +1,7 @@
 package com.example.augaluratas;
 
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -44,17 +46,27 @@ public class Login extends BaseActivity {
             public void onClick(View v) {
                 String Name = name.getText().toString().trim();
                 String Password = password.getText().toString().trim();
+
+                ObjectAnimator animator = ObjectAnimator.ofFloat(login, "translationX",  0f, 25f, -25f, 15f, -15f, 5f, -5f, 0f);
+                animator.setDuration(600);
+
+                AnimatorSet set = new AnimatorSet();
+                set.playSequentially(animator);
+
                 if (Name.isEmpty()){
                     Toast.makeText(getApplicationContext(), "Neįrašytas vardas", Toast.LENGTH_SHORT).show();
+                    set.start();
                     return;
                 }
                 if (Password.isEmpty()){
                     Toast.makeText(getApplicationContext(), "Neįrašytas slaptažodis", Toast.LENGTH_SHORT).show();
+                    set.start();
                     return;
                 }
                 Users user = usersDatabase.usersDAO().getUserByUsername(Name);
                 if(user == null || !user.getPassword().equals(Password)){
                     Toast.makeText(getApplicationContext(), "Vartotojo vardas arba slaptažodis neteisingas", Toast.LENGTH_SHORT).show();
+                    set.start();
                     return;
                 }
                 SharedPreferences sharedPref = getBaseContext().getSharedPreferences("augalu_ratas.CURRENT_USER_KEY", Context.MODE_PRIVATE);

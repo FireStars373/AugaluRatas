@@ -1,5 +1,7 @@
 package com.example.augaluratas;
 
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -56,6 +58,12 @@ public class AddPost extends BaseActivity {
                 String Price = price.getText().toString().trim();
                 if (Title.isEmpty() || Description.isEmpty() || Price.isEmpty()){
                     Toast.makeText(getApplicationContext(), "Laukai negali būti tušti", Toast.LENGTH_SHORT).show();
+                    ObjectAnimator animator = ObjectAnimator.ofFloat(upload_post, "translationX",  0f, 25f, -25f, 15f, -15f, 5f, -5f, 0f);
+                    animator.setDuration(600);
+
+                    AnimatorSet set = new AnimatorSet();
+                    set.playSequentially(animator);
+                    set.start();
                     return;
                 }
 
