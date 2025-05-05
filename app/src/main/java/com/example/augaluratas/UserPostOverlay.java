@@ -21,7 +21,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-public class UserPostOverlay extends AppCompatActivity {
+public class UserPostOverlay extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

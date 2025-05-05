@@ -7,6 +7,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
@@ -19,7 +20,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-public class Help extends AppCompatActivity {
+public class Help extends BaseActivity {
 
     private ActivityResultLauncher<String> requestPermissionLauncher;
 
@@ -45,6 +46,8 @@ public class Help extends AppCompatActivity {
 
         Button sendButton = findViewById(R.id.button45);
         sendButton.setOnClickListener(v -> {
+            sendButton.setAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_out_left));
+            sendButton.animate();
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
                 if (checkSelfPermission(android.Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
                     requestPermissionLauncher.launch(android.Manifest.permission.POST_NOTIFICATIONS);

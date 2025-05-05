@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import android.content.Context;
-public class AllPosts extends AppCompatActivity {
+public class AllPosts extends BaseActivity {
     private User_PostDatabase db;
 
     private ExecutorService executorService = Executors.newSingleThreadExecutor();
@@ -63,7 +63,7 @@ public class AllPosts extends AppCompatActivity {
             //db.postsDAO().insert(new Posts(current_id,"Bananmedis", "fainas medis", imageBytes, 2));
 
             // Gauti įrašus ir nustatyti adapterį
-            List<Posts> posts = db.postsDAO().getAllPosts();
+            List<Posts> posts = db.postsDAO().getPostsWithoutUser(current_id);
             runOnUiThread(() -> {
                 PostAdapter postAdapter = new PostAdapter(posts);
                 recyclerView.setAdapter(postAdapter);
@@ -76,11 +76,13 @@ public class AllPosts extends AppCompatActivity {
         sidebar.setOnClickListener(v -> {
             Intent intent = new Intent(getBaseContext(), MeniuOverlay.class);
             startActivity(intent);
+            overridePendingTransition(R.anim.slide_out_left, 0);
         });
 
         shopping_cart.setOnClickListener(v -> {
             Intent intent = new Intent(getBaseContext(), ShoppingCartList.class);
             startActivity(intent);
+            overridePendingTransition(R.anim.expand, 0);
         });
     }
 }

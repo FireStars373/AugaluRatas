@@ -14,7 +14,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-public class Privacy extends AppCompatActivity {
+public class Privacy extends BaseActivity {
 
 
     @Override

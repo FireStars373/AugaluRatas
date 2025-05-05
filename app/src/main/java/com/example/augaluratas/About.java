@@ -14,7 +14,7 @@ import androidx.core.view.WindowInsetsCompat;
 import java.io.IOException;
 import java.io.InputStream;
 
-public class About extends AppCompatActivity {
+public class About extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

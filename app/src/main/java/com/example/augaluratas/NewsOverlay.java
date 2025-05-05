@@ -16,7 +16,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 import org.w3c.dom.Text;
 
-public class NewsOverlay extends AppCompatActivity {
+public class NewsOverlay extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

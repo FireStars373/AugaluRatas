@@ -7,9 +7,14 @@ import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AccelerateDecelerateInterpolator;
+import android.view.animation.DecelerateInterpolator;
+import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
+import androidx.interpolator.view.animation.LinearOutSlowInInterpolator;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 import android.util.Log;
@@ -29,7 +34,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
     @NonNull
     @Override
     public PostViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.post_item, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.post_item_buyable, parent, false);
         return new PostViewHolder(view);
     }
 
@@ -57,6 +62,51 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
             intent.putExtra("POST_ID", post.getId()); // Įrašome post ID į Intent
             v.getContext().startActivity(intent);
         });
+        holder.addToCart.setOnClickListener(v -> {
+            // Animate imageView to cart icon
+            int[] originalPos = new int[2];
+            holder.imageView.getLocationOnScreen(originalPos);
+
+            // Clone image
+            ImageView clone = new ImageView(v.getContext());
+            clone.setImageDrawable(holder.imageView.getDrawable());
+
+            FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(
+                    holder.imageView.getWidth(), holder.imageView.getHeight());
+            params.leftMargin = originalPos[0];
+            params.topMargin = originalPos[1];
+
+            // Get activity context and root layout
+            android.app.Activity activity = (android.app.Activity) v.getContext();
+            FrameLayout rootLayout = (FrameLayout) activity.getWindow().getDecorView();
+            rootLayout.addView(clone, params);
+
+            // Find cart icon position
+            ImageView cartIcon = activity.findViewById(R.id.shopping_cart); // make sure it exists
+            if (cartIcon == null) {
+                Log.e("PostAdapter", "Cart icon not found!");
+                return;
+            }
+
+            int[] targetPos = new int[2];
+            cartIcon.getLocationOnScreen(targetPos);
+            targetPos[0] -= cartIcon.getWidth()/2;
+            targetPos[1] -= cartIcon.getHeight()/2;
+
+            float deltaX = targetPos[0] - originalPos[0];
+            float deltaY = targetPos[1] - originalPos[1];
+
+            clone.animate()
+                    .translationX(deltaX)
+                    .translationY(deltaY)
+                    .scaleX(0.2f)
+                    .scaleY(0.2f)
+                    .alpha(0.0f)
+                    .setDuration(1000)
+                    .setInterpolator(new AccelerateDecelerateInterpolator())
+                    .withEndAction(() -> rootLayout.removeView(clone))
+                    .start();
+        });
     }
 
     @Override
@@ -67,6 +117,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
     public static class PostViewHolder extends RecyclerView.ViewHolder {
         TextView plantName, description, price;
         ImageView imageView;
+        ImageButton addToCart;
 
         public PostViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -74,6 +125,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
             description = itemView.findViewById(R.id.text_description);
             price = itemView.findViewById(R.id.text_price);
             imageView = itemView.findViewById(R.id.image_plant);
+            addToCart = itemView.findViewById(R.id.add_to_cart_btn);
         }
     }
 }

@@ -4,9 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
-import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -25,7 +23,7 @@ import androidx.core.view.WindowInsetsCompat;
 import java.io.ByteArrayOutputStream;
 import java.util.List;
 
-public class MainPage extends AppCompatActivity {
+public class MainPage extends BaseActivity {
 
 
     @Override
@@ -67,6 +65,7 @@ public class MainPage extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(getBaseContext(), MeniuOverlay.class);
                 startActivity(intent);
+                overridePendingTransition(R.anim.slide_out_left, 0);
             }
         });
     }

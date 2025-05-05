@@ -16,7 +16,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 import org.w3c.dom.Text;
 
-public class ShoppingCart extends AppCompatActivity {
+public class ShoppingCart extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
