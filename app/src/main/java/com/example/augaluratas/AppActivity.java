@@ -2,11 +2,23 @@ package com.example.augaluratas;
 
 import android.app.Application;
 
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Log;
+
+
+import androidx.annotation.NonNull;
 import androidx.room.Room;
+import androidx.room.RoomDatabase;
+import androidx.sqlite.db.SupportSQLiteDatabase;
+
+import java.io.ByteArrayOutputStream;
 
 public class AppActivity extends Application {
     static PlantsDatabase db;
     static User_PostDatabase db2;
+    static NewsDatabase db3;
 
 
     @Override
@@ -15,6 +27,7 @@ public class AppActivity extends Application {
         db = Room.databaseBuilder(getApplicationContext(),PlantsDatabase.class,"my_app_db").allowMainThreadQueries().fallbackToDestructiveMigration().build();
         //Log.d("DB_CHECK", "Duomenų bazė sukurta!");
         db2 = Room.databaseBuilder(getApplicationContext(),User_PostDatabase.class,"users_db").allowMainThreadQueries().build();
+        db3 = Room.databaseBuilder(getApplicationContext(),NewsDatabase.class,"news_db").allowMainThreadQueries().fallbackToDestructiveMigration().build();
     }
 
     public static PlantsDatabase getDatabase()
@@ -26,5 +39,8 @@ public class AppActivity extends Application {
     {
         return db2;
     }
-
+    public static NewsDatabase getNewsDatabase()
+    {
+        return db3;
+    }
 }

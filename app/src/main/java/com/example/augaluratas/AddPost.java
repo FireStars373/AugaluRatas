@@ -93,8 +93,10 @@ public class AddPost extends AppCompatActivity {
                 database = AppActivity.getUser_PostDatabase();
                 database.postsDAO().insert(post);
 
+
                 Intent intent = new Intent(getBaseContext(), AllPosts.class);
                 mp2.start();
+
                 startActivity(intent);
             }
         });

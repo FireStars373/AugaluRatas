@@ -8,8 +8,6 @@
     android:background="@color/dark_green"
     tools:context=".MainPage">
 
-
-
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -63,7 +61,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView14" />
 
             <TextView
-                android:id="@+id/textView16"
+                android:id="@+id/news_start"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -78,62 +76,17 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/main_page_username" />
 
-            <TextView
-                android:id="@+id/textView17"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="100dp"
-                android:layout_marginEnd="50dp"
-                android:layout_marginTop="20dp"
-                android:fontFamily="@font/spectral_sc"
-                android:text="@string/naujienos_antraste"
-                android:textColor="@color/text_brown"
-                android:textSize="24sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView16" />
-
             <ImageButton
                 android:id="@+id/sidebar_from_main_page"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="35dp"
                 android:layout_marginTop="80dp"
-                android:layout_marginStart="45dp"
-                android:contentDescription="@string/hamburger_btn"
                 android:background="@drawable/hamburger_button"
+                android:contentDescription="@string/hamburger_btn"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-
-            <ImageButton
-                android:id="@+id/imageButton2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="110dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="60dp"
-                android:layout_marginBottom="40dp"
-                android:contentDescription="@string/news_img"
-                app:layout_constraintBottom_toTopOf="@id/textView26"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView17"
-                tools:srcCompat="@tools:sample/avatars" />
-
-            <TextView
-                android:id="@+id/textView26"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="100dp"
-                android:layout_marginEnd="50dp"
-                android:layout_marginTop="20dp"
-                android:fontFamily="@font/spectral_sc"
-                android:text="@string/naujienos_antraste"
-                android:textColor="@color/text_brown"
-                android:textSize="24sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageButton2" />
 
             <View
                 android:id="@+id/view9"
@@ -148,18 +101,17 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/view16" />
 
-            <ImageButton
-                android:id="@+id/imageButton3"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:id="@+id/main_page_layout"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="110dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="60dp"
-                android:contentDescription="@string/news_img"
+                android:layout_marginStart="100dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="50dp"
+                android:orientation="vertical"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView26"
-                tools:srcCompat="@tools:sample/avatars" />
+                app:layout_constraintTop_toBottomOf="@+id/news_start"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
