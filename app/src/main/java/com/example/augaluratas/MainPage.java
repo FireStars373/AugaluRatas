@@ -49,6 +49,7 @@ public class MainPage extends BaseActivity {
         //Deleting example data
         //newsDao.deleteAll();
 
+
         if (newsDao.getAllNews().isEmpty()){
             //Inserting example data if empty
             newsDao.insert(new News(

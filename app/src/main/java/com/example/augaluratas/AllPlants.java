@@ -50,6 +50,7 @@ public class AllPlants extends BaseActivity {
             return;
         }
         byte[] imageBytes = ImageUtils.bitmapToByteArray(bitmap);
+
         executorService.execute(() -> {
             database.plantsDAO().insert(new Plants(
                     "Chlorofilas Variegatum",
