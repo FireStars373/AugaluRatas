@@ -96,6 +96,12 @@ public class AddPost extends BaseActivity {
                 SharedPreferences sharedPref = getBaseContext().getSharedPreferences("augalu_ratas.CURRENT_USER_KEY", Context.MODE_PRIVATE);
                 Long currentUserId = sharedPref.getLong("current_user_id", 0);
                 if (selectedImageBitmap == null) {
+                    ObjectAnimator animator = ObjectAnimator.ofFloat(upload_post, "translationX",  0f, 25f, -25f, 15f, -15f, 5f, -5f, 0f);
+                    animator.setDuration(600);
+
+                    AnimatorSet set = new AnimatorSet();
+                    set.playSequentially(animator);
+
                     Toast.makeText(getApplicationContext(), "Pasirinkite nuotrauką", Toast.LENGTH_SHORT).show();
                     upload_post.setSoundEffectsEnabled(false);
                     mp.start();
@@ -108,7 +114,7 @@ public class AddPost extends BaseActivity {
                 database.postsDAO().insert(post);
 
 
-                Intent intent = new Intent(getBaseContext(), AllPosts.class);
+                Intent intent = new Intent(getBaseContext(), UserPosts.class);
                 mp2.start();
 
                 startActivity(intent);
