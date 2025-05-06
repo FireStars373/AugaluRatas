@@ -20,16 +20,41 @@ public class AllPosts extends AppCompatActivity {
     private User_PostDatabase db;
 
     private ExecutorService executorService = Executors.newSingleThreadExecutor();
+    RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_all_posts);
-        RecyclerView recyclerView = findViewById(R.id.recyclerView);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView = findViewById(R.id.recyclerView);
+
         db = AppActivity.getUser_PostDatabase();
 
         // Gauname visus įrašus foninėje gijoje
+
+        add_posts();
+        ImageButton sidebar = findViewById(R.id.sidebar_from_all_posts);
+        ImageButton shopping_cart = findViewById(R.id.shopping_cart);
+
+        sidebar.setOnClickListener(v -> {
+            Intent intent = new Intent(getBaseContext(), MeniuOverlay.class);
+            startActivity(intent);
+            overridePendingTransition(R.anim.slide_out_left, 0);
+        });
+
+        shopping_cart.setOnClickListener(v -> {
+            Intent intent = new Intent(getBaseContext(), ShoppingCartList.class);
+            startActivity(intent);
+            overridePendingTransition(R.anim.expand, 0);
+        });
+    }
+    @Override
+    public void onResume(){
+        super.onResume();
+        add_posts();
+    }
+    public void add_posts(){
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
         executorService.execute(() -> {
             SharedPreferences sharedPref = getBaseContext().getSharedPreferences("augalu_ratas.CURRENT_USER_KEY", Context.MODE_PRIVATE);
             Long current_id = sharedPref.getLong("current_user_id", 0);
@@ -63,24 +88,11 @@ public class AllPosts extends AppCompatActivity {
             //db.postsDAO().insert(new Posts(current_id,"Bananmedis", "fainas medis", imageBytes, 2));
 
             // Gauti įrašus ir nustatyti adapterį
-            List<Posts> posts = db.postsDAO().getAllPosts();
+            List<Posts> posts = db.postsDAO().getPostsWithoutUser(current_id);
             runOnUiThread(() -> {
                 PostAdapter postAdapter = new PostAdapter(posts);
                 recyclerView.setAdapter(postAdapter);
             });
-        });
-
-        ImageButton sidebar = findViewById(R.id.sidebar_from_all_posts);
-        ImageButton shopping_cart = findViewById(R.id.shopping_cart);
-
-        sidebar.setOnClickListener(v -> {
-            Intent intent = new Intent(getBaseContext(), MeniuOverlay.class);
-            startActivity(intent);
-        });
-
-        shopping_cart.setOnClickListener(v -> {
-            Intent intent = new Intent(getBaseContext(), ShoppingCartList.class);
-            startActivity(intent);
         });
     }
 }
