@@ -1,5 +1,5 @@
 [versions]
-agp = "8.9.0"
+agp = "8.9.2"
 junit = "4.13.2"
 junitVersion = "1.2.1"
 espressoCore = "3.6.1"
@@ -13,6 +13,7 @@ lifecycleViewmodelKtx = "2.8.7"
 gridlayout = "1.0.0"
 roomCommon = "2.6.1"
 legacySupportV4 = "1.0.0"
+roomRuntimeAndroid = "2.7.1"
 
 [libraries]
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -28,6 +29,7 @@ lifecycle-viewmodel-ktx = { group = "androidx.lifecycle", name = "lifecycle-view
 gridlayout = { group = "androidx.gridlayout", name = "gridlayout", version.ref = "gridlayout" }
 room-common = { group = "androidx.room", name = "room-common", version.ref = "roomCommon" }
 legacy-support-v4 = { group = "androidx.legacy", name = "legacy-support-v4", version.ref = "legacySupportV4" }
+room-runtime-android = { group = "androidx.room", name = "room-runtime-android", version.ref = "roomRuntimeAndroid" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

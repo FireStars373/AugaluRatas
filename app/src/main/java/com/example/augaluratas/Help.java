@@ -1,5 +1,7 @@
 package com.example.augaluratas;
 
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.pm.PackageManager;
@@ -7,7 +9,10 @@ import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.AnimationUtils;
+import android.view.animation.DecelerateInterpolator;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
@@ -19,7 +24,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-public class Help extends AppCompatActivity {
+public class Help extends BaseActivity {
 
     private ActivityResultLauncher<String> requestPermissionLauncher;
 
@@ -44,14 +49,28 @@ public class Help extends AppCompatActivity {
         requestPermissionLauncher = registerForActivityResult(new ActivityResultContracts.RequestPermission(), isGranted -> {});
 
         Button sendButton = findViewById(R.id.button45);
+        EditText complaint = findViewById(R.id.editTextTextEmailAddress);
         sendButton.setOnClickListener(v -> {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                if (checkSelfPermission(android.Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
-                    requestPermissionLauncher.launch(android.Manifest.permission.POST_NOTIFICATIONS);
-                } else {
-                    NotificationHandler.sendNotification(Help.this, "app_channel_id", "Jūsų skelbimas buvo įsimintas!", Help.class, 1);
-                }
+            if (complaint.getText().toString().trim().isEmpty()){
+                ObjectAnimator animator = ObjectAnimator.ofFloat(sendButton, "translationX",  0f, 25f, -25f, 15f, -15f, 5f, -5f, 0f);
+                animator.setDuration(600);
+
+                AnimatorSet set = new AnimatorSet();
+                set.playSequentially(animator);
+                set.start();
+
+                Toast.makeText(getBaseContext(), "Žinutė negali būti tuščia", Toast.LENGTH_SHORT).show();
+                return;
             }
+            Toast.makeText(getBaseContext(), "Jūsų žinutė buvo išsiųsta!", Toast.LENGTH_SHORT).show();
+            complaint.setText("");
+//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+//                if (checkSelfPermission(android.Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+//                    requestPermissionLauncher.launch(android.Manifest.permission.POST_NOTIFICATIONS);
+//                } else {
+//                    NotificationHandler.sendNotification(Help.this, "app_channel_id", "Jūsų skelbimas buvo įsimintas!", Help.class, 1);
+//                }
+//            }
         });
     }
     private void createNotificationChannel() {

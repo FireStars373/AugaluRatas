@@ -14,7 +14,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-public class Subscription extends AppCompatActivity {
+public class Subscription extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +36,7 @@ public class Subscription extends AppCompatActivity {
         if(user.getSubscribed()){
             Intent intent = new Intent(getBaseContext(), SubscriptionSuccess.class);
             startActivity(intent);
+            overridePendingTransition(R.anim.slide_out_right, R.anim.slide_in_left);
         }
 
         sidebar.setOnClickListener(new View.OnClickListener() {
@@ -43,6 +44,7 @@ public class Subscription extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(getBaseContext(), MeniuOverlay.class);
                 startActivity(intent);
+                overridePendingTransition(R.anim.slide_out_left, 0);
             }
         });
         subscribe.setOnClickListener(new View.OnClickListener() {

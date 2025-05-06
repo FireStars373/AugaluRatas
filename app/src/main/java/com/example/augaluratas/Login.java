@@ -1,5 +1,7 @@
 package com.example.augaluratas;
 
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -17,7 +19,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-public class Login extends AppCompatActivity {
+public class Login extends BaseActivity {
 
 
     @Override
@@ -45,23 +47,42 @@ public class Login extends AppCompatActivity {
             public void onClick(View v) {
                 String Name = name.getText().toString().trim();
                 String Password = password.getText().toString().trim();
+
+                ObjectAnimator animator = ObjectAnimator.ofFloat(login, "translationX",  0f, 25f, -25f, 15f, -15f, 5f, -5f, 0f);
+                animator.setDuration(600);
+
+                AnimatorSet set = new AnimatorSet();
+                set.playSequentially(animator);
+
                 if (Name.isEmpty()){
                     login.setSoundEffectsEnabled(false);
                     Toast.makeText(getApplicationContext(), "Neįrašytas vardas", Toast.LENGTH_SHORT).show();
+
+                    set.start();
+
                     mp.start();
+
                     return;
                 }
                 if (Password.isEmpty()){
                     login.setSoundEffectsEnabled(false);
                     Toast.makeText(getApplicationContext(), "Neįrašytas slaptažodis", Toast.LENGTH_SHORT).show();
+
+                    set.start();
+
                     mp.start();
+
                     return;
                 }
                 Users user = usersDatabase.usersDAO().getUserByUsername(Name);
                 if(user == null || !user.getPassword().equals(Password)){
                     login.setSoundEffectsEnabled(false);
                     Toast.makeText(getApplicationContext(), "Vartotojo vardas arba slaptažodis neteisingas", Toast.LENGTH_SHORT).show();
+
+                    set.start();
+
                     mp.start();
+
                     return;
                 }
                 SharedPreferences sharedPref = getBaseContext().getSharedPreferences("augalu_ratas.CURRENT_USER_KEY", Context.MODE_PRIVATE);

@@ -32,7 +32,7 @@ import java.util.concurrent.Executors;
 import android.content.Intent;
 import android.widget.Toast;
 
-public class AllPlants extends AppCompatActivity {
+public class AllPlants extends BaseActivity {
     private LinearLayout plantsContainer;
     private PlantsDatabase database;
     private ExecutorService executorService = Executors.newSingleThreadExecutor();
@@ -327,6 +327,7 @@ public class AllPlants extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(getBaseContext(), MeniuOverlay.class);
                 startActivity(intent);
+                overridePendingTransition(R.anim.slide_out_left, 0);
             }
         });
     }

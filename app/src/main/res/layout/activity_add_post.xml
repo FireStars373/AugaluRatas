@@ -35,8 +35,10 @@
             android:id="@+id/sidebar_from_add_post"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="80dp"
             android:layout_marginStart="45dp"
+
+            android:layout_marginTop="80dp"
+
             android:background="@drawable/hamburger_button"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

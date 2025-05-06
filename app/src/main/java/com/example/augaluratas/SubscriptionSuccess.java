@@ -11,7 +11,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-public class SubscriptionSuccess extends AppCompatActivity {
+public class SubscriptionSuccess extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +31,7 @@ public class SubscriptionSuccess extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(getBaseContext(), MeniuOverlay.class);
                 startActivity(intent);
+                overridePendingTransition(R.anim.slide_out_left, 0);
             }
         });
     }

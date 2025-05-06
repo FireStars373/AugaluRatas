@@ -28,7 +28,7 @@ import android.content.Context;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class UserPosts extends AppCompatActivity {
+public class UserPosts extends BaseActivity {
     private User_PostDatabase db;
 
     private ExecutorService executorService = Executors.newSingleThreadExecutor();

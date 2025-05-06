@@ -18,6 +18,9 @@ public interface PostsDAO {
 
     @Query("SELECT * FROM posts WHERE user_id = :userId")
     List<Posts> getPostsByUser(long userId);
+    @Query("SELECT * FROM posts WHERE user_id != :userId")
+    List<Posts> getPostsWithoutUser(long userId);
+
     @Query("SELECT * FROM posts WHERE id = :postId LIMIT 1")
     Posts getPostById(long postId);  // Čia naudojame 'LIMIT 1', nes ID turėtų būti unikalus
     @Delete

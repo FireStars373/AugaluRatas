@@ -1,5 +1,7 @@
 package com.example.augaluratas;
 
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -23,9 +25,9 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import java.io.IOException;
 
-public class AddPost extends AppCompatActivity {
+public class AddPost extends BaseActivity {
+
 
     private User_PostDatabase database;
     private static final int PICK_IMAGE_REQUEST = 1;
@@ -63,6 +65,7 @@ public class AddPost extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(getBaseContext(), MeniuOverlay.class);
                 startActivity(intent);
+                overridePendingTransition(R.anim.slide_out_left, 0);
             }
         });
         upload_post.setOnClickListener(new View.OnClickListener() {
@@ -74,8 +77,17 @@ public class AddPost extends AppCompatActivity {
                 String Price = price.getText().toString().trim();
                 if (Title.isEmpty() || Description.isEmpty() || Price.isEmpty()){
                     Toast.makeText(getApplicationContext(), "Laukai negali būti tušti", Toast.LENGTH_SHORT).show();
+
+                    ObjectAnimator animator = ObjectAnimator.ofFloat(upload_post, "translationX",  0f, 25f, -25f, 15f, -15f, 5f, -5f, 0f);
+                    animator.setDuration(600);
+
+                    AnimatorSet set = new AnimatorSet();
+                    set.playSequentially(animator);
+                    set.start();
+
                     upload_post.setSoundEffectsEnabled(false);
                     mp.start();
+
                     return;
                 }
 

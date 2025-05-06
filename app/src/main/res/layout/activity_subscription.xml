@@ -129,10 +129,9 @@
             android:id="@+id/sidebar_from_subscription"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="80dp"
-            android:layout_marginEnd="300dp"
             android:layout_marginStart="45dp"
-            android:background="@drawable/arrow_button"
+            android:layout_marginTop="80dp"
+            android:background="@drawable/hamburger_button"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
