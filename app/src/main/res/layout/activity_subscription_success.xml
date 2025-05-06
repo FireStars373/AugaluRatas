@@ -30,6 +30,25 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+        <View
+            android:id="@+id/view34"
+            android:layout_width="250dp"
+            android:layout_height="250dp"
+            android:layout_marginStart="-20dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/subscription_plant"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <View
+            android:id="@+id/view35"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginStart="-50dp"
+            android:background="@drawable/subscription_plant"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/view34" />
 
         <ImageButton
             android:id="@+id/sidebar_from_subscription_success"

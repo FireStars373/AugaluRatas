@@ -19,8 +19,8 @@
 
             <View
                 android:id="@+id/view16"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="20dp"
@@ -97,7 +97,7 @@
                 android:layout_marginBottom="10dp"
                 android:background="@drawable/lines_background_1"
                 app:layout_constraintBottom_toBottomOf="@+id/view16"
-                app:layout_constraintEnd_toStartOf="@+id/textView17"
+
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/view16" />
 
@@ -108,10 +108,12 @@
                 android:layout_marginStart="100dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="50dp"
+                android:layout_marginBottom="100dp"
                 android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/news_start"/>
+                app:layout_constraintTop_toBottomOf="@+id/news_start" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>

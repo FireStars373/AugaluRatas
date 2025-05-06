@@ -1,0 +1,77 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="200dp"
+    android:height="200dp"
+    android:viewportWidth="500"
+    android:viewportHeight="500">
+
+    <path
+        android:fillColor="@color/firstload_green"
+        android:pathData="M250,150 h10 v400 h-10 z" />
+    <path
+        android:fillColor="@color/dark_brown"
+        android:pathData="M150.0,400.0 v10 h200 v-10 z" />
+    <path
+        android:fillColor="@color/checkbox_brown"
+        android:pathData="M150.0,410.0 L200, 500 310, 500 350, 410 z" />
+
+    <!--Middle-->
+    <path
+    android:fillColor="@color/dark_brown"
+    android:pathData="M255.0,130.0
+        L220, 150
+        L220, 190
+        L255, 210
+        L290, 190
+        L290, 150 z" />
+    <!--Petles-->
+    <path
+        android:fillColor="@color/firstload_green"
+        android:pathData="M220,70
+        L185, 90
+        L185, 130
+        L220, 150
+        L255, 130
+        L255, 90 z" />
+    <path
+        android:fillColor="@color/firstload_green"
+        android:pathData="M185,130
+        L150, 150
+        L150, 190
+        L185, 210
+        L220, 190
+        L220, 150 z" />
+    <path
+        android:fillColor="@color/firstload_green"
+        android:pathData="M220,190
+        L185, 210
+        L185, 250
+        L220, 270
+        L255, 250
+        L255, 210 z" />
+    <path
+        android:fillColor="@color/firstload_green"
+        android:pathData="M290.0,70.0
+        L255, 90
+        L255, 130
+        L290, 150
+        L325, 130
+        L325, 90 z" />
+    <path
+        android:fillColor="@color/firstload_green"
+        android:pathData="M325.0,130.0
+        L290, 150
+        L290, 190
+        L325, 210
+        L360, 190
+        L360, 150 z" />
+    <path
+        android:fillColor="@color/firstload_green"
+        android:pathData="M290.0,190.0
+        L255, 210
+        L255, 250
+        L290, 270
+        L325, 250
+        L325, 210 z" />
+
+
+</vector>

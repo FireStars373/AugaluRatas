@@ -41,7 +41,7 @@
                 android:layout_marginStart="45dp"
                 android:layout_marginTop="80dp"
                 android:contentDescription="@string/back_btn"
-                android:background="@drawable/arrow_button"
+                android:background="@drawable/hamburger_button"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -74,6 +74,7 @@
                 android:layout_marginTop="30dp"
                 android:layout_marginEnd="45dp"
                 android:layout_marginStart="45dp"
+                android:layout_marginBottom="100dp"
                 android:orientation="vertical"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
