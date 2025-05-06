@@ -3,6 +3,7 @@ package com.example.augaluratas;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
@@ -55,37 +56,55 @@ public class Register extends BaseActivity {
                 AnimatorSet set = new AnimatorSet();
                 set.playSequentially(animator);
 
+
+                MediaPlayer mp = MediaPlayer.create(getBaseContext(), R.raw.bad_info);
+                mp.setVolume(0.8f,0.8f);
+
                 if ( Name.isEmpty() || Email.isEmpty() || Password.isEmpty() || Repeat_password.isEmpty() || Number.isEmpty()){
+                    register.setSoundEffectsEnabled(false);
+                    mp.start();
                     Toast.makeText(getApplicationContext(), "Visi laukai turi būti išpildyti", Toast.LENGTH_SHORT).show();
                     set.start();
                     return;
                 }
                 if(Password.length() < 5 || !Password.matches(".*\\d.*")){
+                    register.setSoundEffectsEnabled(false);
+                    mp.start();
                     Toast.makeText(getApplicationContext(), "Slaptažodį turi sudaryti bent 5 simboliai, su bent vienu skaičiu", Toast.LENGTH_LONG).show();
                     set.start();
                     return;
                 }
                 if (!Password.equals(Repeat_password)){
+                    register.setSoundEffectsEnabled(false);
+                    mp.start();
                     Toast.makeText(getApplicationContext(), "Slaptažodžiai nesutampa", Toast.LENGTH_SHORT).show();
                     set.start();
                     return;
                 }
                 if(!Patterns.EMAIL_ADDRESS.matcher(Email).matches()){
+                    register.setSoundEffectsEnabled(false);
+                    mp.start();
                     Toast.makeText(getApplicationContext(), "Neteisingas el. pašto formatas", Toast.LENGTH_SHORT).show();
                     set.start();
                     return;
                 }
                 if(!Patterns.PHONE.matcher(Number).matches()){
+                    register.setSoundEffectsEnabled(false);
+                    mp.start();
                     Toast.makeText(getApplicationContext(), "Neteisingas tel. numerio formatas", Toast.LENGTH_SHORT).show();
                     set.start();
                     return;
                 }
                 if(usersDatabase.usersDAO().getUserByUsername(Name) != null){
+                    register.setSoundEffectsEnabled(false);
+                    mp.start();
                     Toast.makeText(getApplicationContext(), "Jau yra vartotojas su šiuo vardu", Toast.LENGTH_SHORT).show();
                     set.start();
                     return;
                 }
                 if(usersDatabase.usersDAO().getUserByEmail(Email) != null){
+                    register.setSoundEffectsEnabled(false);
+                    mp.start();
                     Toast.makeText(getApplicationContext(), "Šis el. paštas jau panaudotas", Toast.LENGTH_SHORT).show();
                     set.start();
                     return;

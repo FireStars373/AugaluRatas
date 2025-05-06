@@ -4,8 +4,13 @@ import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+
+import android.media.AudioManager;
+import android.media.MediaPlayer;
+
 import android.content.pm.PackageManager;
 import android.os.Build;
+
 import android.os.Bundle;
 import android.transition.Explode;
 import android.transition.Slide;

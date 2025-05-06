@@ -117,7 +117,7 @@
     <string name="price">Kaina</string>
     <string name="seller_name">Pardavėjas vardas</string>
     <string name="plant_seller_description">Augalo aprašymas</string>
-    <string name="plant_origin">Augalo kilmė</string>
+    <string name="plant_origin">Augalo rūšis</string>
     <string name="origin">Kilme</string>
     <string name="how_to_take_care_of">Kaip prižiūrėti?</string>
     <string name="maintenance">Priežiūra</string>

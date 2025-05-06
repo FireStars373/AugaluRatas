@@ -1,0 +1,16 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="64dp"
+    android:height="64dp"
+    android:viewportWidth="64"
+    android:viewportHeight="64">
+
+    <!-- Big main circle -->
+    <path
+        android:fillColor="#43352D14"
+        android:pathData="M0.0,32.0 a32.0,32.0 0 1,0 64.0,0 a32.0,32.0 0 1,0 -64.0,0" />
+
+    <!-- Smaller, darker circle offset to top-right -->
+    <path
+        android:fillColor="#43352D29"
+        android:pathData="M8.0,30.0 a20.0,20.0 0 1,0 55.0,0 a20.0,20.0 0 1,0 -55.0,0" />
+</vector>

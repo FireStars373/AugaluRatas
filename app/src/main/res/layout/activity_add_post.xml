@@ -36,7 +36,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="45dp"
+
             android:layout_marginTop="80dp"
+
             android:background="@drawable/hamburger_button"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -52,13 +54,17 @@
             app:layout_constraintTop_toTopOf="parent" />
 
 
-        <androidx.appcompat.widget.AppCompatButton
+        <ImageView
             android:id="@+id/button24"
             android:layout_width="180dp"
             android:layout_height="180dp"
             android:layout_marginStart="45dp"
             android:layout_marginTop="20dp"
             android:layout_marginEnd="45dp"
+            android:src="@drawable/select_image"
+            android:contentDescription="Mygtuko paveikslėlis"
+            android:clickable="true"
+            android:focusable="true"
             android:fontFamily="@font/spectral_sc"
             android:text="@string/upload_photo"
             android:textColor="#000000"
