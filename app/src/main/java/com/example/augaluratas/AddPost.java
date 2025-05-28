@@ -6,8 +6,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -27,14 +25,14 @@ import androidx.core.view.WindowInsetsCompat;
 
 import java.io.IOException;
 
-
 public class AddPost extends BaseActivity {
-
 
     private User_PostDatabase database;
     private static final int PICK_IMAGE_REQUEST = 1;
+    private static final int CAMERA_REQUEST = 2;  // Kamera request kodas
     private Bitmap selectedImageBitmap = null;
     private ImageView select_photo;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,76 +49,84 @@ public class AddPost extends BaseActivity {
         EditText title = findViewById(R.id.add_post_title);
         EditText description = findViewById(R.id.add_post_description);
         EditText price = findViewById(R.id.add_post_price);
-        MediaPlayer mp = MediaPlayer.create(getBaseContext(), R.raw.bad_info);
-        mp.setVolume(0.8f,0.8f);
-        MediaPlayer mp2 = MediaPlayer.create(getBaseContext(), R.raw.succesful);
-        mp2.setVolume(0.5f,0.5f);
         select_photo = findViewById(R.id.button24);
 
+        MediaPlayer mp = MediaPlayer.create(getBaseContext(), R.raw.bad_info);
+        mp.setVolume(0.8f, 0.8f);
+        MediaPlayer mp2 = MediaPlayer.create(getBaseContext(), R.raw.succesful);
+        mp2.setVolume(0.5f, 0.5f);
+
+        // Pasirinkti nuotrauką iš galerijos
         select_photo.setOnClickListener(v -> {
             Intent intent = new Intent(Intent.ACTION_PICK);
             intent.setType("image/*");
             startActivityForResult(intent, PICK_IMAGE_REQUEST);
         });
-        sidebar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getBaseContext(), MeniuOverlay.class);
-                startActivity(intent);
-                overridePendingTransition(R.anim.slide_out_left, 0);
+
+        // Naujas mygtukas fotografuoti
+        ImageButton take_photo = findViewById(R.id.take_photo_button);
+        take_photo.setOnClickListener(v -> {
+            Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            if (cameraIntent.resolveActivity(getPackageManager()) != null) {
+                startActivityForResult(cameraIntent, CAMERA_REQUEST);
+            } else {
+                Toast.makeText(this, "Kamera nepasiekiama", Toast.LENGTH_SHORT).show();
             }
         });
-        upload_post.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //Checking field validity
-                String Title = title.getText().toString().trim();
-                String Description = description.getText().toString().trim();
-                String Price = price.getText().toString().trim();
-                if (Title.isEmpty() || Description.isEmpty() || Price.isEmpty()){
-                    Toast.makeText(getApplicationContext(), "Laukai negali būti tušti", Toast.LENGTH_SHORT).show();
 
-                    ObjectAnimator animator = ObjectAnimator.ofFloat(upload_post, "translationX",  0f, 25f, -25f, 15f, -15f, 5f, -5f, 0f);
-                    animator.setDuration(600);
+        sidebar.setOnClickListener(v -> {
+            Intent intent = new Intent(getBaseContext(), MeniuOverlay.class);
+            startActivity(intent);
+            overridePendingTransition(R.anim.slide_out_left, 0);
+        });
 
-                    AnimatorSet set = new AnimatorSet();
-                    set.playSequentially(animator);
-                    set.start();
+        upload_post.setOnClickListener(v -> {
+            // Tikrinam laukų užpildymą
+            String Title = title.getText().toString().trim();
+            String Description = description.getText().toString().trim();
+            String Price = price.getText().toString().trim();
+            if (Title.isEmpty() || Description.isEmpty() || Price.isEmpty()) {
+                Toast.makeText(getApplicationContext(), "Laukai negali būti tušti", Toast.LENGTH_SHORT).show();
 
-                    upload_post.setSoundEffectsEnabled(false);
-                    mp.start();
+                ObjectAnimator animator = ObjectAnimator.ofFloat(upload_post, "translationX", 0f, 25f, -25f, 15f, -15f, 5f, -5f, 0f);
+                animator.setDuration(600);
 
-                    return;
-                }
+                AnimatorSet set = new AnimatorSet();
+                set.playSequentially(animator);
+                set.start();
 
-                SharedPreferences sharedPref = getBaseContext().getSharedPreferences("augalu_ratas.CURRENT_USER_KEY", Context.MODE_PRIVATE);
-                Long currentUserId = sharedPref.getLong("current_user_id", 0);
-                if (selectedImageBitmap == null) {
-                    ObjectAnimator animator = ObjectAnimator.ofFloat(upload_post, "translationX",  0f, 25f, -25f, 15f, -15f, 5f, -5f, 0f);
-                    animator.setDuration(600);
+                upload_post.setSoundEffectsEnabled(false);
+                mp.start();
 
-                    AnimatorSet set = new AnimatorSet();
-                    set.playSequentially(animator);
-
-                    Toast.makeText(getApplicationContext(), "Pasirinkite nuotrauką", Toast.LENGTH_SHORT).show();
-                    upload_post.setSoundEffectsEnabled(false);
-                    mp.start();
-                    return;
-                }
-                Bitmap bitmap = selectedImageBitmap;
-                byte[] imageBytes = ImageUtils.bitmapToByteArray(bitmap);
-                Posts post = new Posts(currentUserId, Title, Description, imageBytes, Double.parseDouble(Price));
-                database = AppActivity.getUser_PostDatabase();
-                database.postsDAO().insert(post);
-
-
-                Intent intent = new Intent(getBaseContext(), UserPosts.class);
-                mp2.start();
-
-                startActivity(intent);
+                return;
             }
+
+            SharedPreferences sharedPref = getBaseContext().getSharedPreferences("augalu_ratas.CURRENT_USER_KEY", Context.MODE_PRIVATE);
+            Long currentUserId = sharedPref.getLong("current_user_id", 0);
+            if (selectedImageBitmap == null) {
+                ObjectAnimator animator = ObjectAnimator.ofFloat(upload_post, "translationX", 0f, 25f, -25f, 15f, -15f, 5f, -5f, 0f);
+                animator.setDuration(600);
+
+                AnimatorSet set = new AnimatorSet();
+                set.playSequentially(animator);
+
+                Toast.makeText(getApplicationContext(), "Pasirinkite nuotrauką", Toast.LENGTH_SHORT).show();
+                upload_post.setSoundEffectsEnabled(false);
+                mp.start();
+                return;
+            }
+            Bitmap bitmap = selectedImageBitmap;
+            byte[] imageBytes = ImageUtils.bitmapToByteArray(bitmap);
+            Posts post = new Posts(currentUserId, Title, Description, imageBytes, Double.parseDouble(Price));
+            database = AppActivity.getUser_PostDatabase();
+            database.postsDAO().insert(post);
+
+            mp2.start();
+            Intent intent = new Intent(getBaseContext(), UserPosts.class);
+            startActivity(intent);
         });
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -134,7 +140,15 @@ public class AddPost extends BaseActivity {
                 e.printStackTrace();
                 Toast.makeText(this, "Klaida įkeliant nuotrauką", Toast.LENGTH_SHORT).show();
             }
+        } else if (requestCode == CAMERA_REQUEST && resultCode == RESULT_OK && data != null) {
+            Bundle extras = data.getExtras();
+            Bitmap imageBitmap = (Bitmap) extras.get("data");
+            if (imageBitmap != null) {
+                selectedImageBitmap = imageBitmap;
+                select_photo.setImageBitmap(selectedImageBitmap);
+            } else {
+                Toast.makeText(this, "Nepavyko nufotografuoti", Toast.LENGTH_SHORT).show();
+            }
         }
     }
-
 }
