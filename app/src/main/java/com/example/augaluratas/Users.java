@@ -29,6 +29,9 @@ public class Users {
     @ColumnInfo(name = "subscribed")
     private Boolean subscribed;
 
+    @ColumnInfo(name = "currency")
+    private String currency;
+
     public Users(@NonNull String username, @NonNull String password, @NonNull String phoneNumber, @NonNull String email) {
         this.username = username;
         this.password = password;
@@ -50,4 +53,6 @@ public class Users {
 
     public void setSubscribed(Boolean subscribed) {this.subscribed = subscribed;}
     public Boolean getSubscribed(){return subscribed;}
+    public void setCurrency(String currency){this.currency = currency;}
+    public String getCurrency(){return currency;}
 }

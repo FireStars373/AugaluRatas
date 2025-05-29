@@ -74,7 +74,7 @@ public class UserPosts extends BaseActivity {
             // Gauti įrašus ir nustatyti adapterį
             List<Posts> posts = db.postsDAO().getPostsByUser(current_id);
             runOnUiThread(() -> {
-                PostAdapter postAdapter = new PostAdapter(posts, true);
+                PostAdapter postAdapter = new PostAdapter(posts, true, getBaseContext());
                 recyclerView.setAdapter(postAdapter);
             });
         });

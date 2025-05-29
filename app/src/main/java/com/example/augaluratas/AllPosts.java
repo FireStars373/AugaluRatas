@@ -8,15 +8,26 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import java.text.NumberFormat;
+import java.util.Currency;
 import java.util.List;
+
+import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
-import java.util.List;
+
+import java.util.Locale;
+import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import android.content.Context;
+
+import org.chromium.net.CronetEngine;
+import org.chromium.net.UrlRequest;
+
 public class AllPosts extends AppCompatActivity {
     private User_PostDatabase db;
 
@@ -49,6 +60,7 @@ public class AllPosts extends AppCompatActivity {
             startActivity(intent);
             overridePendingTransition(R.anim.expand, 0);
         });
+
     }
     @Override
     public void onResume(){
@@ -92,7 +104,7 @@ public class AllPosts extends AppCompatActivity {
             // Gauti įrašus ir nustatyti adapterį
             List<Posts> posts = db.postsDAO().getPostsWithoutUser(current_id);
             runOnUiThread(() -> {
-                PostAdapter postAdapter = new PostAdapter(posts);
+                PostAdapter postAdapter = new PostAdapter(posts, false, getBaseContext());
                 recyclerView.setAdapter(postAdapter);
 
                 TextView plant_count = findViewById(R.id.plant_count);

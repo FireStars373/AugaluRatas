@@ -5,8 +5,11 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -15,6 +18,19 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
+import org.chromium.net.CronetEngine;
+import org.chromium.net.UrlRequest;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.Currency;
+import java.util.List;
+import java.util.Locale;
+import java.util.Set;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 
 public class UserData extends BaseActivity {
 
@@ -47,6 +63,55 @@ public class UserData extends BaseActivity {
         password_rewrite.setText(user.getPassword());
         phone_number.setText(user.getPhoneNumber());
 
+        Spinner currency_select = findViewById(R.id.change_currency);
+
+        List<String> currencies = new ArrayList<>(Arrays.asList("EUR", "AED", "AFN", "ALL", "AMD", "ANG", "AOA", "ARS", "AUD", "AWG", "AZN", "BAM",
+                "BBD", "BDT", "BGN", "BHD", "BIF", "BMD", "BND", "BOB", "BRL", "BSD", "BTN", "BWP",
+                "BYN", "BZD", "CAD", "CDF", "CHF", "CLP", "CNY", "COP", "CRC", "CUP", "CVE", "CZK",
+                "DJF", "DKK", "DOP", "DZD", "EGP", "ERN", "ETB", "FJD", "FKP", "FOK", "GBP", "GEL",
+                "GGP", "GHS", "GIP", "GMD", "GNF", "GTQ", "GYD", "HKD", "HNL", "HRK", "HTG", "HUF",
+                "IDR", "ILS", "IMP", "INR", "IQD", "IRR", "ISK", "JEP", "JMD", "JOD", "JPY", "KES",
+                "KGS", "KHR", "KID", "KMF", "KRW", "KWD", "KYD", "KZT", "LAK", "LBP", "LKR", "LRD",
+                "LSL", "LYD", "MAD", "MDL", "MGA", "MKD", "MMK", "MNT", "MOP", "MRU", "MUR", "MVR",
+                "MWK", "MXN", "MYR", "MZN", "NAD", "NGN", "NIO", "NOK", "NPR", "NZD", "OMR", "PAB",
+                "PEN", "PGK", "PHP", "PKR", "PLN", "PYG", "QAR", "RON", "RSD", "RUB", "RWF", "SAR",
+                "SBD", "SCR", "SDG", "SEK", "SGD", "SHP", "SLE", "SLL", "SOS", "SRD", "SSP", "STN",
+                "SYP", "SZL", "THB", "TJS", "TMT", "TND", "TOP", "TRY", "TTD", "TVD", "TWD", "TZS",
+                "UAH", "UGX", "USD", "UYU", "UZS", "VES", "VND", "VUV", "WST", "XAF", "XCD", "XCG",
+                "XDR", "XOF", "XPF", "YER", "ZAR", "ZMW", "ZWL"));
+//        Set<Currency> currency_set = Currency.getAvailableCurrencies();
+//        List<String> currencies = new ArrayList<>();
+//
+//        for (Currency currency : currency_set) {
+//            currencies.add(currency.getCurrencyCode());
+//        }
+        currencies.sort(new Comparator<String>() {
+            @Override
+            public int compare(String o1, String o2) {
+                return o1.compareToIgnoreCase(o2);
+            }
+        });
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(
+                this,
+                android.R.layout.simple_spinner_item,
+                currencies
+        );
+
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        currency_select.setAdapter(adapter);
+
+        String currency = user.getCurrency();
+        if(!currency.equals("NOTFOUND")){
+            int pos = 0;
+            for (String code : currencies){
+                if(code.equals(currency)){
+                    break;
+                }
+                pos++;
+            }
+            currency_select.setSelection(pos);
+        }
+
         return_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -70,7 +135,7 @@ public class UserData extends BaseActivity {
                     Toast.makeText(getApplicationContext(), "Slaptažodį turi sudaryti bent 5 simboliai, su bent vienu skaičiu", Toast.LENGTH_LONG).show();
                     return;
                 }
-                if(!password_rewrite.equals(password)){
+                if(!Password_rewrite.equals(Password)){
                     Toast.makeText(getApplicationContext(), "Spaltažodžiai turi sutapti", Toast.LENGTH_LONG).show();
                     return;
                 }
@@ -90,11 +155,27 @@ public class UserData extends BaseActivity {
                     Toast.makeText(getApplicationContext(), "Šis el. paštas jau panaudotas", Toast.LENGTH_SHORT).show();
                     return;
                 }
+
+
+                String new_currency = currencies.get((int)currency_select.getSelectedItemId());
+
+                CronetEngine.Builder myBuilder = new CronetEngine.Builder(getBaseContext());
+                CronetEngine cronetEngine = myBuilder.build();
+
+                Executor executor = Executors.newSingleThreadExecutor();
+
+                UrlRequest.Builder requestBuilder = cronetEngine.newUrlRequestBuilder(
+                        "https://v6.exchangerate-api.com/v6/2d01d5f6b910d11e87a610cb/latest/EUR", new CurrencyConversionUrlRequestCallback(getBaseContext(), new_currency), executor);
+
+                UrlRequest request = requestBuilder.build();
+                request.start();
+
                 Users user = database.usersDAO().getUserById(current_id);
                 user.setUsername(Name);
                 user.setEmail(Email);
                 user.setPassword(Password_rewrite);
                 user.setPhoneNumber(Number);
+                user.setCurrency(new_currency);
                 database.usersDAO().Update(user);
                 Toast.makeText(getApplicationContext(), "Duomenys sėkmingai pakeisti!", Toast.LENGTH_SHORT).show();
             }

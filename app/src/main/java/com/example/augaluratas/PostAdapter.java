@@ -19,8 +19,11 @@ import androidx.annotation.NonNull;
 import androidx.interpolator.view.animation.LinearOutSlowInInterpolator;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.text.NumberFormat;
+import java.util.Currency;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Set;
 
 import android.util.Log;
@@ -28,7 +31,8 @@ import android.widget.Toast;
 
 public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder> {
     private List<Posts> postList;
-    boolean belongs_to_user;
+    private boolean belongs_to_user;
+    private Context context;
 
     public PostAdapter(List<Posts> postList) {
         this(postList, false); // Calls the other constructor with `false`
@@ -36,6 +40,11 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
     public PostAdapter(List<Posts> postList, boolean belongs_to_user) {
         this.postList = postList;
         this.belongs_to_user = belongs_to_user;
+    }
+    public PostAdapter(List<Posts> postList, boolean belongs_to_user, Context context) {
+        this.postList = postList;
+        this.belongs_to_user = belongs_to_user;
+        this.context = context;
     }
 
     @NonNull
@@ -52,6 +61,34 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
         holder.plantName.setText(post.getPlantName());
         holder.description.setText(post.getDescription());
         holder.price.setText(String.format("%.2f €", post.getPrice()));
+
+
+        if (context != null){
+            SharedPreferences sharedPref = context.getSharedPreferences("augalu_ratas.CURRENT_USER_KEY", Context.MODE_PRIVATE);
+            Long current_id = sharedPref.getLong("current_user_id", 0);
+            User_PostDatabase database = AppActivity.getUser_PostDatabase();
+            Users user = database.usersDAO().getUserById(current_id);
+
+            String currency = user.getCurrency();
+            SharedPreferences sharedPrefCur = context.getSharedPreferences("augalu_ratas.CURRENT_CURRENCY", Context.MODE_PRIVATE);
+            Float conversion_rate = sharedPrefCur.getFloat("current_conversion_rate", -1);
+
+
+            String currencySymbol = Currency.getInstance(currency).getSymbol();
+            int decimal_point = Currency.getInstance(currency).getDefaultFractionDigits();
+            double price = post.getPrice() * conversion_rate;
+
+            String formatPattern = "%." + decimal_point + "f %s";
+            String formattedPrice = String.format(formatPattern, price, currencySymbol);
+
+            //NumberFormat format = NumberFormat.getCurrencyInstance(new Locale(" ", country_code));
+            //String formattedPrice = format.format(price);
+
+            holder.price.setText(formattedPrice);
+        }
+        //Getting country code and converting currency accordingly
+
+
 
         // Konvertuoja byte[] į Bitmap
         Bitmap bitmap = BitmapFactory.decodeByteArray(post.getImage(), 0, post.getImage().length);

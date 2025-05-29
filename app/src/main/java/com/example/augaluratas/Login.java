@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.telephony.TelephonyManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,6 +19,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
+import org.chromium.net.CronetEngine;
+import org.chromium.net.UrlRequest;
+
+import java.util.Currency;
+import java.util.Locale;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 
 public class Login extends BaseActivity {
 
@@ -85,6 +94,34 @@ public class Login extends BaseActivity {
 
                     return;
                 }
+
+                String currency = user.getCurrency();
+
+                //If currency code isn't saved, gets it from sim card location. USD by default
+                if (currency == null){
+                    TelephonyManager tm = (TelephonyManager) getBaseContext().getSystemService(Context.TELEPHONY_SERVICE);
+                    String country = tm.getSimCountryIso().toUpperCase();
+                    if (country.isEmpty()){
+                        currency = "USD";
+                    }
+                    else{
+                        currency = Currency.getInstance(new Locale("", country)).getCurrencyCode();
+                    }
+                    user.setCurrency(currency);
+                    AppActivity.getUser_PostDatabase().usersDAO().Update(user);
+                }
+                //If conversion rate isn't saved, calls API to find it. 1.0 by default
+                CronetEngine.Builder myBuilder = new CronetEngine.Builder(getBaseContext());
+                CronetEngine cronetEngine = myBuilder.build();
+
+                Executor executor = Executors.newSingleThreadExecutor();
+
+                UrlRequest.Builder requestBuilder = cronetEngine.newUrlRequestBuilder(
+                        "https://v6.exchangerate-api.com/v6/2d01d5f6b910d11e87a610cb/latest/EUR", new CurrencyConversionUrlRequestCallback(getBaseContext(), currency), executor);
+
+                UrlRequest request = requestBuilder.build();
+                request.start();
+
                 SharedPreferences sharedPref = getBaseContext().getSharedPreferences("augalu_ratas.CURRENT_USER_KEY", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPref.edit();
                 editor.putLong("current_user_id", user.getId());
@@ -96,7 +133,6 @@ public class Login extends BaseActivity {
         return_to_first_screen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 finish();
             }
         });
