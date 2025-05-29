@@ -44,7 +44,6 @@ public class Settings extends BaseActivity {
         Button help = findViewById(R.id.settings_help);
         Button about = findViewById(R.id.settings_about);
         Button privacy = findViewById(R.id.settings_privacy);
-        Spinner country_select = findViewById(R.id.country_code_select);
 
         String[] countryCodes = Locale.getISOCountries();
 
@@ -55,20 +54,6 @@ public class Settings extends BaseActivity {
         );
 
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        country_select.setAdapter(adapter);
-
-        SharedPreferences sharedPrefCur = getBaseContext().getSharedPreferences("augalu_ratas.CURRENT_CURRENCY", Context.MODE_PRIVATE);
-        String country = sharedPrefCur.getString("current_country_code", "NOTFOUND");
-        if(!country.equals("NOTFOUND")){
-            int pos = 0;
-            for (String code : countryCodes){
-                if(code.equals(country)){
-                    break;
-                }
-                pos++;
-            }
-            country_select.setSelection(pos);
-        }
 
         return_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -110,30 +95,6 @@ public class Settings extends BaseActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(getBaseContext(), Privacy.class);
                 startActivity(intent);
-            }
-        });
-        country_select.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                SharedPreferences.Editor editor = sharedPrefCur.edit();
-                editor.putString("current_country_code", countryCodes[(int)id]);
-                editor.apply();
-
-                CronetEngine.Builder myBuilder = new CronetEngine.Builder(getBaseContext());
-                CronetEngine cronetEngine = myBuilder.build();
-
-                Executor executor = Executors.newSingleThreadExecutor();
-
-                UrlRequest.Builder requestBuilder = cronetEngine.newUrlRequestBuilder(
-                        "https://v6.exchangerate-api.com/v6/2d01d5f6b910d11e87a610cb/latest/EUR", new CurrencyConversionUrlRequestCallback(getBaseContext(), countryCodes[(int)id]), executor);
-
-                UrlRequest request = requestBuilder.build();
-                request.start();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
             }
         });
     }
