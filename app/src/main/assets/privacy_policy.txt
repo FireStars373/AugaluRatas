@@ -1,0 +1,74 @@
+1. Information We Collect
+We collect the following types of information:
+
+Account Information
+Name, email address, phone number, and password when you register.
+
+Profile details like profile picture or location if you choose to add them.
+
+Transactional Data
+Details of plants bought or sold, transaction history, delivery address.
+
+Payment Information
+We use third-party payment processors. We do not store full payment card details on our servers.
+
+Usage Data
+App activity (e.g., viewed pages, saved plants, interactions with other users).
+
+Device information (device type, OS version, unique device IDs, crash reports).
+
+Plant Care Section Activity
+Articles read, plants saved to favorites, and submitted tips or comments.
+
+2. How We Use Your Information
+We use your information to:
+
+Create and manage your user account.
+
+Process transactions and facilitate plant trades.
+
+Provide plant care advice and personalized recommendations.
+
+Improve our services and user experience.
+
+Send important updates, notifications, and promotional messages (you can opt out).
+
+Prevent fraud, spam, and misuse of the app.
+
+3. How We Share Your Information
+We do not sell your personal data. We may share your information with:
+
+Buyers or sellers (e.g., name and address for order fulfillment).
+
+Service providers (e.g., payment processors, hosting, analytics).
+
+Legal authorities if required by law or to protect rights and safety.
+
+4. Your Rights and Choices
+Depending on your region, you may have rights to:
+
+Access, update, or delete your personal information.
+
+Withdraw consent for data processing.
+
+Request a copy of your data.
+
+Opt out of promotional emails.
+
+To exercise these rights, contact us at: [Insert Contact Email]
+
+5. Data Security
+We implement industry-standard security measures to protect your information. However, no method of transmission over the internet or method of electronic storage is 100% secure.
+
+6. Children’s Privacy
+Our app is not intended for children under 13 (or the equivalent age in your jurisdiction). We do not knowingly collect personal information from children.
+
+7. Changes to This Policy
+We may update this Privacy Policy from time to time. When we do, we will notify you via the app or email. Your continued use of the app after changes indicates your agreement with the new terms.
+
+8. Contact Us
+If you have questions about this Privacy Policy or our data practices, you can contact us at:
+
+[App Name] Support Team
+Email: [Insert Email]
+Address: [Insert Company Address, if applicable]

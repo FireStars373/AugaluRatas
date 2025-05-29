@@ -19,8 +19,8 @@
 
         <View
             android:id="@+id/view23"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:layout_marginStart="20dp"
             android:layout_marginTop="20dp"
             android:layout_marginEnd="20dp"
@@ -84,38 +84,27 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView66" />
 
-        <ScrollView
-            android:id="@+id/scrollView4"
+
+        <TextView
+            android:id="@+id/privacy_text"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginStart="45dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginEnd="45dp"
-            android:layout_marginBottom="15dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/spectral_sc"
+            android:gravity="start|center_vertical"
+            android:layout_marginHorizontal="45dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="25dp"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:text="@string/privacy_text"
+            android:textColor="@color/text_brown"
+            android:textSize="16sp"
             app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView67">
+            app:layout_constraintTop_toBottomOf="@+id/textView67" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/textView83"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/spectral_sc"
-                    android:gravity="start|center_vertical"
-                    android:paddingStart="16dp"
-                    android:paddingEnd="16dp"
-                    android:text="@string/privacy_text"
-                    android:textColor="@color/text_brown"
-                    android:textSize="16sp" />
-
-            </LinearLayout>
-        </ScrollView>
 
         <LinearLayout
             android:id="@+id/linearLayout2"

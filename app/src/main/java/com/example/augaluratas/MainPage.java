@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
@@ -119,7 +120,11 @@ public class MainPage extends BaseActivity {
             if (news != newsList.get(newsList.size()-1)){
                 ImageButton newImageButton = new ImageButton(this);
                 //newImageButton.setPadding(110, 8, 0, 8);
-                newImageButton.setImageResource(R.drawable.news1);
+                byte[] imageData = news.getImage();
+                if (imageData != null && imageData.length > 0) {
+                    Bitmap bitmap = BitmapFactory.decodeByteArray(imageData, 0, imageData.length);
+                    newImageButton.setImageBitmap(bitmap);
+                }
                 //newImageButton.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
                 LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(400, 400);
                 params.setMargins(100, 20, 50, 40);

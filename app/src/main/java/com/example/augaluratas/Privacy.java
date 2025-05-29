@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -14,6 +15,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
+import java.io.IOException;
+import java.io.InputStream;
 
 public class Privacy extends BaseActivity {
 
@@ -31,6 +35,9 @@ public class Privacy extends BaseActivity {
 
         ImageButton return_button = findViewById(R.id.return_from_privacy);
         CheckBox agreement = findViewById(R.id.privacy_agreement);
+
+        TextView about = findViewById(R.id.privacy_text);
+        about.setText(loadTextFromAsset("privacy_policy.txt"));
 
         SharedPreferences sharedPref = getBaseContext().getSharedPreferences("augalu_ratas.SETTINGS", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
@@ -54,5 +61,19 @@ public class Privacy extends BaseActivity {
                 editor.apply();
             }
         });
+    }
+    public String loadTextFromAsset(String fileName) {
+        String text = "";
+        try {
+            InputStream is = getAssets().open(fileName);
+            int size = is.available();
+            byte[] buffer = new byte[size];
+            is.read(buffer);
+            is.close();
+            text = new String(buffer, "UTF-8");
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        return text;
     }
 }

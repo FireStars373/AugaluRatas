@@ -38,6 +38,14 @@ android {
     buildFeatures {
         viewBinding = true
     }
+    packaging {
+        resources {
+            excludes += setOf(
+                "META-INF/NOTICE.md",
+                "META-INF/LICENSE.md" // optional
+            )
+        }
+    }
 }
 
 dependencies {
@@ -77,5 +85,9 @@ dependencies {
 
     //gson
     implementation ("com.google.code.gson:gson:2.11.0")
+
+    //JavaMain API
+    implementation("com.sun.mail:android-mail:1.6.7")
+    implementation("com.sun.mail:android-activation:1.6.7")
 
 }

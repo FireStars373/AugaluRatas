@@ -33,6 +33,7 @@ public class UserData extends BaseActivity {
         TextView name = findViewById(R.id.user_data_name);
         TextView email = findViewById(R.id.user_data_email);
         TextView password = findViewById(R.id.user_data_password);
+        TextView password_rewrite = findViewById(R.id.password_repeat);
         TextView phone_number = findViewById(R.id.user_data_phone_number);
         Button change_data = findViewById(R.id.change_user_data);
 
@@ -43,6 +44,7 @@ public class UserData extends BaseActivity {
         name.setText(user.getUsername());
         email.setText(user.getEmail());
         password.setText(user.getPassword());
+        password_rewrite.setText(user.getPassword());
         phone_number.setText(user.getPhoneNumber());
 
         return_button.setOnClickListener(new View.OnClickListener() {
@@ -58,13 +60,18 @@ public class UserData extends BaseActivity {
                 String Name = name.getText().toString().trim();
                 String Email = email.getText().toString().trim();
                 String Password = password.getText().toString().trim();
+                String Password_rewrite = password_rewrite.getText().toString().trim();
                 String Number = phone_number.getText().toString().trim();
-                if (Name.isEmpty() || Email.isEmpty() || Password.isEmpty() || Number.isEmpty()){
+                if (Name.isEmpty() || Email.isEmpty() || Password.isEmpty() || Password_rewrite.isEmpty() || Number.isEmpty()){
                     Toast.makeText(getApplicationContext(), "Visi laukai turi būti išpildyti", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if(Password.length() < 5 || !Password.matches(".*\\d.*")){
+                if(Password_rewrite.length() < 5 || !Password_rewrite.matches(".*\\d.*")){
                     Toast.makeText(getApplicationContext(), "Slaptažodį turi sudaryti bent 5 simboliai, su bent vienu skaičiu", Toast.LENGTH_LONG).show();
+                    return;
+                }
+                if(!password_rewrite.equals(password)){
+                    Toast.makeText(getApplicationContext(), "Spaltažodžiai turi sutapti", Toast.LENGTH_LONG).show();
                     return;
                 }
                 if(!Patterns.EMAIL_ADDRESS.matcher(Email).matches()){
@@ -86,7 +93,7 @@ public class UserData extends BaseActivity {
                 Users user = database.usersDAO().getUserById(current_id);
                 user.setUsername(Name);
                 user.setEmail(Email);
-                user.setPassword(Password);
+                user.setPassword(Password_rewrite);
                 user.setPhoneNumber(Number);
                 database.usersDAO().Update(user);
                 Toast.makeText(getApplicationContext(), "Duomenys sėkmingai pakeisti!", Toast.LENGTH_SHORT).show();

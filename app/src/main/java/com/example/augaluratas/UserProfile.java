@@ -3,17 +3,27 @@ package com.example.augaluratas;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.media.Image;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
+import java.io.ByteArrayOutputStream;
 
 public class UserProfile extends BaseActivity {
 
@@ -29,10 +39,14 @@ public class UserProfile extends BaseActivity {
         });
 
         ImageButton return_button = findViewById(R.id.return_from_user_profile);
+        ImageView user_photo = findViewById(R.id.user_image);
         Button user_posts = findViewById(R.id.user_profile_user_posts);
         Button settings = findViewById(R.id.user_profile_settings);
         Button delete_user = findViewById(R.id.user_profile_delete_user);
         TextView username = findViewById(R.id.user_profile_username);
+
+        user_photo.setImageResource(R.drawable.user_icon);
+        user_photo.setColorFilter(ContextCompat.getColor(this, R.color.lotus_green), PorterDuff.Mode.SRC_IN);
 
         SharedPreferences sharedPref = getBaseContext().getSharedPreferences("augalu_ratas.CURRENT_USER_KEY", Context.MODE_PRIVATE);
         Long current_id= sharedPref.getLong("current_user_id", 0);

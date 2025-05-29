@@ -56,7 +56,8 @@ public class UserPosts extends BaseActivity {
         return_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                Intent intent = new Intent(getBaseContext(), MeniuOverlay.class);
+                startActivity(intent);
             }
         });
         RecyclerView recyclerView = findViewById(R.id.recyclerView2);

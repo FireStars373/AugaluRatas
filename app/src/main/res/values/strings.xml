@@ -15,7 +15,7 @@
     <!--Add post-->
     <string name="sell_plant">Parduoti augalą</string>
     <string name="type_in_title">Įveskite pavadinimą</string>
-    <string name="type_in_plant_description">Įveskite augalo pavadinimą</string>
+    <string name="type_in_plant_description">Įveskite augalo aprašymą</string>
     <string name="type_in_price">Įveskite kainą</string>
     <string name="upload_photo">Įkelkite nuotrauką</string>
     <!--First load screen-->
