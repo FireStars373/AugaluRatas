@@ -19,8 +19,8 @@
 
         <View
             android:id="@+id/view30"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:layout_marginStart="20dp"
             android:layout_marginTop="20dp"
             android:layout_marginEnd="20dp"
@@ -84,10 +84,11 @@
             android:id="@+id/recyclerView2"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
+            android:layout_marginHorizontal="45dp"
+            android:layout_marginBottom="50dp"
+            android:layout_marginTop="20dp"
             android:scrollbars="vertical"
-            app:layout_constraintBottom_toBottomOf="@id/view30"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/user_posts_search" />

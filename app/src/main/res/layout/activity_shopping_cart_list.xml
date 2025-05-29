@@ -20,8 +20,8 @@
 
         <View
             android:id="@+id/view26"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:layout_marginStart="20dp"
             android:layout_marginTop="20dp"
             android:layout_marginEnd="20dp"
@@ -52,17 +52,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <SearchView
-            android:id="@+id/shopping_cart_search"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="45dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginEnd="45dp"
-            android:background="@drawable/searchbox_background_1"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView38" />
+
 
         <TextView
             android:id="@+id/textView38"
@@ -82,14 +72,14 @@
             android:id="@+id/recyclerView2"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginEnd="20dp"
+            android:layout_marginHorizontal="45dp"
+            android:layout_marginBottom="100dp"
+            android:layout_marginTop="20dp"
             android:scrollbars="vertical"
             app:layout_constraintBottom_toBottomOf="@id/view26"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/shopping_cart_search" />
+            app:layout_constraintTop_toBottomOf="@+id/textView38" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/shopping_cart_list_shopping_cart"

@@ -33,11 +33,11 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/user_image"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_marginTop="60dp"
-            android:layout_marginStart="60dp"
+            android:layout_marginStart="50dp"
             android:contentDescription="@string/user_icon"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -47,16 +47,18 @@
             android:id="@+id/user_profile_username"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="45dp"
+            android:layout_marginStart="20dp"
             android:layout_marginTop="60dp"
+            android:layout_marginEnd="45dp"
+            android:gravity="center_vertical"
             android:fontFamily="@font/spectral_sc"
             android:text="@string/username"
             android:textColor="@color/text_brown"
             android:textSize="28sp"
-            app:layout_constraintStart_toEndOf="@+id/imageView"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintBottom_toBottomOf="@+id/user_image"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/user_image"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/user_profile_user_posts"
@@ -74,7 +76,7 @@
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView" />
+            app:layout_constraintTop_toBottomOf="@+id/user_image" />
 
         <View
             android:id="@+id/view6"

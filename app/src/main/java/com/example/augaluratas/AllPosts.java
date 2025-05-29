@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 import android.util.Log;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
@@ -35,6 +36,7 @@ public class AllPosts extends AppCompatActivity {
         add_posts();
         ImageButton sidebar = findViewById(R.id.sidebar_from_all_posts);
         ImageButton shopping_cart = findViewById(R.id.shopping_cart);
+
 
         sidebar.setOnClickListener(v -> {
             Intent intent = new Intent(getBaseContext(), MeniuOverlay.class);
@@ -92,6 +94,9 @@ public class AllPosts extends AppCompatActivity {
             runOnUiThread(() -> {
                 PostAdapter postAdapter = new PostAdapter(posts);
                 recyclerView.setAdapter(postAdapter);
+
+                TextView plant_count = findViewById(R.id.plant_count);
+                plant_count.setText("Augalų kiekis: " + posts.size());
             });
         });
     }
