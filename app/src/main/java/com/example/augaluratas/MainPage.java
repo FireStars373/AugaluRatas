@@ -59,6 +59,11 @@ public class MainPage extends BaseActivity {
         NewsDao newsDao = AppActivity.getNewsDatabase().newsDao();
         //Deleting example data
         //newsDao.deleteAll();
+        SharedPreferences sharedPrefCur = getBaseContext().getSharedPreferences("augalu_ratas.CURRENT_CURRENCY", Context.MODE_PRIVATE);
+        Float conversion_rate = sharedPrefCur.getFloat("current_conversion_rate", -1);
+        String country_code = sharedPrefCur.getString("current_country_code", "NOTFOUND");
+        SharedPreferences.Editor editor = sharedPrefCur.edit();
+
 
 //        String currency = user.getCurrency();
 //
@@ -86,6 +91,7 @@ public class MainPage extends BaseActivity {
 //
 //        UrlRequest request = requestBuilder.build();
 //        request.start();
+
 
         if (newsDao.getAllNews().isEmpty()){
             //Inserting example data if empty

@@ -69,6 +69,7 @@ public class CurrencyConversionUrlRequestCallback extends UrlRequest.Callback {
         try {
             JSONObject jsonObject = new JSONObject(responseJson);
             JSONObject rates = jsonObject.getJSONObject("conversion_rates");
+            String currency_code = Currency.getInstance(new Locale("", country_code)).getCurrencyCode();
             float rate = (float)rates.getDouble(currency_code);
 
             SharedPreferences sharedPref = context.getSharedPreferences("augalu_ratas.CURRENT_CURRENCY", Context.MODE_PRIVATE);

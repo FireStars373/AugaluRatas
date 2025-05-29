@@ -76,6 +76,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
 
             String currencySymbol = Currency.getInstance(currency).getSymbol();
             int decimal_point = Currency.getInstance(currency).getDefaultFractionDigits();
+
             double price = post.getPrice() * conversion_rate;
 
             String formatPattern = "%." + decimal_point + "f %s";
