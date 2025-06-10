@@ -1,16 +1,26 @@
 package com.example.augaluratas;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.telephony.TelephonyManager;
+import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -18,6 +28,8 @@ import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -63,34 +75,6 @@ public class MainPage extends BaseActivity {
         Float conversion_rate = sharedPrefCur.getFloat("current_conversion_rate", -1);
         String country_code = sharedPrefCur.getString("current_country_code", "NOTFOUND");
         SharedPreferences.Editor editor = sharedPrefCur.edit();
-
-
-//        String currency = user.getCurrency();
-//
-//        //If currency code isn't saved, gets it from sim card location. USD by default
-//        if (currency == null){
-//            TelephonyManager tm = (TelephonyManager) getBaseContext().getSystemService(Context.TELEPHONY_SERVICE);
-//            String country = tm.getSimCountryIso().toUpperCase();
-//            if (country.isEmpty()){
-//                currency = "USD";
-//            }
-//            else{
-//                currency = Currency.getInstance(new Locale("", country)).getCurrencyCode();
-//            }
-//            user.setCurrency(currency);
-//            AppActivity.getUser_PostDatabase().usersDAO().Update(user);
-//        }
-//        //If conversion rate isn't saved, calls API to find it. 1.0 by default
-//        CronetEngine.Builder myBuilder = new CronetEngine.Builder(getBaseContext());
-//        CronetEngine cronetEngine = myBuilder.build();
-//
-//        Executor executor = Executors.newSingleThreadExecutor();
-//
-//        UrlRequest.Builder requestBuilder = cronetEngine.newUrlRequestBuilder(
-//                "https://v6.exchangerate-api.com/v6/2d01d5f6b910d11e87a610cb/latest/EUR", new CurrencyConversionUrlRequestCallback(getBaseContext(), currency), executor);
-//
-//        UrlRequest request = requestBuilder.build();
-//        request.start();
 
 
         if (newsDao.getAllNews().isEmpty()){
@@ -211,4 +195,5 @@ public class MainPage extends BaseActivity {
         bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
         return stream.toByteArray();
     }
+
 }

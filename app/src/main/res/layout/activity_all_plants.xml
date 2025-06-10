@@ -10,10 +10,13 @@
     tools:context=".AllPlants">
 
     <androidx.core.widget.NestedScrollView
-        android:id="@+id/scrollView"
+        android:id="@+id/all_plants_scrollview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fillViewport="true">
+        android:clickable="true"
+        android:fillViewport="true"
+        android:focusableInTouchMode="true"
+        android:focusedByDefault="true">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/plant_list_layout"
@@ -29,6 +32,7 @@
                 android:layout_marginEnd="20dp"
                 android:layout_marginBottom="20sp"
                 android:background="@drawable/square_background_2"
+                android:focusedByDefault="false"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -56,29 +60,29 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <SearchView
-                android:id="@+id/searchView"
+                android:id="@+id/all_plants_searchbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="45dp"
                 android:layout_marginTop="30dp"
                 android:layout_marginEnd="45dp"
                 android:background="@drawable/searchbox_background_1"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/imageView4"/>
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/imageView4" />
 
             <LinearLayout
                 android:id="@+id/plantsContainer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="45dp"
                 android:layout_marginTop="30dp"
                 android:layout_marginEnd="45dp"
-                android:layout_marginStart="45dp"
                 android:layout_marginBottom="100dp"
                 android:orientation="vertical"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/searchView" />
+                app:layout_constraintTop_toBottomOf="@+id/all_plants_searchbar" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

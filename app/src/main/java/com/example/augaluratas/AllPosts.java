@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.widget.NestedScrollView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -15,7 +16,10 @@ import java.util.List;
 
 import android.telephony.TelephonyManager;
 import android.util.Log;
+import android.view.MotionEvent;
+import android.view.View;
 import android.widget.ImageButton;
+import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,15 +37,49 @@ public class AllPosts extends AppCompatActivity {
 
     private ExecutorService executorService = Executors.newSingleThreadExecutor();
     RecyclerView recyclerView;
+    private SearchView searchbar;
+    private NestedScrollView scrollView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_all_posts);
         recyclerView = findViewById(R.id.recyclerView);
+        searchbar = findViewById(R.id.all_posts_searchbar);
+        scrollView = findViewById(R.id.all_posts_scrollview);
 
         db = AppActivity.getUser_PostDatabase();
 
+        searchbar.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                add_posts();
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                if (newText.isEmpty()){
+                    add_posts();
+                }
+                return false;
+            }
+        });
+        searchbar.setOnCloseListener(new SearchView.OnCloseListener() {
+            @Override
+            public boolean onClose() {
+                add_posts();
+                return false;
+            }
+        });
+        //Remove focus from searchbar
+        scrollView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                searchbar.clearFocus();
+                return false;
+            }
+        });
         // Gauname visus įrašus foninėje gijoje
 
         add_posts();
@@ -103,6 +141,8 @@ public class AllPosts extends AppCompatActivity {
 
             // Gauti įrašus ir nustatyti adapterį
             List<Posts> posts = db.postsDAO().getPostsWithoutUser(current_id);
+            //Applying search filter
+            posts.removeIf(post -> !post.getPlantName().toLowerCase().contains(searchbar.getQuery().toString().toLowerCase()));
             runOnUiThread(() -> {
                 PostAdapter postAdapter = new PostAdapter(posts, false, getBaseContext());
                 recyclerView.setAdapter(postAdapter);
