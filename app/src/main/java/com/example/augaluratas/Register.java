@@ -60,7 +60,7 @@ public class Register extends BaseActivity {
                 String Repeat_password = repeat_password.getText().toString().trim();
                 String Number = number.getText().toString().trim();
 
-                ObjectAnimator animator = ObjectAnimator.ofFloat(register, "translationX",  0f, 25f, -25f, 15f, -15f, 5f, -5f, 0f);
+                ObjectAnimator animator = ObjectAnimator.ofFloat(register, "translationX", 0f, 25f, -25f, 15f, -15f, 5f, -5f, 0f);
                 animator.setDuration(600);
 
                 AnimatorSet set = new AnimatorSet();
@@ -68,75 +68,90 @@ public class Register extends BaseActivity {
 
 
                 MediaPlayer mp = MediaPlayer.create(getBaseContext(), R.raw.bad_info);
-                mp.setVolume(0.8f,0.8f);
+                mp.setVolume(0.8f, 0.8f);
 
-                if ( Name.isEmpty() || Email.isEmpty() || Password.isEmpty() || Repeat_password.isEmpty() || Number.isEmpty()){
+                if (Name.isEmpty() || Email.isEmpty() || Password.isEmpty() || Repeat_password.isEmpty() || Number.isEmpty()) {
                     register.setSoundEffectsEnabled(false);
                     mp.start();
                     Toast.makeText(getApplicationContext(), "Visi laukai turi būti išpildyti", Toast.LENGTH_SHORT).show();
                     set.start();
                     return;
                 }
-                if(Password.length() < 5 || !Password.matches(".*\\d.*")){
+                if (Password.length() < 5 || !Password.matches(".*\\d.*")) {
                     register.setSoundEffectsEnabled(false);
                     mp.start();
                     Toast.makeText(getApplicationContext(), "Slaptažodį turi sudaryti bent 5 simboliai, su bent vienu skaičiu", Toast.LENGTH_LONG).show();
                     set.start();
                     return;
                 }
-                if (!Password.equals(Repeat_password)){
+                if (!Password.equals(Repeat_password)) {
                     register.setSoundEffectsEnabled(false);
                     mp.start();
                     Toast.makeText(getApplicationContext(), "Slaptažodžiai nesutampa", Toast.LENGTH_SHORT).show();
                     set.start();
                     return;
                 }
-                if(!Patterns.EMAIL_ADDRESS.matcher(Email).matches()){
+                if (!Patterns.EMAIL_ADDRESS.matcher(Email).matches()) {
                     register.setSoundEffectsEnabled(false);
                     mp.start();
                     Toast.makeText(getApplicationContext(), "Neteisingas el. pašto formatas", Toast.LENGTH_SHORT).show();
                     set.start();
                     return;
                 }
-                if(!Patterns.PHONE.matcher(Number).matches()){
+                if (!Patterns.PHONE.matcher(Number).matches()) {
                     register.setSoundEffectsEnabled(false);
                     mp.start();
                     Toast.makeText(getApplicationContext(), "Neteisingas tel. numerio formatas", Toast.LENGTH_SHORT).show();
                     set.start();
                     return;
                 }
-                if(usersDatabase.usersDAO().getUserByUsername(Name) != null){
-                    register.setSoundEffectsEnabled(false);
-                    mp.start();
-                    Toast.makeText(getApplicationContext(), "Jau yra vartotojas su šiuo vardu", Toast.LENGTH_SHORT).show();
-                    set.start();
-                    return;
-                }
-                if(usersDatabase.usersDAO().getUserByEmail(Email) != null){
-                    register.setSoundEffectsEnabled(false);
-                    mp.start();
-                    Toast.makeText(getApplicationContext(), "Šis el. paštas jau panaudotas", Toast.LENGTH_SHORT).show();
-                    set.start();
-                    return;
-                }
+                // 1. Tikriname, ar vardas užimtas Firestore
+                db.collection("users").whereEqualTo("username", Name).get().addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        if (!task.getResult().isEmpty()) {
+                            register.setSoundEffectsEnabled(false);
+                            mp.start();
+                            Toast.makeText(getApplicationContext(), "Jau yra vartotojas su šiuo vardu", Toast.LENGTH_SHORT).show();
+                            set.start();
+                            return;
+                        }
 
-                /*Users user = new Users(Name, Password, Number, Email);
-                usersDatabase.usersDAO().insert(user);*/
-// Create a new user with a first and last name
-                Map<String, Object> user = new HashMap<>();
-                user.put("currency", "eur");
-                user.put("email", Email);
-                user.put("password", Password);
-                user.put("phoneNumber", Number);
-                user.put("subscribed", false);
-                user.put("username", Name);
+                        // 2. Jei vardas laisvas – tikriname, ar el. paštas jau panaudotas
+                        db.collection("users").whereEqualTo("email", Email).get().addOnCompleteListener(emailTask -> {
+                            if (emailTask.isSuccessful()) {
+                                if (!emailTask.getResult().isEmpty()) {
+                                    register.setSoundEffectsEnabled(false);
+                                    mp.start();
+                                    Toast.makeText(getApplicationContext(), "Šis el. paštas jau panaudotas", Toast.LENGTH_SHORT).show();
+                                    set.start();
+                                    return;
+                                }
 
-// Add a new document with a generated ID
-                db.collection("users")
-                        .add(user);
+                                // 3. Viskas ok – registruojame naują vartotoją
+                                Map<String, Object> user = new HashMap<>();
+                                user.put("currency", "eur");
+                                user.put("email", Email);
+                                user.put("password", Password);
+                                user.put("phoneNumber", Number);
+                                user.put("subscribed", false);
+                                user.put("username", Name);
 
-                Intent intent = new Intent(getBaseContext(), Login.class);
-                startActivity(intent);
+                                db.collection("users")
+                                        .add(user)
+                                        .addOnSuccessListener(documentReference -> {
+                                            Intent intent = new Intent(getBaseContext(), Login.class);
+                                            startActivity(intent);
+                                        });
+
+                            } else {
+                                Toast.makeText(getApplicationContext(), "Klaida tikrinant el. paštą", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Klaida tikrinant vartotojo vardą", Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         });
         return_to_first_screen.setOnClickListener(new View.OnClickListener() {
@@ -146,4 +161,4 @@ public class Register extends BaseActivity {
             }
         });
     }
-}
+    }
