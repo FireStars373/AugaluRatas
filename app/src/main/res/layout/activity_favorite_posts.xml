@@ -1,56 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/constraint_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/dark_green"
-    tools:context=".AllPlants">
+    tools:context=".FavoritePosts">
 
     <androidx.core.widget.NestedScrollView
-        android:id="@+id/all_plants_scrollview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:clickable="true"
-        android:fillViewport="true"
-        android:focusableInTouchMode="true"
-        android:focusedByDefault="true">
+        android:fillViewport="true">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/plant_list_layout"
+            android:id="@+id/all_posts_scrollview"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
 
             <View
-                android:id="@+id/view16"
+                android:id="@+id/view37"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="20dp"
-                android:layout_marginBottom="20sp"
+                android:layout_marginBottom="20dp"
                 android:background="@drawable/square_background_2"
-                android:focusedByDefault="false"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageButton
-                android:id="@+id/sidebar_from_all_plants"
+                android:id="@+id/arrow_back"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="45dp"
                 android:layout_marginTop="80dp"
-                android:background="@drawable/hamburger_button"
-                android:contentDescription="@string/back_btn"
+                android:background="@drawable/arrow_button"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
-                android:id="@+id/imageView4"
+                android:id="@+id/imageView33"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="45dp"
@@ -59,31 +52,40 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <SearchView
-                android:id="@+id/all_plants_searchbar"
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/textView86"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="45dp"
                 android:layout_marginTop="30dp"
                 android:layout_marginEnd="45dp"
-                android:background="@drawable/searchbox_background_1"
+                android:background="@drawable/square_background_5"
+                android:fontFamily="@font/spectral_sc"
+                android:gravity="center"
+                android:text="Pamėgti skelbimai"
+                android:textColor="@color/text_brown"
+                android:textSize="24sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/imageView4" />
+                app:layout_constraintTop_toBottomOf="@+id/imageView33" />
 
-            <LinearLayout
-                android:id="@+id/plantsContainer"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="45dp"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="50dp"
+                android:layout_marginHorizontal="45dp"
                 android:layout_marginBottom="50dp"
-                android:layout_marginTop="30dp"
-                android:layout_marginEnd="45dp"
-                android:orientation="vertical"
+                android:scrollbars="vertical"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/all_plants_searchbar" />
+                app:layout_constraintTop_toBottomOf="@+id/textView86" />
+
+
+
         </androidx.constraintlayout.widget.ConstraintLayout>
+
     </androidx.core.widget.NestedScrollView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

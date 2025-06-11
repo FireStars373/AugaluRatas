@@ -5,12 +5,18 @@ import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+
+import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 import androidx.core.widget.NestedScrollView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.text.NumberFormat;
+import java.util.Comparator;
 import java.util.Currency;
 import java.util.List;
 
@@ -43,10 +49,17 @@ public class AllPosts extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_all_posts);
         recyclerView = findViewById(R.id.recyclerView);
         searchbar = findViewById(R.id.all_posts_searchbar);
         scrollView = findViewById(R.id.all_posts_scrollview);
+
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.constraint_layout), (v, insets) -> {
+            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+            return insets;
+        });
 
         db = AppActivity.getUser_PostDatabase();
 
@@ -143,6 +156,20 @@ public class AllPosts extends AppCompatActivity {
             List<Posts> posts = db.postsDAO().getPostsWithoutUser(current_id);
             //Applying search filter
             posts.removeIf(post -> !post.getPlantName().toLowerCase().contains(searchbar.getQuery().toString().toLowerCase()));
+            posts.sort(new Comparator<Posts>() {
+                @Override
+                public int compare(Posts o1, Posts o2) {
+                    Users u1 = db.usersDAO().getUserById(o1.getUserId());
+                    Users u2 = db.usersDAO().getUserById(o2.getUserId());
+                    if(u1.getSubscribed() && !u2.getSubscribed()){
+                        return -1;
+                    }
+                    else if(!u1.getSubscribed() && u2.getSubscribed()){
+                        return 1;
+                    }
+                    return 0;
+                }
+            });
             runOnUiThread(() -> {
                 PostAdapter postAdapter = new PostAdapter(posts, false, getBaseContext());
                 recyclerView.setAdapter(postAdapter);

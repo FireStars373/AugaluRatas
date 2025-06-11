@@ -114,7 +114,7 @@
             android:gravity="center"
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
-            android:text="@string/price"
+            android:text="@string/subscription_price"
             android:textColor="@color/text_brown"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -123,7 +123,7 @@
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/add_to_cart_from_desc"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="45dp"
             android:layout_marginTop="30dp"

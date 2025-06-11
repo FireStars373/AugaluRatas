@@ -40,6 +40,7 @@ public class UserProfile extends BaseActivity {
 
         ImageButton return_button = findViewById(R.id.return_from_user_profile);
         ImageView user_photo = findViewById(R.id.user_image);
+        Button favorite_posts = findViewById(R.id.favorite_posts);
         Button user_posts = findViewById(R.id.user_profile_user_posts);
         Button settings = findViewById(R.id.user_profile_settings);
         Button delete_user = findViewById(R.id.user_profile_delete_user);
@@ -72,6 +73,13 @@ public class UserProfile extends BaseActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getBaseContext(), Settings.class);
+                startActivity(intent);
+            }
+        });
+        favorite_posts.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getBaseContext(), FavoritePosts.class);
                 startActivity(intent);
             }
         });

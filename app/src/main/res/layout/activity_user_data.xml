@@ -67,7 +67,40 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView30" />
+        <TextView
+            android:id="@+id/textView86"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:fontFamily="@font/spectral_sc"
+            android:gravity="center"
+            android:text="Pridėti profilio nuotrauka"
+            android:textColor="@color/text_brown"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView70" />
 
+
+        <ImageView
+            android:id="@+id/user_change_photo"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:layout_marginStart="45dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="45dp"
+            android:src="@drawable/select_image"
+            android:background="@drawable/textbox_background_2"
+            android:contentDescription="Mygtuko paveikslėlis"
+            android:clickable="true"
+            android:focusable="true"
+            android:fontFamily="@font/spectral_sc"
+            android:text="@string/upload_photo"
+            android:textSize="20sp"
+            app:layout_constraintTop_toBottomOf="@id/textView86"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+/>
         <TextView
             android:id="@+id/user_data_name"
             android:layout_width="0dp"
@@ -91,9 +124,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/spectral_sc"
-            android:layout_marginStart="45dp"
             android:layout_marginTop="10dp"
-            android:layout_marginEnd="45dp"
             android:gravity="center"
             android:text="Pakartoti spaltažodį"
             android:textColor="@color/text_brown"
@@ -192,7 +223,7 @@
             android:id="@+id/textView84"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="10dp"
             android:fontFamily="@font/spectral_sc"
             android:gravity="center"
             android:text="@string/email"
@@ -200,7 +231,7 @@
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView70" />
+            app:layout_constraintTop_toBottomOf="@+id/user_change_photo" />
 
         <TextView
             android:id="@+id/user_data_email"
@@ -277,7 +308,6 @@
             android:background="@drawable/textbox_background_2"
             android:ems="10"
             android:fontFamily="@font/spectral_sc"
-            android:inputType="textPassword"
             android:paddingStart="8dp"
             android:text="slaptazodis"
             android:textColor="@color/text_brown"

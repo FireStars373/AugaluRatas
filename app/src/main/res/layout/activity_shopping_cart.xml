@@ -81,7 +81,7 @@
                 android:fontFamily="@font/spectral_sc"
                 android:gravity="start"
                 android:paddingHorizontal="16sp"
-                android:text="@string/price"
+                android:text="@string/subscription_price"
                 android:textColor="@color/text_brown"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -127,12 +127,13 @@
             android:layout_marginStart="45dp"
             android:layout_marginEnd="45dp"
             android:layout_marginTop="10dp"
+            android:buttonTint="@android:color/black"
             android:background="@drawable/square_background_5"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView46">
 
-            <RadioButton
+            <androidx.appcompat.widget.AppCompatRadioButton
                 android:id="@+id/get_mail_from_seller"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -140,12 +141,13 @@
                 android:gravity="start|center_vertical"
                 android:text="@string/delivery_seller"
                 android:textColor="@color/text_brown"
+                app:buttonTint="@color/text_brown"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toTopOf="@+id/get_mail_from_drop_box"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <RadioButton
+            <androidx.appcompat.widget.AppCompatRadioButton
                 android:id="@+id/get_mail_from_drop_box"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -153,12 +155,13 @@
                 android:gravity="start|center_vertical"
                 android:text="@string/delivery_post"
                 android:textColor="@color/text_brown"
+                app:buttonTint="@color/text_brown"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toTopOf="@+id/get_mail_from_carrier"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/get_mail_from_seller" />
 
-            <RadioButton
+            <androidx.appcompat.widget.AppCompatRadioButton
                 android:id="@+id/get_mail_from_carrier"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -166,6 +169,7 @@
                 android:gravity="start|center_vertical"
                 android:text="@string/delivery_carrier"
                 android:textColor="@color/text_brown"
+                app:buttonTint="@color/text_brown"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
