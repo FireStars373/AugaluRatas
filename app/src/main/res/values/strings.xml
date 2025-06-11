@@ -21,8 +21,8 @@
     <!--First load screen-->
     <string name="have_an_account">Jau turi paskyrą?</string>
     <!--Forgotten password-->
-    <string name="forgotten_password">Pamiršai slaptažodį?</string>
-    <string name="used_email">Naudotas el. paštas</string>
+    <string name="forgotten_password">Atkurti slaptažodį?</string>
+    <string name="used_email">Įrašyti el. paštą</string>
     <string name="send_forgotten_password_email">Siųsti laišką</string>
     <!--Help-->
     <string name="faq">DUK</string>
