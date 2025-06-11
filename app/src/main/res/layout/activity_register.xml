@@ -57,11 +57,12 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
+            android:layout_marginTop="5dp"
             android:fontFamily="@font/spectral_sc"
             android:text="@string/repeat_password"
             android:textColor="@color/white"
             android:textSize="20sp"
-            app:layout_constraintBottom_toTopOf="@+id/register_password_repeat"
+
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/register_password" />
@@ -87,12 +88,11 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="45dp"
             android:layout_marginEnd="8dp"
-
             android:fontFamily="@font/spectral_sc"
             android:text="@string/username"
             android:textColor="@color/white"
             android:textSize="20sp"
-            app:layout_constraintBottom_toTopOf="@+id/register_name"
+
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView5" />
@@ -103,6 +103,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="45dp"
             android:layout_marginStart="45dp"
+            android:layout_marginTop="5dp"
             android:background="@drawable/textbox_background_1"
             android:ems="10"
             android:fontFamily="@font/spectral_sc"
@@ -112,7 +113,7 @@
             android:hint="@string/username"
             android:paddingHorizontal="16sp"
             android:textColorHint="@color/hint_grey"
-            app:layout_constraintBottom_toTopOf="@+id/textView7"
+
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView6" />
@@ -123,11 +124,12 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
+            android:layout_marginTop="5dp"
             android:fontFamily="@font/spectral_sc"
             android:text="@string/email"
             android:textColor="@color/white"
             android:textSize="20sp"
-            app:layout_constraintBottom_toTopOf="@+id/register_email"
+
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/register_name" />
@@ -138,6 +140,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="45dp"
             android:layout_marginEnd="45dp"
+            android:layout_marginTop="5dp"
             android:background="@drawable/textbox_background_1"
             android:ems="10"
             android:fontFamily="@font/spectral_sc"
@@ -147,7 +150,7 @@
             android:hint="@string/email"
             android:paddingHorizontal="16sp"
             android:textColorHint="@color/hint_grey"
-            app:layout_constraintBottom_toTopOf="@+id/textView8"
+
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView7" />
@@ -158,11 +161,12 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
+            android:layout_marginTop="5dp"
             android:fontFamily="@font/spectral_sc"
             android:text="@string/password"
             android:textColor="@color/white"
             android:textSize="20sp"
-            app:layout_constraintBottom_toTopOf="@+id/register_password"
+
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/register_email" />
@@ -173,6 +177,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="45dp"
             android:layout_marginEnd="45dp"
+            android:layout_marginTop="5dp"
             android:background="@drawable/textbox_background_1"
             android:fontFamily="@font/spectral_sc"
             android:inputType="textPassword"
@@ -181,7 +186,7 @@
             android:hint="@string/password"
             android:paddingHorizontal="16sp"
             android:textColorHint="@color/hint_grey"
-            app:layout_constraintBottom_toTopOf="@+id/textView10"
+
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView9" />
@@ -192,11 +197,12 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
+            android:layout_marginTop="5dp"
             android:fontFamily="@font/spectral_sc"
             android:text="@string/phone_number"
             android:textColor="@color/white"
             android:textSize="20sp"
-            app:layout_constraintBottom_toTopOf="@+id/register_phone_number"
+
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/register_password_repeat" />
@@ -208,6 +214,7 @@
             android:layout_marginStart="45dp"
             android:layout_marginEnd="45dp"
             android:layout_marginBottom="45dp"
+            android:layout_marginTop="5dp"
             android:autofillHints="phone"
             android:background="@drawable/textbox_background_1"
             android:ems="10"
@@ -217,7 +224,6 @@
             android:paddingHorizontal="16sp"
             android:textColor="@color/black"
             android:textColorHint="@color/hint_grey"
-            app:layout_constraintBottom_toTopOf="@+id/register"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView10" />
@@ -228,6 +234,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="45dp"
             android:layout_marginEnd="45dp"
+            android:layout_marginTop="5dp"
             android:background="@drawable/textbox_background_1"
             android:ems="10"
             android:fontFamily="@font/spectral_sc"
@@ -237,7 +244,7 @@
             android:hint="@string/password"
             android:paddingHorizontal="16sp"
             android:textColorHint="@color/hint_grey"
-            app:layout_constraintBottom_toTopOf="@+id/textView9"
+
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView8" />
@@ -260,21 +267,20 @@
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/register"
-            android:layout_width="291dp"
-            android:layout_height="39dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="360dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="70dp"
+            android:layout_marginEnd="70dp"
+            android:layout_marginTop="30dp"
             android:background="@drawable/button_background_2"
             android:fontFamily="@font/spectral_sc"
             android:text="@string/do_register"
             android:textColor="@color/text_brown"
             android:textSize="24sp"
-            app:layout_constraintBottom_toBottomOf="parent"
+
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/register_phone_number" />
 
         <TextView
             android:id="@+id/textView4"
