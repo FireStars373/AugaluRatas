@@ -70,7 +70,7 @@
     <string name="register">Registruokis</string>
     <string name="do_register">Registruokis</string>
     <string name="tagline">Ir mainykis augalais lengvai!</string>
-    <string name="email">el. paštas</string>
+    <string name="email">El. paštas</string>
     <string name="username">Vartotojo vardas</string>
     <string name="password">Slaptažodis</string>
     <string name="repeat_password">Pakartoti slaptažodį</string>
@@ -91,7 +91,7 @@
     <string name="buy_selected">Pirkti pažymėtus</string>
     <!--Subscription-->
     <string name="monthly_subscription">Mėnesio prenumerata!</string>
-    <string name="subsciption_privilages" tools:ignore="TypographyEllipsis">Ką gausite užsiprenumeravus?...</string>
+    <string name="subsciption_privilages" tools:ignore="TypographyEllipsis">Įdomu ką gausite užsiprenumeravus?... Jūsų skelbimas kitiems vartotojams bus iškeliamas į viršų! </string>
     <string name="subscription_price" tools:ignore="TypographyEllipsis">Kaina...</string>
     <string name="successful_subscription">Sėkmingai užprenumeruota!</string>
     <string name="from_now_on" tools:ignore="TypographyEllipsis">Nuo šiol galite naudotis šiomis funkcijomis...</string>
@@ -114,7 +114,7 @@
     <string name="plant_name">Augalo Pavadinimas</string>
     <string name="about_plant">Apie</string>
     <string name="user_icon">user_icon</string>
-    <string name="price">Kaina</string>
+    <string name="price"> Tik 1.99€ per mėnesį!</string>
     <string name="seller_name">Pardavėjas vardas</string>
     <string name="plant_seller_description">Augalo aprašymas</string>
     <string name="plant_origin">Augalo rūšis</string>
