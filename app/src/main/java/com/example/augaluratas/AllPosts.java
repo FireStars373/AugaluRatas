@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.text.NumberFormat;
+import java.util.Comparator;
 import java.util.Currency;
 import java.util.List;
 
@@ -143,6 +144,20 @@ public class AllPosts extends AppCompatActivity {
             List<Posts> posts = db.postsDAO().getPostsWithoutUser(current_id);
             //Applying search filter
             posts.removeIf(post -> !post.getPlantName().toLowerCase().contains(searchbar.getQuery().toString().toLowerCase()));
+            posts.sort(new Comparator<Posts>() {
+                @Override
+                public int compare(Posts o1, Posts o2) {
+                    Users u1 = db.usersDAO().getUserById(o1.getUserId());
+                    Users u2 = db.usersDAO().getUserById(o2.getUserId());
+                    if(u1.getSubscribed() && !u2.getSubscribed()){
+                        return -1;
+                    }
+                    else if(!u1.getSubscribed() && u2.getSubscribed()){
+                        return 1;
+                    }
+                    return 0;
+                }
+            });
             runOnUiThread(() -> {
                 PostAdapter postAdapter = new PostAdapter(posts, false, getBaseContext());
                 recyclerView.setAdapter(postAdapter);
