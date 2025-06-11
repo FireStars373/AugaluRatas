@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.telephony.TelephonyManager;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -19,6 +20,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import org.chromium.net.CronetEngine;
 import org.chromium.net.UrlRequest;
@@ -49,7 +53,7 @@ public class Login extends BaseActivity {
         MediaPlayer mp = MediaPlayer.create(this, R.raw.bad_info);
         mp.setVolume(0.8f,0.8f);
         User_PostDatabase usersDatabase = AppActivity.getUser_PostDatabase();
-
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,7 +66,7 @@ public class Login extends BaseActivity {
 
                 AnimatorSet set = new AnimatorSet();
                 set.playSequentially(animator);
-
+/*
                 if (Name.isEmpty()){
                     login.setSoundEffectsEnabled(false);
                     Toast.makeText(getApplicationContext(), "Neįrašytas vardas", Toast.LENGTH_SHORT).show();
@@ -127,7 +131,72 @@ public class Login extends BaseActivity {
                 editor.putLong("current_user_id", user.getId());
                 editor.apply();
                 Intent intent = new Intent(getBaseContext(), MainPage.class);
-                startActivity(intent);
+                startActivity(intent);*/
+                db.collection("users")
+                        .whereEqualTo("username", Name)
+                        .get()
+                        .addOnSuccessListener(queryDocumentSnapshots -> {
+                            if (queryDocumentSnapshots.isEmpty()) {
+                                // Vartotojas nerastas
+                                Toast.makeText(getApplicationContext(), "Vartotojo vardas arba slaptažodis neteisingas", Toast.LENGTH_SHORT).show();
+                                set.start();
+                                mp.start();
+                                return;
+                            }
+
+                            DocumentSnapshot document = queryDocumentSnapshots.getDocuments().get(0);
+                            String passwordInDb = document.getString("password");
+
+                            if (!Password.equals(passwordInDb)) {
+                                Toast.makeText(getApplicationContext(), "Vartotojo vardas arba slaptažodis neteisingas", Toast.LENGTH_SHORT).show();
+                                set.start();
+                                mp.start();
+                                return;
+                            }
+
+                            // Prisijungimas sėkmingas
+                            String userId = document.getId(); // Firestore doc ID
+
+                            // Gauti valiutą, arba apskaičiuoti
+                            String currency = document.getString("currency");
+                            if (currency == null || currency.isEmpty()) {
+                                TelephonyManager tm = (TelephonyManager) getBaseContext().getSystemService(Context.TELEPHONY_SERVICE);
+                                String country = tm.getSimCountryIso().toUpperCase();
+                                if (country.isEmpty()) {
+                                    currency = "USD";
+                                } else {
+                                    currency = Currency.getInstance(new Locale("", country)).getCurrencyCode();
+                                }
+
+                                // Atnaujinti Firestore dokumentą
+                                db.collection("users").document(userId).update("currency", currency);
+                            }
+
+                            // Paleidžiam valiutos keitimo užklausą
+                            CronetEngine.Builder myBuilder = new CronetEngine.Builder(getBaseContext());
+                            CronetEngine cronetEngine = myBuilder.build();
+                            Executor executor = Executors.newSingleThreadExecutor();
+                            UrlRequest.Builder requestBuilder = cronetEngine.newUrlRequestBuilder(
+                                    "https://v6.exchangerate-api.com/v6/2d01d5f6b910d11e87a610cb/latest/EUR",
+                                    new CurrencyConversionUrlRequestCallback(getBaseContext(), currency), executor
+                            );
+                            UrlRequest request = requestBuilder.build();
+                            request.start();
+
+                            // Išsaugom user ID SharedPreferences
+                            SharedPreferences sharedPref = getBaseContext().getSharedPreferences("augalu_ratas.CURRENT_USER_KEY", Context.MODE_PRIVATE);
+                            SharedPreferences.Editor editor = sharedPref.edit();
+                            editor.putString("current_user_id", userId); // Naudojam Firestore ID
+                            editor.apply();
+
+                            Intent intent = new Intent(getBaseContext(), AddPost.class);
+                            startActivity(intent);
+                        })
+                        .addOnFailureListener(e -> {
+                            Log.e("FIRESTORE", "Klaida: " + e.getMessage(), e);
+                            Toast.makeText(getApplicationContext(), "Prisijungimo klaida: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                        });
+
             }
         });
         return_to_first_screen.setOnClickListener(new View.OnClickListener() {

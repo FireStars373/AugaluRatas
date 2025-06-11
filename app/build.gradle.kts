@@ -65,6 +65,7 @@ dependencies {
     implementation(libs.lifecycle.livedata.ktx)
     implementation(libs.lifecycle.viewmodel.ktx)
     implementation(libs.gridlayout)
+    implementation ("com.google.guava:guava:32.1.3-jre")
     val camerax_version = "1.3.0"
     implementation ("androidx.camera:camera-core:$camerax_version")
     implementation ("androidx.camera:camera-camera2:$camerax_version")
