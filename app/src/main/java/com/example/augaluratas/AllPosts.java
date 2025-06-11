@@ -171,7 +171,7 @@ public class AllPosts extends AppCompatActivity {
                 }
             });
             runOnUiThread(() -> {
-                PostAdapter postAdapter = new PostAdapter(posts, false, getBaseContext());
+                PostAdapter postAdapter = new PostAdapter(posts, false);
                 recyclerView.setAdapter(postAdapter);
 
                 TextView plant_count = findViewById(R.id.plant_count);

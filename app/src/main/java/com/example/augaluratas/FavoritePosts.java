@@ -92,7 +92,7 @@ public class FavoritePosts extends BaseActivity {
             List<Posts> posts = db.userPostLikesDAO().getAllUserLikes(current_id);
             //Applying search filter
             runOnUiThread(() -> {
-                PostAdapter postAdapter = new PostAdapter(posts, false, getBaseContext());
+                PostAdapter postAdapter = new PostAdapter(posts, false);
                 recyclerView.setAdapter(postAdapter);
             });
         });

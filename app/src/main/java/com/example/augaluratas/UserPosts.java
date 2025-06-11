@@ -30,7 +30,6 @@ import java.util.concurrent.Executors;
 
 public class UserPosts extends BaseActivity {
     private User_PostDatabase db;
-
     private ExecutorService executorService = Executors.newSingleThreadExecutor();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,7 +73,7 @@ public class UserPosts extends BaseActivity {
             // Gauti įrašus ir nustatyti adapterį
             List<Posts> posts = db.postsDAO().getPostsByUser(current_id);
             runOnUiThread(() -> {
-                PostAdapter postAdapter = new PostAdapter(posts, true, getBaseContext());
+                PostAdapter postAdapter = new PostAdapter(posts, true);
                 recyclerView.setAdapter(postAdapter);
             });
         });

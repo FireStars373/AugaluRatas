@@ -29,9 +29,12 @@ import java.util.Set;
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder>{
     private List<Posts> added_posts;
     boolean belongs_to_user;
+    Context context;
 
-    public CartAdapter(List<Posts> postList) {
+    public CartAdapter(List<Posts> postList, Context context)
+    {
         this.added_posts = postList;
+        this.context = context;
     }
 
     @NonNull
@@ -48,6 +51,11 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
         holder.plantName.setText(post.getPlantName());
         holder.price.setText(String.format("%.2f €", post.getPrice()));
 
+        SharedPreferences prefs = context.getSharedPreferences("cart", Context.MODE_PRIVATE);
+        Set<String> current = prefs.getStringSet("buying_items", new HashSet<>());
+        current.remove(Long.toString(post.getId()));
+        prefs.edit().putStringSet("buying_items", current).apply();
+
         // Konvertuoja byte[] į Bitmap
         Bitmap bitmap = BitmapFactory.decodeByteArray(post.getImage(), 0, post.getImage().length);
         holder.imageView.setImageBitmap(bitmap);
@@ -57,19 +65,17 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
             String a = this.getClass().getSimpleName();
             if (belongs_to_user){
                 Intent intent = new Intent(v.getContext(), UserPostOverlay.class);
-                intent.putExtra("POST_ID", post.getId()); // Įrašome post ID į Intent
+                intent.putExtra("POST_ID", post.getId());
                 v.getContext().startActivity(intent);
                 return;
             }
             Intent intent = new Intent(v.getContext(), PostDescription.class);
-            intent.putExtra("POST_ID", post.getId()); // Įrašome post ID į Intent
+            intent.putExtra("POST_ID", post.getId());
             v.getContext().startActivity(intent);
         });
         holder.addToCart.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                SharedPreferences prefs = buttonView.getContext().getSharedPreferences("cart", Context.MODE_PRIVATE);
-                Set<String> current = prefs.getStringSet("buying_items", new HashSet<>());
                 if (isChecked){
                     current.add(Long.toString(post.getId()));
                     prefs.edit().putStringSet("buying_items", current).apply();
@@ -81,63 +87,6 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
                 }
             }
         });
-//        if (holder.addToCart != null){
-//            holder.addToCart.setOnClickListener(v -> {
-//
-//                SharedPreferences prefs = v.getContext().getSharedPreferences("cart", Context.MODE_PRIVATE);
-//                Set<String> current = prefs.getStringSet("items", new HashSet<>());
-//                if (current.contains(Long.toString(post.getId()))){
-//                    Toast.makeText(v.getContext(), "Šis augalas jau jūsų krepšelyje", Toast.LENGTH_SHORT).show();
-//                    return;
-//                }
-//                current.add(Long.toString(post.getId()));
-//                prefs.edit().putStringSet("items", current).apply();
-//
-//                // Animate imageView to cart icon
-//                int[] originalPos = new int[2];
-//                holder.imageView.getLocationOnScreen(originalPos);
-//
-//                // Clone image
-//                ImageView clone = new ImageView(v.getContext());
-//                clone.setImageDrawable(holder.imageView.getDrawable());
-//
-//                FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(
-//                        holder.imageView.getWidth(), holder.imageView.getHeight());
-//                params.leftMargin = originalPos[0];
-//                params.topMargin = originalPos[1];
-//
-//                // Get activity context and root layout
-//                android.app.Activity activity = (android.app.Activity) v.getContext();
-//                FrameLayout rootLayout = (FrameLayout) activity.getWindow().getDecorView();
-//                rootLayout.addView(clone, params);
-//
-//                // Find cart icon position
-//                ImageView cartIcon = activity.findViewById(R.id.shopping_cart); // make sure it exists
-//                if (cartIcon == null) {
-//                    Log.e("PostAdapter", "Cart icon not found!");
-//                    return;
-//                }
-//
-//                int[] targetPos = new int[2];
-//                cartIcon.getLocationOnScreen(targetPos);
-//                targetPos[0] -= cartIcon.getWidth()/2;
-//                targetPos[1] -= cartIcon.getHeight()/2;
-//
-//                float deltaX = targetPos[0] - originalPos[0];
-//                float deltaY = targetPos[1] - originalPos[1];
-//
-//                clone.animate()
-//                        .translationX(deltaX)
-//                        .translationY(deltaY)
-//                        .scaleX(0.2f)
-//                        .scaleY(0.2f)
-//                        .alpha(0.0f)
-//                        .setDuration(1000)
-//                        .setInterpolator(new AccelerateDecelerateInterpolator())
-//                        .withEndAction(() -> rootLayout.removeView(clone))
-//                        .start();
-//            });
-//        }
 
     }
 

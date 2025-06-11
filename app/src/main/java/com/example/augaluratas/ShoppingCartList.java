@@ -70,7 +70,12 @@ public class ShoppingCartList extends BaseActivity {
         shopping_cart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //recyclerView.setEnabled(false);
+                SharedPreferences prefs = getBaseContext().getSharedPreferences("cart", Context.MODE_PRIVATE);
+                Set<String> buying = prefs.getStringSet("buying_items", new HashSet<>());
+                if(buying.isEmpty()){
+                    Toast.makeText(getBaseContext(), "Nepasirinktos prekes", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 Intent intent = new Intent(getBaseContext(), ShoppingCart.class);
                 startActivity(intent);
             }
@@ -95,7 +100,7 @@ public class ShoppingCartList extends BaseActivity {
 
             //List<Posts> posts = db.postsDAO().getPostsWithoutUser(current_id);
             runOnUiThread(() -> {
-                CartAdapter cartAdapter = new CartAdapter(posts);
+                CartAdapter cartAdapter = new CartAdapter(posts, getBaseContext());
                 PostAdapter postAdapter = new PostAdapter(posts);
                 recyclerView.setAdapter(cartAdapter);
             });
