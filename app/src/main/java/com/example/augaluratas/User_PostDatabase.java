@@ -6,11 +6,12 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
-@Database(entities = {Posts.class, Users.class}, version = 1, exportSchema = false)
+@Database(entities = {Posts.class, Users.class, UserPostLikes.class}, version = 1, exportSchema = false)
 public abstract class User_PostDatabase extends RoomDatabase {
 
     public abstract PostsDAO postsDAO();
-    public abstract UsersDAO usersDAO();  // Pridėkite UsersDAO
+    public abstract UsersDAO usersDAO();
+    public abstract UserPostLikesDAO userPostLikesDAO();
 
     private static volatile User_PostDatabase INSTANCE;
 

@@ -7,6 +7,8 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -42,6 +44,7 @@ public class PostDescription extends BaseActivity {
         TextView price = findViewById(R.id.post_description_price);
 
         Button add_to_cart = findViewById(R.id.add_to_cart_from_desc);
+        CheckBox favorite = findViewById(R.id.favorite_toggle);
 
         db = AppActivity.getUser_PostDatabase();
         long id = getIntent().getLongExtra("POST_ID", -1);
@@ -71,15 +74,38 @@ public class PostDescription extends BaseActivity {
                 title.setText(post.getPlantName());
                 description.setText(post.getDescription());
                 price.setText(String.format("%.2f €", post.getPrice()));
+
+                SharedPreferences sharedPref = getBaseContext().getSharedPreferences("augalu_ratas.CURRENT_USER_KEY", Context.MODE_PRIVATE);
+                Long current_id = sharedPref.getLong("current_user_id", 0);
+
+                UserPostLikes like = db.userPostLikesDAO().getSpecificLike(current_id, id);
+                if (like == null){
+                    favorite.setChecked(false);
+                }
+                else{
+                    favorite.setChecked(true);
+                }
+                favorite.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+                        UserPostLikes like = db.userPostLikesDAO().getSpecificLike(current_id, id);
+                        if (like == null && isChecked){
+                            UserPostLikes new_like = new UserPostLikes(current_id, id);
+                            db.userPostLikesDAO().insert(new_like);
+                        } else if (like != null && !isChecked) {
+                            db.userPostLikesDAO().delete(like);
+                        }
+                    }
+                });
             }
             sidebar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-//                    Intent intent = new Intent(getBaseContext(), AllPosts.class);
-//                    startActivity(intent);
                     finish();
                 }
             });
+
         }
     }
 }
