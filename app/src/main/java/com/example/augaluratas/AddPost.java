@@ -36,7 +36,14 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.google.common.util.concurrent.ListenableFuture;
+import com.google.firebase.firestore.FieldValue;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 import java.util.concurrent.ExecutionException;
 
 public class AddPost extends AppCompatActivity {
@@ -54,8 +61,10 @@ public class AddPost extends AppCompatActivity {
     private ImageButton    sidebarBtn;
     private Button         uploadBtn;
     private EditText       titleEt, descEt, priceEt;
-    private User_PostDatabase database;
     private View[]         uiElements;
+
+    private FirebaseFirestore db;
+    private FirebaseStorage   storage;
 
     private TextView title;
 
@@ -99,7 +108,9 @@ public class AddPost extends AppCompatActivity {
 
         MediaPlayer errSound = MediaPlayer.create(this, R.raw.bad_info);
         MediaPlayer okSound  = MediaPlayer.create(this, R.raw.succesful);
-
+        // Firebase init
+        db      = FirebaseFirestore.getInstance();
+        storage = FirebaseStorage.getInstance();
         // 1) gallery
         selectPhotoView.setOnClickListener(v -> {
             Intent pick = new Intent(Intent.ACTION_PICK,
@@ -132,7 +143,7 @@ public class AddPost extends AppCompatActivity {
         });
 
         // 5) upload
-        uploadBtn.setOnClickListener(v -> handleUpload(errSound, okSound));
+        uploadBtn.setOnClickListener(v -> handleUpload());
     }
 
     private void enterCameraMode() {
@@ -230,35 +241,69 @@ public class AddPost extends AppCompatActivity {
     }
 
     // upload logic
-    private void handleUpload(MediaPlayer errSound, MediaPlayer okSound) {
+    private void handleUpload() {
         String title = titleEt.getText().toString().trim();
-        String desc  = descEt .getText().toString().trim();
-        String price= priceEt.getText().toString().trim();
-        if (title.isEmpty()||desc.isEmpty()||price.isEmpty()) {
-            shakeButton(uploadBtn);
-            errSound.start();
-            Toast.makeText(this, "Laukai negali būti tušti",
-                    Toast.LENGTH_SHORT).show();
+        String desc  = descEt.getText().toString().trim();
+        String price = priceEt.getText().toString().trim();
+
+        if (title.isEmpty() || desc.isEmpty() || price.isEmpty()) {
+            Toast.makeText(this, "Laukai negali būti tušti", Toast.LENGTH_SHORT).show();
             return;
         }
-        if (selectedImageBitmap==null) {
-            shakeButton(uploadBtn);
-            errSound.start();
-            Toast.makeText(this, "Pasirinkite nuotrauką",
-                    Toast.LENGTH_SHORT).show();
+        if (selectedImageBitmap == null) {
+            Toast.makeText(this, "Pasirinkite nuotrauką", Toast.LENGTH_SHORT).show();
             return;
         }
+
+        // Gauname current user ID iš SharedPreferences
         SharedPreferences prefs = getSharedPreferences(
                 "augalu_ratas.CURRENT_USER_KEY", Context.MODE_PRIVATE
         );
-        long uid = prefs.getLong("current_user_id",0);
+        String userId = prefs.getString("current_user_id", null);
+        if (userId == null) {
+            Toast.makeText(this, "Vartotojas neprisijungęs", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        // 1) Pirmiausia įkelti paveikslėlį į Storage
         byte[] imgBytes = ImageUtils.bitmapToByteArray(selectedImageBitmap);
-        Posts post = new Posts(uid, title, desc, imgBytes,
-                Double.parseDouble(price));
-        database = AppActivity.getUser_PostDatabase();
-        database.postsDAO().insert(post);
-        okSound.start();
-        startActivity(new Intent(this, UserPosts.class));
+        String filename = UUID.randomUUID().toString() + ".jpg";
+        StorageReference imgRef = storage.getReference()
+                .child("post_images")
+                .child(filename);
+
+        imgRef.putBytes(imgBytes)
+                .continueWithTask(task -> {
+                    if (!task.isSuccessful()) throw task.getException();
+                    return imgRef.getDownloadUrl();
+                })
+                .addOnSuccessListener(uri -> {
+                    String downloadUrl = uri.toString();
+
+                    // 2) Įrašome dokumentą į Firestore
+                    Map<String, Object> postMap = new HashMap<>();
+                    postMap.put("userId",     userId);
+                    postMap.put("title",      title);
+                    postMap.put("description", desc);
+                    postMap.put("price",      Double.parseDouble(price));
+                    postMap.put("imageUrl",   downloadUrl);
+                    postMap.put("timestamp",  FieldValue.serverTimestamp());
+
+                    db.collection("posts")
+                            .add(postMap)
+                            .addOnSuccessListener(ref -> {
+                                Toast.makeText(this, "Įkelta sėkmingai!", Toast.LENGTH_SHORT).show();
+                                // Pereiname į savo vartotojo įrašų sąrašą
+                                startActivity(new Intent(this, UserPosts.class));
+                                finish();
+                            })
+                            .addOnFailureListener(e -> {
+                                Toast.makeText(this, "Klaida įrašant įrašą", Toast.LENGTH_SHORT).show();
+                            });
+                })
+                .addOnFailureListener(e -> {
+                    Toast.makeText(this, "Klaida įkeliant nuotrauką", Toast.LENGTH_SHORT).show();
+                });
     }
 
     private void shakeButton(View btn) {
