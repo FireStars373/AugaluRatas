@@ -42,12 +42,15 @@ import java.util.concurrent.Executors;
 import android.content.Intent;
 import android.widget.Toast;
 
+import com.google.firebase.firestore.FirebaseFirestore;
+
 public class AllPlants extends BaseActivity {
     private LinearLayout plantsContainer;
     private PlantsDatabase database;
     private ExecutorService executorService = Executors.newSingleThreadExecutor();
     private SearchView searchbar;
     private NestedScrollView scrollView;
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -384,6 +387,7 @@ public class AllPlants extends BaseActivity {
     }
     private void loadPlants() {
         executorService.execute(() -> {
+
             // Užklausa į duomenų bazę
             List<Plants> plantList = database.plantsDAO().getAllPlants();
             if (plantList == null || plantList.isEmpty()) return;

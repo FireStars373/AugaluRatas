@@ -21,6 +21,8 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -126,21 +128,30 @@ public class Register extends BaseActivity {
                                     set.start();
                                     return;
                                 }
+                                FirebaseAuth auth = FirebaseAuth.getInstance();
+                                auth.createUserWithEmailAndPassword(Email, Password)
+                                        .addOnCompleteListener(taskk -> {
+                                            if (taskk.isSuccessful()) {
+                                                FirebaseUser currentUser = auth.getCurrentUser();
+                                                String userId = currentUser.getUid();
 
-                                // 3. Viskas ok – registruojame naują vartotoją
-                                Map<String, Object> user = new HashMap<>();
-                                user.put("currency", "eur");
-                                user.put("email", Email);
-                                user.put("password", Password);
-                                user.put("phoneNumber", Number);
-                                user.put("subscribed", false);
-                                user.put("username", Name);
+                                                Map<String, Object> user = new HashMap<>();
+                                                user.put("currency", "eur");
+                                                user.put("email", Email);
+                                                user.put("phoneNumber", Number);
+                                                user.put("subscribed", false);
+                                                user.put("username", Name);
 
-                                db.collection("users")
-                                        .add(user)
-                                        .addOnSuccessListener(documentReference -> {
-                                            Intent intent = new Intent(getBaseContext(), Login.class);
-                                            startActivity(intent);
+                                                db.collection("users")
+                                                        .document(userId)
+                                                        .set(user)
+                                                        .addOnSuccessListener(unused -> {
+                                                            Intent intent = new Intent(getBaseContext(), Login.class);
+                                                            startActivity(intent);
+                                                        });
+                                            } else {
+                                                Toast.makeText(getApplicationContext(), "Registracijos klaida: " + taskk.getException().getMessage(), Toast.LENGTH_LONG).show();
+                                            }
                                         });
 
                             } else {

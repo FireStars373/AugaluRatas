@@ -21,6 +21,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -32,185 +33,115 @@ import java.util.Locale;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
-public class Login extends BaseActivity {
+public class Login extends BaseActivity {    @Override
+protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    EdgeToEdge.enable(this);
+    setContentView(R.layout.activity_login);
 
+    ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.contstraint_layout), (v, insets) -> {
+        Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+        v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+        return insets;
+    });
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_login);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.contstraint_layout), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
-        Button login = findViewById(R.id.login);
-        Button return_to_first_screen = findViewById(R.id.return_to_first_screen_from_login);
-        TextView forgotten_password = findViewById(R.id.to_forgotten_password);
-        EditText name = findViewById(R.id.login_name);
-        EditText password = findViewById(R.id.login_password);
-        MediaPlayer mp = MediaPlayer.create(this, R.raw.bad_info);
-        mp.setVolume(0.8f,0.8f);
-        User_PostDatabase usersDatabase = AppActivity.getUser_PostDatabase();
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
+    Button login = findViewById(R.id.login);
+    Button return_to_first_screen = findViewById(R.id.return_to_first_screen_from_login);
+    TextView forgotten_password = findViewById(R.id.to_forgotten_password);
+    EditText name = findViewById(R.id.login_name);
+    EditText password = findViewById(R.id.login_password);
+    MediaPlayer mp = MediaPlayer.create(this, R.raw.bad_info);
+    mp.setVolume(0.8f, 0.8f);
 
-        login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String Name = name.getText().toString().trim();
-                String Password = password.getText().toString().trim();
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-                ObjectAnimator animator = ObjectAnimator.ofFloat(login, "translationX",  0f, 25f, -25f, 15f, -15f, 5f, -5f, 0f);
-                animator.setDuration(600);
+    login.setOnClickListener(v -> {
+        String Name = name.getText().toString().trim();
+        String Password = password.getText().toString().trim();
 
-                AnimatorSet set = new AnimatorSet();
-                set.playSequentially(animator);
-/*
-                if (Name.isEmpty()){
-                    login.setSoundEffectsEnabled(false);
-                    Toast.makeText(getApplicationContext(), "Neįrašytas vardas", Toast.LENGTH_SHORT).show();
+        ObjectAnimator animator = ObjectAnimator.ofFloat(login, "translationX", 0f, 25f, -25f, 15f, -15f, 5f, -5f, 0f);
+        animator.setDuration(600);
+        AnimatorSet set = new AnimatorSet();
+        set.playSequentially(animator);
 
-                    set.start();
-
-                    mp.start();
-
-                    return;
-                }
-                if (Password.isEmpty()){
-                    login.setSoundEffectsEnabled(false);
-                    Toast.makeText(getApplicationContext(), "Neįrašytas slaptažodis", Toast.LENGTH_SHORT).show();
-
-                    set.start();
-
-                    mp.start();
-
-                    return;
-                }
-                Users user = usersDatabase.usersDAO().getUserByUsername(Name);
-                if(user == null || !user.getPassword().equals(Password)){
-                    login.setSoundEffectsEnabled(false);
-                    Toast.makeText(getApplicationContext(), "Vartotojo vardas arba slaptažodis neteisingas", Toast.LENGTH_SHORT).show();
-
-                    set.start();
-
-                    mp.start();
-
-                    return;
-                }
-
-                String currency = user.getCurrency();
-
-                //If currency code isn't saved, gets it from sim card location. USD by default
-                if (currency == null){
-                    TelephonyManager tm = (TelephonyManager) getBaseContext().getSystemService(Context.TELEPHONY_SERVICE);
-                    String country = tm.getSimCountryIso().toUpperCase();
-                    if (country.isEmpty()){
-                        currency = "USD";
+        // Ieškom vartotojo pagal username, kad gautume jo email
+        db.collection("users")
+                .whereEqualTo("username", Name)
+                .get()
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    if (queryDocumentSnapshots.isEmpty()) {
+                        Toast.makeText(getApplicationContext(), "Vartotojo vardas arba slaptažodis neteisingas", Toast.LENGTH_SHORT).show();
+                        set.start();
+                        mp.start();
+                        return;
                     }
-                    else{
-                        currency = Currency.getInstance(new Locale("", country)).getCurrencyCode();
+
+                    DocumentSnapshot document = queryDocumentSnapshots.getDocuments().get(0);
+                    String email = document.getString("email");
+
+                    if (email == null || email.isEmpty()) {
+                        Toast.makeText(getApplicationContext(), "Nepavyko rasti el. pašto", Toast.LENGTH_SHORT).show();
+                        set.start();
+                        mp.start();
+                        return;
                     }
-                    user.setCurrency(currency);
-                    AppActivity.getUser_PostDatabase().usersDAO().Update(user);
-                }
-                //If conversion rate isn't saved, calls API to find it. 1.0 by default
-                CronetEngine.Builder myBuilder = new CronetEngine.Builder(getBaseContext());
-                CronetEngine cronetEngine = myBuilder.build();
 
-                Executor executor = Executors.newSingleThreadExecutor();
+                    // Prisijungiame per Firebase Authentication
+                    FirebaseAuth.getInstance().signInWithEmailAndPassword(email, Password)
+                            .addOnSuccessListener(authResult -> {
+                                String userId = document.getId();
 
-                UrlRequest.Builder requestBuilder = cronetEngine.newUrlRequestBuilder(
-                        "https://v6.exchangerate-api.com/v6/2d01d5f6b910d11e87a610cb/latest/EUR", new CurrencyConversionUrlRequestCallback(getBaseContext(), currency), executor);
-
-                UrlRequest request = requestBuilder.build();
-                request.start();
-
-                SharedPreferences sharedPref = getBaseContext().getSharedPreferences("augalu_ratas.CURRENT_USER_KEY", Context.MODE_PRIVATE);
-                SharedPreferences.Editor editor = sharedPref.edit();
-                editor.putLong("current_user_id", user.getId());
-                editor.apply();
-                Intent intent = new Intent(getBaseContext(), MainPage.class);
-                startActivity(intent);*/
-                db.collection("users")
-                        .whereEqualTo("username", Name)
-                        .get()
-                        .addOnSuccessListener(queryDocumentSnapshots -> {
-                            if (queryDocumentSnapshots.isEmpty()) {
-                                // Vartotojas nerastas
-                                Toast.makeText(getApplicationContext(), "Vartotojo vardas arba slaptažodis neteisingas", Toast.LENGTH_SHORT).show();
-                                set.start();
-                                mp.start();
-                                return;
-                            }
-
-                            DocumentSnapshot document = queryDocumentSnapshots.getDocuments().get(0);
-                            String passwordInDb = document.getString("password");
-
-                            if (!Password.equals(passwordInDb)) {
-                                Toast.makeText(getApplicationContext(), "Vartotojo vardas arba slaptažodis neteisingas", Toast.LENGTH_SHORT).show();
-                                set.start();
-                                mp.start();
-                                return;
-                            }
-
-                            // Prisijungimas sėkmingas
-                            String userId = document.getId(); // Firestore doc ID
-
-                            // Gauti valiutą, arba apskaičiuoti
-                            String currency = document.getString("currency");
-                            if (currency == null || currency.isEmpty()) {
-                                TelephonyManager tm = (TelephonyManager) getBaseContext().getSystemService(Context.TELEPHONY_SERVICE);
-                                String country = tm.getSimCountryIso().toUpperCase();
-                                if (country.isEmpty()) {
-                                    currency = "USD";
-                                } else {
-                                    currency = Currency.getInstance(new Locale("", country)).getCurrencyCode();
+                                // Gauti valiutą arba apskaičiuoti
+                                String currency = document.getString("currency");
+                                if (currency == null || currency.isEmpty()) {
+                                    TelephonyManager tm = (TelephonyManager) getBaseContext().getSystemService(Context.TELEPHONY_SERVICE);
+                                    String country = tm.getSimCountryIso().toUpperCase();
+                                    if (country.isEmpty()) {
+                                        currency = "USD";
+                                    } else {
+                                        currency = Currency.getInstance(new Locale("", country)).getCurrencyCode();
+                                    }
+                                    db.collection("users").document(userId).update("currency", currency);
                                 }
 
-                                // Atnaujinti Firestore dokumentą
-                                db.collection("users").document(userId).update("currency", currency);
-                            }
+                                // Paleidžiam valiutos keitimo užklausą
+                                CronetEngine.Builder myBuilder = new CronetEngine.Builder(getBaseContext());
+                                CronetEngine cronetEngine = myBuilder.build();
+                                Executor executor = Executors.newSingleThreadExecutor();
+                                UrlRequest.Builder requestBuilder = cronetEngine.newUrlRequestBuilder(
+                                        "https://v6.exchangerate-api.com/v6/2d01d5f6b910d11e87a610cb/latest/EUR",
+                                        new CurrencyConversionUrlRequestCallback(getBaseContext(), currency), executor
+                                );
+                                UrlRequest request = requestBuilder.build();
+                                request.start();
 
-                            // Paleidžiam valiutos keitimo užklausą
-                            CronetEngine.Builder myBuilder = new CronetEngine.Builder(getBaseContext());
-                            CronetEngine cronetEngine = myBuilder.build();
-                            Executor executor = Executors.newSingleThreadExecutor();
-                            UrlRequest.Builder requestBuilder = cronetEngine.newUrlRequestBuilder(
-                                    "https://v6.exchangerate-api.com/v6/2d01d5f6b910d11e87a610cb/latest/EUR",
-                                    new CurrencyConversionUrlRequestCallback(getBaseContext(), currency), executor
-                            );
-                            UrlRequest request = requestBuilder.build();
-                            request.start();
+                                // Išsaugom user ID
+                                SharedPreferences sharedPref = getBaseContext().getSharedPreferences("augalu_ratas.CURRENT_USER_KEY", Context.MODE_PRIVATE);
+                                SharedPreferences.Editor editor = sharedPref.edit();
+                                editor.putString("current_user_id", userId);
+                                editor.apply();
 
-                            // Išsaugom user ID SharedPreferences
-                            SharedPreferences sharedPref = getBaseContext().getSharedPreferences("augalu_ratas.CURRENT_USER_KEY", Context.MODE_PRIVATE);
-                            SharedPreferences.Editor editor = sharedPref.edit();
-                            editor.putString("current_user_id", userId); // Naudojam Firestore ID
-                            editor.apply();
+                                Intent intent = new Intent(getBaseContext(), MainPage.class);
+                                startActivity(intent);
+                            })
+                            .addOnFailureListener(e -> {
+                                Toast.makeText(getApplicationContext(), "Vartotojo vardas arba slaptažodis neteisingas", Toast.LENGTH_SHORT).show();
+                                set.start();
+                                mp.start();
+                            });
 
-                            Intent intent = new Intent(getBaseContext(), AddPost.class);
-                            startActivity(intent);
-                        })
-                        .addOnFailureListener(e -> {
-                            Log.e("FIRESTORE", "Klaida: " + e.getMessage(), e);
-                            Toast.makeText(getApplicationContext(), "Prisijungimo klaida: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                        });
+                })
+                .addOnFailureListener(e -> {
+                    Log.e("FIRESTORE", "Klaida: " + e.getMessage(), e);
+                    Toast.makeText(getApplicationContext(), "Prisijungimo klaida: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                });
+    });
 
-            }
-        });
-        return_to_first_screen.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
-        forgotten_password.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getBaseContext(), ForgottenPassword.class);
-                startActivity(intent);
-            }
-        });
-    }
+    return_to_first_screen.setOnClickListener(v -> finish());
+
+    forgotten_password.setOnClickListener(v -> {
+        Intent intent = new Intent(getBaseContext(), ForgottenPassword.class);
+        startActivity(intent);
+    });
+}
 }

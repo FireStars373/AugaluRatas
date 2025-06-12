@@ -35,6 +35,10 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
+
 import org.chromium.net.CronetEngine;
 import org.chromium.net.UrlRequest;
 
@@ -65,9 +69,17 @@ public class MainPage extends BaseActivity {
 
 
         SharedPreferences sharedPref = getBaseContext().getSharedPreferences("augalu_ratas.CURRENT_USER_KEY", Context.MODE_PRIVATE);
-        Long current_id = sharedPref.getLong("current_user_id", 0);
-        Users user = AppActivity.getUser_PostDatabase().usersDAO().getUserById(current_id);
-        username.setText(user.getUsername());
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+       /* if (currentUser != null) {
+            String userId = currentUser.getUid();
+
+            db.collection("users").document(userId).get()
+                    .addOnSuccessListener(documentSnapshot -> {
+                        String DBusername = documentSnapshot.getString("username");
+                        username.setText(DBusername);
+                    });
+        }*/
         NewsDao newsDao = AppActivity.getNewsDatabase().newsDao();
         //Deleting example data
         //newsDao.deleteAll();
