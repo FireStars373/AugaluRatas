@@ -7,6 +7,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.telephony.TelephonyManager;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.AdapterView;
@@ -74,6 +75,22 @@ public class UserData extends BaseActivity {
         User_PostDatabase database = AppActivity.getUser_PostDatabase();
         Users user = database.usersDAO().getUserById(current_id);
         UserSettings settings = database.userSettingsDAO().getByUserId(current_id);
+
+        if (user != null) {
+            String currency = settings.getCurrency();
+            if (currency == null) {
+                TelephonyManager tm = (TelephonyManager) getBaseContext().getSystemService(Context.TELEPHONY_SERVICE);
+                String country = tm.getSimCountryIso().toUpperCase();
+                if (country.isEmpty()) {
+                    currency = "USD";
+                } else {
+                    currency = Currency.getInstance(new Locale("", country)).getCurrencyCode();
+                }
+                settings.setCurrency(currency);
+                database.userSettingsDAO().Update(settings);
+                AppActivity.getUser_PostDatabase().usersDAO().Update(user);
+            }
+        }
 
         name.setText(user.getUsername());
         email.setText(user.getEmail());

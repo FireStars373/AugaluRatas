@@ -113,7 +113,7 @@ public class AddPost extends AppCompatActivity {
         // Firebase init
         db      = FirebaseFirestore.getInstance();
         storage = FirebaseStorage.getInstance();
-        // 1) gallery
+
         selectPhotoView.setOnClickListener(v -> {
             Intent pick = new Intent(Intent.ACTION_PICK,
                     MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
@@ -121,7 +121,6 @@ public class AddPost extends AppCompatActivity {
             startActivityForResult(pick, PICK_IMAGE_REQUEST);
         });
 
-        // 2) take photo -> request permission then enter camera mode
         takePhotoBtn.setOnClickListener(v -> {
             if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
                     != PackageManager.PERMISSION_GRANTED) {
@@ -135,21 +134,17 @@ public class AddPost extends AppCompatActivity {
             }
         });
 
-        // 3) capture button
         cameraCaptureBtn.setOnClickListener(v -> takePhoto());
 
-        // 4) sidebar nav
         sidebarBtn.setOnClickListener(v -> {
             startActivity(new Intent(this, MeniuOverlay.class));
             overridePendingTransition(R.anim.slide_out_left, 0);
         });
 
-        // 5) upload
         uploadBtn.setOnClickListener(v -> handleUpload());
     }
 
     private void enterCameraMode() {
-        // hide all other UI
         for (View el : uiElements) el.setVisibility(View.GONE);
         previewView.setVisibility(View.VISIBLE);
         cameraCaptureBtn.setVisibility(View.VISIBLE);
@@ -157,7 +152,6 @@ public class AddPost extends AppCompatActivity {
     }
 
     private void exitCameraMode() {
-        // restore UI
         for (View el : uiElements) el.setVisibility(View.VISIBLE);
         previewView.setVisibility(View.GONE);
         cameraCaptureBtn.setVisibility(View.GONE);
@@ -209,7 +203,6 @@ public class AddPost extends AppCompatActivity {
         );
     }
 
-    // handle gallery result
     @Override
     protected void onActivityResult(int req, int res, Intent data) {
         super.onActivityResult(req, res, data);
@@ -227,7 +220,6 @@ public class AddPost extends AppCompatActivity {
         }
     }
 
-    // handle camera permission response
     @Override
     public void onRequestPermissionsResult(int code,
                                            @NonNull String[] perms, @NonNull int[] grants) {
@@ -242,7 +234,6 @@ public class AddPost extends AppCompatActivity {
         }
     }
 
-    // upload logic
     private void handleUpload() {
         String title = titleEt.getText().toString().trim();
         String desc  = descEt.getText().toString().trim();
@@ -268,7 +259,6 @@ public class AddPost extends AppCompatActivity {
             return;
         }
 
-        // 1) Pirmiausia įkelti paveikslėlį į Storage
         byte[] imgBytes = ImageUtils.bitmapToByteArray(selectedImageBitmap);
         String filename = UUID.randomUUID().toString() + ".jpg";
         StorageReference imgRef = storage.getReference()
@@ -283,7 +273,6 @@ public class AddPost extends AppCompatActivity {
                 .addOnSuccessListener(uri -> {
                     String downloadUrl = uri.toString();
 
-                    // 2) Įrašome dokumentą į Firestore
                     Map<String, Object> postMap = new HashMap<>();
                     postMap.put("userId",     userId);
                     postMap.put("title",      title);
