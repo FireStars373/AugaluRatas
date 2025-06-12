@@ -96,40 +96,10 @@ protected void onCreate(Bundle savedInstanceState) {
                         usersDatabase.userSettingsDAO().insert(settings);
                     }
 
-                    String currency = settings.getCurrency();
-
-                    //If currency code isn't saved, gets it from sim card location. USD by default
-                    if (currency == null){
-                        TelephonyManager tm = (TelephonyManager) getBaseContext().getSystemService(Context.TELEPHONY_SERVICE);
-                        String country = tm.getSimCountryIso().toUpperCase();
-                        if (country.isEmpty()){
-                            currency = "USD";
-                        }
-                        else{
-                            currency = Currency.getInstance(new Locale("", country)).getCurrencyCode();
-                        }
-                        settings.setCurrency(currency);
-                        usersDatabase.userSettingsDAO().Update(settings);
-                        AppActivity.getUser_PostDatabase().usersDAO().Update(user);
-                    }
-                    //If conversion rate isn't saved, calls API to find it. 1.0 by default
-                    CronetEngine.Builder myBuilder = new CronetEngine.Builder(getBaseContext());
-                    CronetEngine cronetEngine = myBuilder.build();
-
-                    Executor executor = Executors.newSingleThreadExecutor();
-
-                    UrlRequest.Builder requestBuilder = cronetEngine.newUrlRequestBuilder(
-                            "https://v6.exchangerate-api.com/v6/2d01d5f6b910d11e87a610cb/latest/EUR", new CurrencyConversionUrlRequestCallback(getBaseContext(), currency), executor);
-
-                    UrlRequest request = requestBuilder.build();
-                    request.start();
-
                     SharedPreferences sharedPref = getBaseContext().getSharedPreferences("augalu_ratas.CURRENT_USER_KEY", Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor = sharedPref.edit();
                     editor.putLong("current_user_id", user.getId());
                     editor.apply();
-
-
 
 
                     // Prisijungiame per Firebase Authentication
@@ -162,10 +132,10 @@ protected void onCreate(Bundle savedInstanceState) {
                                 request.start();
 
                                 // Išsaugom user ID
-                                SharedPreferences sharedPref = getBaseContext().getSharedPreferences("augalu_ratas.CURRENT_USER_KEY", Context.MODE_PRIVATE);
+                                /*SharedPreferences sharedPref = getBaseContext().getSharedPreferences("augalu_ratas.CURRENT_USER_KEY", Context.MODE_PRIVATE);
                                 SharedPreferences.Editor editor = sharedPref.edit();
                                 editor.putString("current_user_id", userId);
-                                editor.apply();
+                                editor.apply();*/
 
                                 Intent intent = new Intent(getBaseContext(), MainPage.class);
                                 startActivity(intent);
