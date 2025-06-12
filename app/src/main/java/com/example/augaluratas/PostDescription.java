@@ -52,15 +52,15 @@ public class PostDescription extends BaseActivity {
         add_to_cart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SharedPreferences prefs = v.getContext().getSharedPreferences("cart", Context.MODE_PRIVATE);
-                Set<String> current = prefs.getStringSet("items", new HashSet<>());
-                if (current.contains(Long.toString(id))){
+                SharedPreferences sharedPref = getBaseContext().getSharedPreferences("augalu_ratas.CURRENT_USER_KEY", Context.MODE_PRIVATE);
+                Long current_id = sharedPref.getLong("current_user_id", 0);
+                if (db.userShoppingCartDAO().getSpecificItem(current_id, id)!=null){
                     Toast.makeText(v.getContext(), "Šis augalas jau jūsų krepšelyje", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 Toast.makeText(v.getContext(), "Augalas sėkmingai pridėtas!", Toast.LENGTH_SHORT).show();
-                current.add(Long.toString(id));
-                prefs.edit().putStringSet("items", current).apply();
+                UserShoppingCart cart = new UserShoppingCart(current_id, id);
+                db.userShoppingCartDAO().insert(cart);
             }
         });
 
