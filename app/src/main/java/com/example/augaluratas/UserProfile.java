@@ -27,6 +27,7 @@ import androidx.core.view.WindowInsetsCompat;
 import java.io.ByteArrayOutputStream;
 
 public class UserProfile extends BaseActivity {
+    private ImageView user_photo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +41,7 @@ public class UserProfile extends BaseActivity {
         });
 
         ImageButton return_button = findViewById(R.id.return_from_user_profile);
-        ImageView user_photo = findViewById(R.id.user_image);
+        user_photo = findViewById(R.id.user_image);
         Button favorite_posts = findViewById(R.id.favorite_posts);
         Button user_posts = findViewById(R.id.user_profile_user_posts);
         Button settings = findViewById(R.id.user_profile_settings);
@@ -107,5 +108,22 @@ public class UserProfile extends BaseActivity {
                 startActivity(intent);
             }
         });
+    }
+    @Override
+    public void onResume(){
+        super.onResume();
+        SharedPreferences sharedPref = getBaseContext().getSharedPreferences("augalu_ratas.CURRENT_USER_KEY", Context.MODE_PRIVATE);
+        Long current_id= sharedPref.getLong("current_user_id", 0);
+        User_PostDatabase database = AppActivity.getUser_PostDatabase();
+        Users user = database.usersDAO().getUserById(current_id);
+        if(user.getImage() == null){
+            user_photo.setImageResource(R.drawable.user_icon);
+            user_photo.setColorFilter(ContextCompat.getColor(this, R.color.lotus_green), PorterDuff.Mode.SRC_IN);
+        }
+        else{
+            Bitmap bitmap = BitmapFactory.decodeByteArray(user.getImage(), 0, user.getImage().length);
+            user_photo.setImageBitmap(bitmap);
+            user_photo.clearColorFilter();
+        }
     }
 }
