@@ -14,6 +14,10 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
+
 public class Subscription extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,10 +54,15 @@ public class Subscription extends BaseActivity {
         subscribe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                settings.setSubscribed(true);
-                database.userSettingsDAO().Update(settings);
-                Intent intent = new Intent(getBaseContext(), SubscriptionSuccess.class);
-                startActivity(intent);
+                FirebaseFirestore dbb = FirebaseFirestore.getInstance();
+                FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+                dbb.collection("users").document(currentUser.getUid()).get().addOnCompleteListener(task -> {
+                    dbb.collection("users").document(currentUser.getUid()).update("subscribed", true);
+                    settings.setSubscribed(true);
+                    database.userSettingsDAO().Update(settings);
+                    Intent intent = new Intent(getBaseContext(), SubscriptionSuccess.class);
+                    startActivity(intent);
+                });
             }
         });
     }

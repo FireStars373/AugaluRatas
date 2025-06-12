@@ -25,15 +25,25 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+
 import org.chromium.net.CronetEngine;
 import org.chromium.net.UrlRequest;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Currency;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
@@ -223,6 +233,45 @@ public class UserData extends BaseActivity {
                 }
                 database.usersDAO().Update(user);
                 Toast.makeText(getApplicationContext(), "Duomenys sėkmingai pakeisti!", Toast.LENGTH_SHORT).show();
+                FirebaseFirestore firestore = FirebaseFirestore.getInstance();
+                FirebaseAuth auth = FirebaseAuth.getInstance();
+                String uid = auth.getCurrentUser().getUid();
+
+                DocumentReference userRef = firestore.collection("users").document(uid);
+
+                Map<String, Object> userData = new HashMap<>();
+                userData.put("username", Name);
+                userData.put("email", Email);
+                userData.put("phoneNumber", Number);
+                userData.put("currency", new_currency);
+
+                if (selectedImageBitmap != null) {
+                    // Įkelti paveikslėlį į Firebase Storage
+                    StorageReference storageRef = FirebaseStorage.getInstance().getReference("users/" + uid + "/profile.jpg");
+                    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                    selectedImageBitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                    byte[] imageData = baos.toByteArray();
+
+                    UploadTask uploadTask = storageRef.putBytes(imageData);
+                    uploadTask.addOnSuccessListener(taskSnapshot -> {
+                        storageRef.getDownloadUrl().addOnSuccessListener(uri -> {
+                            userData.put("imageUrl", uri.toString());
+                            userRef.update(userData).addOnSuccessListener(aVoid -> {
+                                Toast.makeText(getApplicationContext(), "Duomenys sėkmingai pakeisti!", Toast.LENGTH_SHORT).show();
+                            }).addOnFailureListener(e -> {
+                                Toast.makeText(getApplicationContext(), "Firestore klaida: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                            });
+                        });
+                    }).addOnFailureListener(e -> {
+                        Toast.makeText(getApplicationContext(), "Nepavyko įkelti nuotraukos: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    });
+                } else {
+                    userRef.update(userData).addOnSuccessListener(aVoid -> {
+                        Toast.makeText(getApplicationContext(), "Duomenys sėkmingai pakeisti!", Toast.LENGTH_SHORT).show();
+                    }).addOnFailureListener(e -> {
+                        Toast.makeText(getApplicationContext(), "Firestore klaida: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                    });
+                }
             }
         });
     }

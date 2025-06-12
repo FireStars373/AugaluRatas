@@ -24,6 +24,10 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
+
 import java.io.ByteArrayOutputStream;
 
 public class UserProfile extends BaseActivity {
@@ -100,6 +104,15 @@ public class UserProfile extends BaseActivity {
                 Long current_id = sharedPref.getLong("current_user_id", 0);
                 Users user = database.usersDAO().getUserById(current_id);
                 database.usersDAO().delete(user);
+                FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+                if (currentUser != null) {
+                    String userId = currentUser.getUid();
+                    FirebaseFirestore.getInstance()
+                            .collection("users")
+                            .document(userId)
+                            .delete();
+
+                }
                 //Signing out
                 SharedPreferences.Editor editor = sharedPref.edit();
                 editor.putLong("current_user_id", 0);
