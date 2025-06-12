@@ -132,7 +132,7 @@ protected void onCreate(Bundle savedInstanceState) {
                                 request.start();
 
                                 // Išsaugom user ID
-                                /*SharedPreferences sharedPref = getBaseContext().getSharedPreferences("augalu_ratas.CURRENT_USER_KEY", Context.MODE_PRIVATE);
+                               /* SharedPreferences sharedPref = getBaseContext().getSharedPreferences("augalu_ratas.CURRENT_USER_KEY", Context.MODE_PRIVATE);
                                 SharedPreferences.Editor editor = sharedPref.edit();
                                 editor.putString("current_user_id", userId);
                                 editor.apply();*/

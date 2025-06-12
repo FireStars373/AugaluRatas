@@ -109,7 +109,7 @@ public class MainPage extends BaseActivity {
         db.collection("news").get().addOnCompleteListener(task -> {
             if (task.isSuccessful() && task.getResult().isEmpty()) {
                 List<News> seedList = new ArrayList<>();
-                // Čia įdėkite visus savo News objektus su byte[] paveikslėliais
+
                 seedList.add(new News(
                         "8 mažai priežiūros reikalaujantys kambariniai augalai: juos itin sunku numarinti",
                         "Jei jums sunkiai sekasi tinkamai puoselėti augalus, tačiau vis tiek norite jų turėti savo namuose, yra išeitis. Pasirodo, kai kurie augalai beveik nereikalauja priežiūros, o tai reiškia, kad jų beveik neįmanoma numarinti.",

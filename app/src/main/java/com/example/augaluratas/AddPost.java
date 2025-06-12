@@ -36,6 +36,8 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.google.common.util.concurrent.ListenableFuture;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
@@ -54,7 +56,7 @@ public class AddPost extends AppCompatActivity {
     private PreviewView    previewView;
     private ImageCapture   imageCapture;
     private Bitmap         selectedImageBitmap = null;
-
+    private User_PostDatabase database;
     private ImageView      selectPhotoView;
     private ImageButton    takePhotoBtn;
     private ImageButton    cameraCaptureBtn;
@@ -259,7 +261,8 @@ public class AddPost extends AppCompatActivity {
         SharedPreferences prefs = getSharedPreferences(
                 "augalu_ratas.CURRENT_USER_KEY", Context.MODE_PRIVATE
         );
-        String userId = prefs.getString("current_user_id", null);
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        String userId = currentUser.getUid();
         if (userId == null) {
             Toast.makeText(this, "Vartotojas neprisijungęs", Toast.LENGTH_SHORT).show();
             return;
@@ -288,7 +291,12 @@ public class AddPost extends AppCompatActivity {
                     postMap.put("price",      Double.parseDouble(price));
                     postMap.put("imageUrl",   downloadUrl);
                     postMap.put("timestamp",  FieldValue.serverTimestamp());
-
+                    long uid = prefs.getLong("current_user_id",0);
+                    byte[] imgBytess = ImageUtils.bitmapToByteArray(selectedImageBitmap);
+                    Posts post = new Posts(uid, title, desc, imgBytess,
+                            Double.parseDouble(price));
+                    database = AppActivity.getUser_PostDatabase();
+                    database.postsDAO().insert(post);
                     db.collection("posts")
                             .add(postMap)
                             .addOnSuccessListener(ref -> {
@@ -304,6 +312,7 @@ public class AddPost extends AppCompatActivity {
                 .addOnFailureListener(e -> {
                     Toast.makeText(this, "Klaida įkeliant nuotrauką", Toast.LENGTH_SHORT).show();
                 });
+
     }
 
     private void shakeButton(View btn) {

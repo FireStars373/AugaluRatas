@@ -141,7 +141,8 @@ public class Register extends BaseActivity {
                                                 user.put("phoneNumber", Number);
                                                 user.put("subscribed", false);
                                                 user.put("username", Name);
-
+                                                Users userl = new Users(Name, Password, Number, Email);
+                                                usersDatabase.usersDAO().insert(userl);
                                                 db.collection("users")
                                                         .document(userId)
                                                         .set(user)
