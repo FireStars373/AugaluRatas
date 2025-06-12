@@ -26,18 +26,15 @@ public class Users {
     @ColumnInfo(name = "email")
     private String email;
 
-    @ColumnInfo(name = "subscribed")
-    private Boolean subscribed;
 
-    @ColumnInfo(name = "currency")
-    private String currency;
+    @ColumnInfo(name = "image")
+    private byte[] image;
 
     public Users(@NonNull String username, @NonNull String password, @NonNull String phoneNumber, @NonNull String email) {
         this.username = username;
         this.password = password;
         this.phoneNumber = phoneNumber;
         this.email = email;
-        subscribed = false;
     }
 
     public void setId(@NonNull long id) {this.id = id;}
@@ -51,8 +48,6 @@ public class Users {
     public void setEmail(@NonNull String email) {this.email = email;}
     public String getEmail() {return this.email;}
 
-    public void setSubscribed(Boolean subscribed) {this.subscribed = subscribed;}
-    public Boolean getSubscribed(){return subscribed;}
-    public void setCurrency(String currency){this.currency = currency;}
-    public String getCurrency(){return currency;}
+    public void setImage(byte[] image){this.image = image;}
+    public byte[] getImage(){return image;}
 }

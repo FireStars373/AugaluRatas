@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- When the checkbox is checked, show the filled heart -->
+    <item android:drawable="@drawable/full_heart_icon"
+        android:state_checked="true" />
+
+    <!-- When the checkbox is unchecked, show the empty heart -->
+    <item android:drawable="@drawable/empty_heart_icon"
+        android:state_checked="false" />
+
+    <!-- Default state (same as unchecked) -->
+    <item android:drawable="@drawable/empty_heart_icon" />
+
+</selector>

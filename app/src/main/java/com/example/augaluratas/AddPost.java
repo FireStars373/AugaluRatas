@@ -74,7 +74,6 @@ public class AddPost extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_add_post);
 
-        // edge-to-edge padding
         ViewCompat.setOnApplyWindowInsetsListener(
                 findViewById(R.id.contstraint_layout),
                 (v, insets) -> {
@@ -84,7 +83,6 @@ public class AddPost extends AppCompatActivity {
                 }
         );
 
-        // find views
         selectPhotoView   = findViewById(R.id.button24);
         takePhotoBtn      = findViewById(R.id.take_photo_button);
         previewView       = findViewById(R.id.camera_preview);
@@ -96,13 +94,11 @@ public class AddPost extends AppCompatActivity {
         priceEt           = findViewById(R.id.add_post_price);
         title = findViewById(R.id.textView19);
 
-        // group UI for hide/show
         uiElements = new View[]{
                 selectPhotoView, takePhotoBtn, sidebarBtn,
                 uploadBtn, titleEt, descEt, priceEt, title
         };
 
-        // hide camera preview initially
         previewView.setVisibility(View.GONE);
         cameraCaptureBtn.setVisibility(View.GONE);
 
@@ -119,7 +115,6 @@ public class AddPost extends AppCompatActivity {
             startActivityForResult(pick, PICK_IMAGE_REQUEST);
         });
 
-        // 2) take photo -> request permission then enter camera mode
         takePhotoBtn.setOnClickListener(v -> {
             if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
                     != PackageManager.PERMISSION_GRANTED) {
@@ -133,21 +128,17 @@ public class AddPost extends AppCompatActivity {
             }
         });
 
-        // 3) capture button
         cameraCaptureBtn.setOnClickListener(v -> takePhoto());
 
-        // 4) sidebar nav
         sidebarBtn.setOnClickListener(v -> {
             startActivity(new Intent(this, MeniuOverlay.class));
             overridePendingTransition(R.anim.slide_out_left, 0);
         });
 
-        // 5) upload
-        uploadBtn.setOnClickListener(v -> handleUpload());
+        uploadBtn.setOnClickListener(v -> handleUpload(errSound, okSound));
     }
 
     private void enterCameraMode() {
-        // hide all other UI
         for (View el : uiElements) el.setVisibility(View.GONE);
         previewView.setVisibility(View.VISIBLE);
         cameraCaptureBtn.setVisibility(View.VISIBLE);
@@ -155,7 +146,6 @@ public class AddPost extends AppCompatActivity {
     }
 
     private void exitCameraMode() {
-        // restore UI
         for (View el : uiElements) el.setVisibility(View.VISIBLE);
         previewView.setVisibility(View.GONE);
         cameraCaptureBtn.setVisibility(View.GONE);
@@ -188,9 +178,8 @@ public class AddPost extends AppCompatActivity {
                 new ImageCapture.OnImageCapturedCallback() {
                     @Override
                     public void onCaptureSuccess(@NonNull ImageProxy proxy) {
-                        // Po to, kai nufotografavai ar pasirinkai iš galerijos:
                         Bitmap raw = previewView.getBitmap();
-                        selectedImageBitmap = scaleBitmap(raw, 1024); // maksimalus ilgis 1024px
+                        selectedImageBitmap = scaleBitmap(raw, 1024);
                         selectPhotoView.setImageBitmap(selectedImageBitmap);
                         /*Bitmap bmp = previewView.getBitmap();
                         selectedImageBitmap = bmp;
@@ -207,7 +196,6 @@ public class AddPost extends AppCompatActivity {
         );
     }
 
-    // handle gallery result
     @Override
     protected void onActivityResult(int req, int res, Intent data) {
         super.onActivityResult(req, res, data);
@@ -225,7 +213,6 @@ public class AddPost extends AppCompatActivity {
         }
     }
 
-    // handle camera permission response
     @Override
     public void onRequestPermissionsResult(int code,
                                            @NonNull String[] perms, @NonNull int[] grants) {
@@ -239,9 +226,7 @@ public class AddPost extends AppCompatActivity {
                     Toast.LENGTH_SHORT).show();
         }
     }
-
-    // upload logic
-    private void handleUpload() {
+    private void handleUpload(MediaPlayer errSound, MediaPlayer okSound) {
         String title = titleEt.getText().toString().trim();
         String desc  = descEt.getText().toString().trim();
         String price = priceEt.getText().toString().trim();

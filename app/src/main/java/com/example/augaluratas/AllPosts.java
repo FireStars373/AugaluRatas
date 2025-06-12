@@ -149,9 +149,6 @@ public class AllPosts extends AppCompatActivity {
 
             byte[] imageBytes = ImageUtils.bitmapToByteArray(bitmap);
 
-            // Jei vartotojas egzistuoja, tęsiame įrašymą
-            //db.postsDAO().insert(new Posts(current_id,"Bananmedis", "fainas medis", imageBytes, 2));
-
             // Gauti įrašus ir nustatyti adapterį
             List<Posts> posts = db.postsDAO().getPostsWithoutUser(current_id);
             //Applying search filter
@@ -160,18 +157,20 @@ public class AllPosts extends AppCompatActivity {
                 @Override
                 public int compare(Posts o1, Posts o2) {
                     Users u1 = db.usersDAO().getUserById(o1.getUserId());
+                    UserSettings s1 = db.userSettingsDAO().getByUserId(u1.getId());
                     Users u2 = db.usersDAO().getUserById(o2.getUserId());
-                    if(u1.getSubscribed() && !u2.getSubscribed()){
+                    UserSettings s2 = db.userSettingsDAO().getByUserId(u2.getId());
+                    if(s1.getSubscribed() && !s2.getSubscribed()){
                         return -1;
                     }
-                    else if(!u1.getSubscribed() && u2.getSubscribed()){
+                    else if(!s1.getSubscribed() && s2.getSubscribed()){
                         return 1;
                     }
                     return 0;
                 }
             });
             runOnUiThread(() -> {
-                PostAdapter postAdapter = new PostAdapter(posts, false, getBaseContext());
+                PostAdapter postAdapter = new PostAdapter(posts, false);
                 recyclerView.setAdapter(postAdapter);
 
                 TextView plant_count = findViewById(R.id.plant_count);

@@ -85,6 +85,13 @@ protected void onCreate(Bundle savedInstanceState) {
                         mp.start();
                         return;
                     }
+                    settings.setCurrency(currency);
+                    usersDatabase.userSettingsDAO().Update(settings);
+                    AppActivity.getUser_PostDatabase().usersDAO().Update(user);
+                }
+                //If conversion rate isn't saved, calls API to find it. 1.0 by default
+                CronetEngine.Builder myBuilder = new CronetEngine.Builder(getBaseContext());
+                CronetEngine cronetEngine = myBuilder.build();
 
                     // Prisijungiame per Firebase Authentication
                     FirebaseAuth.getInstance().signInWithEmailAndPassword(email, Password)

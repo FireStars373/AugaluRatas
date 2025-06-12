@@ -32,21 +32,17 @@ import android.widget.Toast;
 public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder> {
     private List<Posts> postList;
     private boolean belongs_to_user;
-    private Context context;
 
     public PostAdapter(List<Posts> postList) {
         this(postList, false); // Calls the other constructor with `false`
     }
+
     public PostAdapter(List<Posts> postList, boolean belongs_to_user) {
         this.postList = postList;
         this.belongs_to_user = belongs_to_user;
     }
-    public PostAdapter(List<Posts> postList, boolean belongs_to_user, Context context) {
-        this.postList = postList;
-        this.belongs_to_user = belongs_to_user;
-        this.context = context;
-    }
 
+    // onCreateViewHolder is still needed. It creates the view.
     @NonNull
     @Override
     public PostViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -55,124 +51,29 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
         return new PostViewHolder(view);
     }
 
+    // onBindViewHolder is still needed. It binds the data by delegating.
     @Override
     public void onBindViewHolder(@NonNull PostViewHolder holder, int position) {
         Posts post = postList.get(position);
-        holder.plantName.setText(post.getPlantName());
-        holder.description.setText(post.getDescription());
-        holder.price.setText(String.format("%.2f €", post.getPrice()));
 
-
-        if (context != null){
-            SharedPreferences sharedPref = context.getSharedPreferences("augalu_ratas.CURRENT_USER_KEY", Context.MODE_PRIVATE);
-            Long current_id = sharedPref.getLong("current_user_id", 0);
-            User_PostDatabase database = AppActivity.getUser_PostDatabase();
-            Users user = database.usersDAO().getUserById(current_id);
-
-            String currency = user.getCurrency();
-            SharedPreferences sharedPrefCur = context.getSharedPreferences("augalu_ratas.CURRENT_CURRENCY", Context.MODE_PRIVATE);
-            Float conversion_rate = sharedPrefCur.getFloat("current_conversion_rate", -1);
-
-
-            String currencySymbol = Currency.getInstance(currency).getSymbol();
-            int decimal_point = Currency.getInstance(currency).getDefaultFractionDigits();
-
-            double price = post.getPrice() * conversion_rate;
-
-            String formatPattern = "%." + decimal_point + "f %s";
-            String formattedPrice = String.format(formatPattern, price, currencySymbol);
-
-            //NumberFormat format = NumberFormat.getCurrencyInstance(new Locale(" ", country_code));
-            //String formattedPrice = format.format(price);
-
-            holder.price.setText(formattedPrice);
-        }
-        //Getting country code and converting currency accordingly
-
-
-
-        // Konvertuoja byte[] į Bitmap
-        Bitmap bitmap = BitmapFactory.decodeByteArray(post.getImage(), 0, post.getImage().length);
-        holder.imageView.setImageBitmap(bitmap);
-
-        holder.itemView.setOnClickListener(v -> {
-            // Perduoti post ID į kitą aktyvumą
-            String a = this.getClass().getSimpleName();
-            if (belongs_to_user){
-                Intent intent = new Intent(v.getContext(), UserPostOverlay.class);
-                intent.putExtra("POST_ID", post.getId()); // Įrašome post ID į Intent
-                v.getContext().startActivity(intent);
-                return;
-            }
-            Intent intent = new Intent(v.getContext(), PostDescription.class);
-            intent.putExtra("POST_ID", post.getId()); // Įrašome post ID į Intent
-            v.getContext().startActivity(intent);
-        });
-        if (holder.addToCart != null){
-            holder.addToCart.setOnClickListener(v -> {
-
-                SharedPreferences prefs = v.getContext().getSharedPreferences("cart", Context.MODE_PRIVATE);
-                Set<String> current = prefs.getStringSet("items", new HashSet<>());
-                if (current.contains(Long.toString(post.getId()))){
-                    Toast.makeText(v.getContext(), "Šis augalas jau jūsų krepšelyje", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                current.add(Long.toString(post.getId()));
-                prefs.edit().putStringSet("items", current).apply();
-
-                // Animate imageView to cart icon
-                int[] originalPos = new int[2];
-                holder.imageView.getLocationOnScreen(originalPos);
-
-                // Clone image
-                ImageView clone = new ImageView(v.getContext());
-                clone.setImageDrawable(holder.imageView.getDrawable());
-
-                FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(
-                        holder.imageView.getWidth(), holder.imageView.getHeight());
-                params.leftMargin = originalPos[0];
-                params.topMargin = originalPos[1];
-
-                // Get activity context and root layout
-                android.app.Activity activity = (android.app.Activity) v.getContext();
-                FrameLayout rootLayout = (FrameLayout) activity.getWindow().getDecorView();
-                rootLayout.addView(clone, params);
-
-                // Find cart icon position
-                ImageView cartIcon = activity.findViewById(R.id.shopping_cart); // make sure it exists
-                if (cartIcon == null) {
-                    Log.e("PostAdapter", "Cart icon not found!");
-                    return;
-                }
-
-                int[] targetPos = new int[2];
-                cartIcon.getLocationOnScreen(targetPos);
-                targetPos[0] -= cartIcon.getWidth()/2;
-                targetPos[1] -= cartIcon.getHeight()/2;
-
-                float deltaX = targetPos[0] - originalPos[0];
-                float deltaY = targetPos[1] - originalPos[1];
-
-                clone.animate()
-                        .translationX(deltaX)
-                        .translationY(deltaY)
-                        .scaleX(0.2f)
-                        .scaleY(0.2f)
-                        .alpha(0.0f)
-                        .setDuration(1000)
-                        .setInterpolator(new AccelerateDecelerateInterpolator())
-                        .withEndAction(() -> rootLayout.removeView(clone))
-                        .start();
-            });
-        }
-
+        // This is the single line of code that does all the work now.
+        // It calls the reusable binder we created.
+        PostViewBinder.INSTANCE.bind(holder.itemView, post, belongs_to_user, holder.itemView.getContext());
     }
 
+    // getItemCount is still needed.
     @Override
     public int getItemCount() {
         return postList.size();
     }
 
+    // getItemViewType is still needed.
+    @Override
+    public int getItemViewType(int position) {
+        return belongs_to_user ? 1 : 0;
+    }
+
+    // The ViewHolder inner class is still needed.
     public static class PostViewHolder extends RecyclerView.ViewHolder {
         TextView plantName, description, price;
         ImageView imageView;
@@ -187,10 +88,6 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
             addToCart = itemView.findViewById(R.id.add_to_cart_btn);
         }
     }
-    @Override
-    public int getItemViewType(int position) {
-        // Return different view types based on `belongs_to_user`
-        return belongs_to_user ? 1 : 0;
-    }
 }
+
 
