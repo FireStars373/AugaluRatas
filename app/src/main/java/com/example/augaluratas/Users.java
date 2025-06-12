@@ -32,6 +32,9 @@ public class Users {
     @ColumnInfo(name = "currency")
     private String currency;
 
+    @ColumnInfo(name = "image")
+    private byte[] image;
+
     public Users(@NonNull String username, @NonNull String password, @NonNull String phoneNumber, @NonNull String email) {
         this.username = username;
         this.password = password;
@@ -55,4 +58,6 @@ public class Users {
     public Boolean getSubscribed(){return subscribed;}
     public void setCurrency(String currency){this.currency = currency;}
     public String getCurrency(){return currency;}
+    public void setImage(byte[] image){this.image = image;}
+    public byte[] getImage(){return image;}
 }

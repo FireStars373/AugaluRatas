@@ -1,14 +1,19 @@
 package com.example.augaluratas;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -33,6 +38,8 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
 public class UserData extends BaseActivity {
+    ImageView add_image;
+    private Bitmap selectedImageBitmap = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +60,15 @@ public class UserData extends BaseActivity {
         TextView phone_number = findViewById(R.id.user_data_phone_number);
         Button change_data = findViewById(R.id.change_user_data);
 
+        add_image = findViewById(R.id.user_change_photo);
+
+        add_image.setOnClickListener(v -> {
+            Intent pick = new Intent(Intent.ACTION_PICK,
+                    MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+            pick.setType("image/*");
+            startActivityForResult(pick, 1);
+        });
+
         SharedPreferences sharedPref = getBaseContext().getSharedPreferences("augalu_ratas.CURRENT_USER_KEY", Context.MODE_PRIVATE);
         Long current_id = sharedPref.getLong("current_user_id", 0);
         User_PostDatabase database = AppActivity.getUser_PostDatabase();
@@ -62,6 +78,11 @@ public class UserData extends BaseActivity {
         password.setText(user.getPassword());
         password_rewrite.setText(user.getPassword());
         phone_number.setText(user.getPhoneNumber());
+        if(user.getImage() != null){
+            Bitmap bitmap = BitmapFactory.decodeByteArray(user.getImage(), 0, user.getImage().length);
+            add_image.setImageBitmap(bitmap);
+            add_image.setBackground(getDrawable(R.color.light_green));
+        }
 
         Spinner currency_select = findViewById(R.id.change_currency);
 
@@ -176,10 +197,46 @@ public class UserData extends BaseActivity {
                 user.setPassword(Password_rewrite);
                 user.setPhoneNumber(Number);
                 user.setCurrency(new_currency);
+                if(selectedImageBitmap != null){
+                    byte[] bytes = ImageUtils.bitmapToByteArray(selectedImageBitmap);
+                    user.setImage(bytes);
+                }
                 database.usersDAO().Update(user);
                 Toast.makeText(getApplicationContext(), "Duomenys sėkmingai pakeisti!", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+    @Override
+    protected void onActivityResult(int req, int res, Intent data) {
+        super.onActivityResult(req, res, data);
+        if (req == 1 && res == RESULT_OK && data!=null && data.getData()!=null) {
+            try {
+                selectedImageBitmap = MediaStore.Images.Media.getBitmap(
+                        getContentResolver(), data.getData()
+                );
+                selectedImageBitmap = scaleBitmap(selectedImageBitmap, 1024);
+                add_image.setImageBitmap(selectedImageBitmap);
+                add_image.setBackground(getDrawable(R.color.light_green));
+            } catch (Exception e) {
+                Toast.makeText(this, "Klaida įkeliant nuotrauką",
+                        Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+    private Bitmap scaleBitmap(Bitmap original, int maxSize) {
+        int width = original.getWidth();
+        int height = original.getHeight();
+        float ratio = (float) width / (float) height;
 
+        int newWidth, newHeight;
+        if (ratio > 1) {
+            newWidth = maxSize;
+            newHeight = (int) (maxSize / ratio);
+        } else {
+            newHeight = maxSize;
+            newWidth = (int) (maxSize * ratio);
+        }
+
+        return Bitmap.createScaledBitmap(original, newWidth, newHeight, true);
     }
 }

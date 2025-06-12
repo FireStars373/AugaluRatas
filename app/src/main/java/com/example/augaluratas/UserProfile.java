@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.BitmapDrawable;
@@ -46,13 +47,20 @@ public class UserProfile extends BaseActivity {
         Button delete_user = findViewById(R.id.user_profile_delete_user);
         TextView username = findViewById(R.id.user_profile_username);
 
-        user_photo.setImageResource(R.drawable.user_icon);
-        user_photo.setColorFilter(ContextCompat.getColor(this, R.color.lotus_green), PorterDuff.Mode.SRC_IN);
 
         SharedPreferences sharedPref = getBaseContext().getSharedPreferences("augalu_ratas.CURRENT_USER_KEY", Context.MODE_PRIVATE);
         Long current_id= sharedPref.getLong("current_user_id", 0);
         User_PostDatabase database = AppActivity.getUser_PostDatabase();
-        username.setText(database.usersDAO().getUserById(current_id).getUsername());
+        Users user = database.usersDAO().getUserById(current_id);
+        username.setText(user.getUsername());
+        if(user.getImage() == null){
+            user_photo.setImageResource(R.drawable.user_icon);
+            user_photo.setColorFilter(ContextCompat.getColor(this, R.color.lotus_green), PorterDuff.Mode.SRC_IN);
+        }
+        else{
+            Bitmap bitmap = BitmapFactory.decodeByteArray(user.getImage(), 0, user.getImage().length);
+            user_photo.setImageBitmap(bitmap);
+        }
 
         return_button.setOnClickListener(new View.OnClickListener() {
             @Override
