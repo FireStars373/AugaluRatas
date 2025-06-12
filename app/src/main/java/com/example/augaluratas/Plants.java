@@ -14,7 +14,7 @@ public class Plants implements Parcelable {
     @NonNull
     @ColumnInfo(name = "plant_name")
     private String name;
-
+    private String idW;
     @NonNull
     @ColumnInfo(name = "description")
     private String description;
@@ -40,6 +40,13 @@ public class Plants implements Parcelable {
     }
     // Getteriai ir setteriai
 
+    public Plants() {
+        this.name = "";
+        this.description = "";
+        this.category = "";
+        this.origin = "";
+        this.image = new byte[0];
+    }
     public Plants(Parcel in) {
         name = in.readString();
         description = in.readString();
@@ -73,6 +80,8 @@ public class Plants implements Parcelable {
         dest.writeString(origin);
         dest.writeByteArray(image);
     }
+    public String getIdW() { return idW; }
+    public void setIdW(String idW) { this.idW = idW; }
     public void setId(@NonNull long name) {this.id = id;}
     public long getId() {return this.id;}
     public void setName(@NonNull String name) {this.name = name;}

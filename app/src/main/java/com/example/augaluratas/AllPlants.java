@@ -1,28 +1,19 @@
 package com.example.augaluratas;
 
-import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Gravity;
-import android.view.MotionEvent;
-import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ScrollView;
 import android.widget.SearchView;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.core.graphics.Insets;
@@ -32,25 +23,30 @@ import androidx.core.widget.NestedScrollView;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
-import java.util.LinkedHashSet;
+import java.util.HashMap;
 import java.util.List;
-import java.util.Set;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import android.content.Intent;
-import android.widget.Toast;
+import java.util.Map;
+import java.util.UUID;
+import java.util.concurrent.atomic.AtomicReference;
+import java.util.stream.Collectors;
 
+import android.content.Intent;
+
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 public class AllPlants extends BaseActivity {
     private LinearLayout plantsContainer;
-    private PlantsDatabase database;
-    private ExecutorService executorService = Executors.newSingleThreadExecutor();
     private SearchView searchbar;
     private NestedScrollView scrollView;
-    FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private FirebaseFirestore db;
+    private FirebaseStorage storage;
+    private List<Plants> allPlants = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,75 +59,43 @@ public class AllPlants extends BaseActivity {
             return insets;
         });
 
+        // Init
+        db = FirebaseFirestore.getInstance();
+        storage = FirebaseStorage.getInstance();
         plantsContainer = findViewById(R.id.plantsContainer);
-        database = PlantsDatabase.getDatabase(this);
         searchbar = findViewById(R.id.all_plants_searchbar);
         scrollView = findViewById(R.id.all_plants_scrollview);
-        searchbar.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                loadPlants();
-                return false;
-            }
 
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                if (newText.isEmpty()){
-                    loadPlants();
-                }
-                return false;
-            }
+        // Seed if empty
+        seedPlantsIfEmpty();
+
+        // Load and display
+        loadPlantsFromFirestore();
+
+        // Search listeners
+        searchbar.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override public boolean onQueryTextSubmit(String q) { filterAndDisplayPlants(q); return false; }
+            @Override public boolean onQueryTextChange(String t) { filterAndDisplayPlants(t); return false; }
         });
-        searchbar.setOnCloseListener(new SearchView.OnCloseListener() {
-            @Override
-            public boolean onClose() {
-                loadPlants();
-                return false;
-            }
+        searchbar.setOnCloseListener(() -> { filterAndDisplayPlants(""); return false; });
+        scrollView.setOnTouchListener((v, e) -> { searchbar.clearFocus(); return false; });
+
+        // Sidebar
+        findViewById(R.id.sidebar_from_all_plants).setOnClickListener(v -> {
+            startActivity(new Intent(this, MeniuOverlay.class));
+            overridePendingTransition(R.anim.slide_out_left, 0);
         });
-        //Remove focus from searchbar
-        scrollView.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                searchbar.clearFocus();
-                return false;
-            }
-        });
-        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.bananmedis);
-        if (bitmap == null) {
-            Log.e("BitmapError", "Nepavyko užkrauti lotus_icon");
-            return;
-        }
-        byte[] imageBytes = ImageUtils.bitmapToByteArray(bitmap);
-        executorService.execute(() -> {
-            if(database.plantsDAO().getAllPlants().isEmpty()){
-                database.plantsDAO().insert(new Plants(
-                        "Chlorofilas Variegatum",
-                        "Labai nereikli kambarinė gėlė, priklausanti lelijinių šeimai. Išsiskiria ilgais lancetiškais lapais, kurie būna margi arba vienspalviai. Žiedai nėra labai dekoratyvūs, auginama dėl lapijos. Stipriai valo orą.\n" +"\n" +
-                                "Laikymas: pakenčia sausą kambario orą.\n" + "\n" +
-                                "Apšvietimas: gerai auga šviesioje patalpoje, tačiau toleruoja ir dalinį pavėsį. Margalapėms veislėms reikia daugiau šviesos nei žalialapėms.\n" +
-                                "Temperatūra: 15–18 °C, vasarą galima auginti lauke.\n" +"\n" +
-                                "Laistymas: reguliarus, substratas nuolat drėgnas, tačiau nepalaisčius nežus, tik apdžius lapų pakraščiai.\n" +"\n" +
-                                "Substratas: derlingas, laidus. Nepakenčia sunkios, suslėgtos žemės.\n" +"\n" +
-                                "Genėjimas: nereikalingas.\n" +"\n" +
-                                "Tręšimas: kas 2–3 savaites skystomis trąšomis.\n" +"\n" +
-                                "Persodinimas: kas 1–2 metus, geriausia pavasarį.",
-                        "Chlorofitai",
-                        convertDrawableToByteArray(R.drawable.chlorofilas_variegatum)));
-                database.plantsDAO().insert(new Plants(
-                        "Monstera Obliqua Peru",
-                        "Lengvai ir greitai augantis kambarinis augalas, gali užaugti didžiulis ir gyventi daug metų. Pritaikomas įvairiuose interjeruose. Užaugina įspūdingo dydžio, blizgančius, giliai skeldėtus lapus.\n" +"\n" +
-                                "Laikymas: saulėta kambario vieta, rytinė arba vakarinė pusė. Vasarą galima išnešti į lauką.\n" +"\n" +
-                                "Apšvietimas: netiesioginė dienos šviesa, toleruoja prieblandą.\n" +"\n" +
-                                "Temperatūra: 15–24 °C.\n" +"\n" +
-                                "Laistymas: mėgsta drėgmę.\n" +"\n" +
-                                "Substratas: derlingas, humusingas. Reikalingas geras drenažas.\n" +"\n" +
-                                "Tręšimas: kartą per mėnesį lapinių gėlių trąšomis.\n" +"\n" +
-                                "Persodinimas: kas dvejus metus.\n" +"\n" +
-                                "Patarimas: jeigu trukdo monsteros orinės šaknys, galima jas apgenėti arba suvynioti atgal į vazoną. Nuolat pasirūpinti, kad lapai neapdulkėtų.",
-                        "Monsteros",
-                        convertDrawableToByteArray(R.drawable.monstera_obliqua_peru)));
-                database.plantsDAO().insert(new Plants(
+    }
+
+    private void seedPlantsIfEmpty() {
+        StorageReference imagesRef = storage.getReference().child("plant_images");
+        db.collection("plants").get().addOnCompleteListener(task -> {
+            if (task.isSuccessful() && task.getResult().isEmpty()) {
+                // Paruošiame pradinį sąrašą
+                List<Plants> seed = new ArrayList<>();
+               // seed.add(new Plants("Chlorofilas Variegatum", "Labai nereikli...", "Chlorofitai", convertDrawableToByteArray(R.drawable.chlorofilas_variegatum)));
+                //seed.add(new Plants("Monstera Obliqua Peru", "Lengvai ir greitai...", "Monsteros", convertDrawableToByteArray( R.drawable.monstera_obliqua_peru)));
+                seed.add(new Plants(
                         "Monstera Thai",
                         "Lengvai ir greitai augantis kambarinis augalas, gali užaugti didžiulis ir gyventi daug metų. Pritaikomas įvairiuose interjeruose. Užaugina įspūdingo dydžio, blizgančius, giliai skeldėtus lapus.\n" +"\n" +
                                 "Laikymas: saulėta kambario vieta, rytinė arba vakarinė pusė. Vasarą galima išnešti į lauką.\n" +"\n" +
@@ -144,7 +108,7 @@ public class AllPlants extends BaseActivity {
                                 "Patarimas: jeigu trukdo monsteros orinės šaknys, galima jas apgenėti arba suvynioti atgal į vazoną. Nuolat pasirūpinti, kad lapai neapdulkėtų.",
                         "Monsteros",
                         convertDrawableToByteArray(R.drawable.monstera_thai)));
-                database.plantsDAO().insert(new Plants(
+                seed.add(new Plants(
                         "Alokazija Polly",
                         "Azijos atogrąžų regiono augalas, išsiskiriantis lapų grožiu. Spalvingi lapai išauga ant aukštų, tiesių stiebų.\n" +"\n" +
                                 "Apšvietimas: mėgsta šviesą, tačiau saugoti nuo tiesioginių saulės spindulių.\n" +"\n" +
@@ -157,7 +121,7 @@ public class AllPlants extends BaseActivity {
                                 "Persodinimas: tik pavasarį, kas 2–3 metus.\n" +"\n",
                         "Alokazijos",
                         convertDrawableToByteArray(R.drawable.alokazija_polly)));
-                database.plantsDAO().insert(new Plants(
+                seed.add(new Plants(
                         "Zamiokuklas",
                         "Viena iš populiariausių kambarinių gėlių, dar vadinama pinigų medžiu. Auga mėsingais, storais lapkočiais ir tamsiai žaliais, blizgančiais lapais su nusmailėjusiomis viršūnėmis.\n" +"\n" +
                                 "Laikymas: šiltos ir šviesios erdvės.\n" +"\n" +
@@ -169,8 +133,7 @@ public class AllPlants extends BaseActivity {
                                 "Persodinimas: kiekvienais metais.",
                         "Zamiokuklai",
                         convertDrawableToByteArray(R.drawable.zamiokuklas)));
-
-                database.plantsDAO().insert(new Plants(
+                seed.add(new Plants(
                         "Anturis Esudo",
                         "Gana nereikli, net 3–4 mėnesius žydinti gėlė, turinti įdomią lapų formą, kuri augalą paverčia nuolat dekoratyviu.\n" +"\n" +
                                 "Laikymas: gerai vėdinamoje patalpoje, toliau nuo šildymo radiatorių.\n" +"\n" +
@@ -183,7 +146,7 @@ public class AllPlants extends BaseActivity {
                                 "Persodinimas: jauni augalai persodinami kasmet, senesni – kas 2–3 metus.",
                         "Anturiai",
                         convertDrawableToByteArray(R.drawable.anturis_esudo)));
-                database.plantsDAO().insert(new Plants(
+                seed.add(new Plants(
                         "Jazminaitis Pink Bow",
                         "Stipriai kvepiantis vijoklinis kambarinis augalas, kilęs iš Kinijos. Priklauso alyvmedinių šeimai. Gausiai žydi baltos - rausvos spalvos žiedeliais. Žali, plunksniški lapeliai.\n" +"\n" +
                                 "Laikymas: rytinėje arba pietinėje pusėje. Saugoti nuo šalto oro gūsių, nes jautriai reaguoja į temperatūros pokyčius.\n" +"\n" +
@@ -197,7 +160,7 @@ public class AllPlants extends BaseActivity {
                                 "Persodinimas: kas 2–3 metus.",
                         "Jazminaičiai",
                         convertDrawableToByteArray(R.drawable.jazminaitis_pink_bow)));
-                database.plantsDAO().insert(new Plants(
+                seed.add(new Plants(
                         "Vėzdūnė",
                         "Natūraliai auga Amerikos miškuose. Dekoratyvus augalas ilgakočiais lapais bei balta pažiede, o žiedas panašus į burbuolę. Nereiklus ir lengvai auginamas namų sąlygomis.\n" +"\n" +
                                 "Laikymas: pietinė ar pietrytinė pusė, nepakenčia skersvėjų.\n" +"\n" +
@@ -209,7 +172,7 @@ public class AllPlants extends BaseActivity {
                                 "Persodinimas: kas 1–2 metus. Mėgsta erdvę, todėl vazonas gali būti ir didesnis.",
                         "Vėzdūnės",
                         convertDrawableToByteArray(R.drawable.vezdune)));
-                database.plantsDAO().insert(new Plants(
+                seed.add(new Plants(
                         "Azalija Mix On Stem",
                         "Viržinių šeimos visžalis kambarinis augalas, natūraliai augantis Japonijoje ir Kinijoje. Puošia namų aplinką įvairiaspalviais žiedais – rožiniais, baltais, margais. Dažniausiai sužydi taip gausiai, kad nebesimato net augalo lapų.\n" +"\n" +
                                 "Laikymas: pietinė arba vakarinė pusė. Vasarą galima išnešti į lauką, tačiau laikyti pavėsingoje vietoje.\n" +"\n" +
@@ -223,7 +186,7 @@ public class AllPlants extends BaseActivity {
                                 "Persodinimas: kas 3 metus.",
                         "Azalijos",
                         convertDrawableToByteArray(R.drawable.azalija_mix_in_stem)));
-                database.plantsDAO().insert(new Plants(
+                seed.add(new Plants(
                         "Gloksinija",
                         "Šakniagumbinė gėlė kilusi iš Brazilijos tropinių miškų. Lapai ovalūs, apaugę plaukeliais. Žiedai labai dideli, varpelio formos, gali būti rožinės, raudonos, violetinės spalvos. Žydi nuo balandžio – rugpjūčio mėn.\n" +"\n" +
                                 "Laikymas: labai svarbu užtikrinti oro drėgmę, nepakenčia skersvėjo.\n" +"\n" +
@@ -236,8 +199,7 @@ public class AllPlants extends BaseActivity {
                                 "Genėjimas: nereikalingas.",
                         "Gloksinijos",
                         convertDrawableToByteArray(R.drawable.gloksinija)));
-
-                database.plantsDAO().insert(new Plants(
+                seed.add(new Plants(
                         "Karduote Moonshine",
                         "Vienas griežčiausių augalų, kurie savo struktūra puošia interjerą ir gali nudžiuginti savo griežta, stora lapija. Galima rasti vienspalvių, margų veislių. Labai nereiklios, todėl kiekvienas gali juos auginti.\n" +"\n" +
                                 "Laikymas: gerai jaučiasi kambaryje, kuriame mažiau šviesos. Tinka rytinė arba vakarinė pusė. Vasarą atgaivinti galima išnešti į lauką.\n" +"\n" +
@@ -249,7 +211,7 @@ public class AllPlants extends BaseActivity {
                                 "Persodinimas: kovą arba balandį, kai augalas visiškai užpildo vazoną.",
                         "Karduotės",
                         convertDrawableToByteArray(R.drawable.karduote_moonshine)));
-                database.plantsDAO().insert(new Plants(
+                seed.add(new Plants(
                         "Alokazija Chocolate Green",
                         "Azijos atogrąžų regiono augalas, išsiskiriantis lapų grožiu. Spalvingi lapai išauga ant aukštų, tiesių stiebų.\n" +"\n" +
                                 "Apšvietimas: mėgsta šviesą, tačiau saugoti nuo tiesioginių saulės spindulių.\n" +"\n" +
@@ -262,7 +224,7 @@ public class AllPlants extends BaseActivity {
                                 "Persodinimas: tik pavasarį, kas 2–3 metus.",
                         "Alokazijos",
                         convertDrawableToByteArray(R.drawable.alokazija_chocolate_green)));
-                database.plantsDAO().insert(new Plants(
+                seed.add(new Plants(
                         "Alokazija Black Velvet",
                         "Azijos atogrąžų regiono augalas, išsiskiriantis lapų grožiu. Spalvingi lapai išauga ant aukštų, tiesių stiebų.\n" +"\n" +
                                 "Apšvietimas: mėgsta šviesą, tačiau saugoti nuo tiesioginių saulės spindulių.\n" +"\n" +
@@ -275,7 +237,7 @@ public class AllPlants extends BaseActivity {
                                 "Persodinimas: tik pavasarį, kas 2–3 metus.",
                         "Alokazijos",
                         convertDrawableToByteArray(R.drawable.alokazija_black_velvet)));
-                database.plantsDAO().insert(new Plants(
+                seed.add(new Plants(
                         "Filodendras Choco Red",
                         "Viena gražiausių kambarinių lapinių gėlių, stebinanti savo įvairove nuo lapų formos ir dydžio iki spalvų gamos. Yra net vijoklinių rūšių.\n" +"\n" +
                                 "Apšvietimas: mėgsta šviesą, tačiau toleruoja ir dalinį pavėsį. Gali prisitaikyti ir prie tiesioginės saulės spindulių.\n" +"\n" +
@@ -287,7 +249,7 @@ public class AllPlants extends BaseActivity {
                                 "Persodinimas: kai kurių rūšių filodendrai labai greitai auga, todėl gali prireikti persodinti kasmet. Vijoklinėms rūšims parūpinti atramas.",
                         "Filodendrai",
                         convertDrawableToByteArray(R.drawable.filodendras_choco_red)));
-                database.plantsDAO().insert(new Plants(
+                seed.add(new Plants(
                         "Kalankė Tomentosa Chocolate",
                         "Sukulentinė, ypač ilgai žydinti gėlė, kuri gali džiuginti įvairiaspalviais žiedais visus metus. Kilusi iš Madagaskaro, puikiai auga ir mūsų namų sąlygomis.\n" +"\n" +
                                 "Laikymas: vakarinė ir rytinė palangė. Žiemą perkelti ant pietinės.\n" +"\n" +
@@ -300,8 +262,7 @@ public class AllPlants extends BaseActivity {
                                 "Persodinimas: ankstyvą pavasarį.",
                         "Kalankės",
                         convertDrawableToByteArray(R.drawable.kalanke_tomentosa_chocolate)));
-
-                database.plantsDAO().insert(new Plants(
+                seed.add(new Plants(
                         "Alavijas Humilis Variegata",
                         "Aloe vera yra sukulentinis augalas, garsėjantis ne tik savo išvaizda, bet ir gydomosiomis savybėmis. Šis augalas, natūraliai augantis sausose vietose, puikiai tinka dekoruoti įvairias patalpas ir suteikti joms išskirtinį charakterį.\n" +"\n" +
                                 "Laikymas: Idealus auginti ant rytinės arba vakarinės palangės. Vasara alaviją galima perkelti į lauką, kad gautų daugiau natūralios šviesos.\n" +"\n" +
@@ -313,7 +274,7 @@ public class AllPlants extends BaseActivity {
                                 "Persodinimas: Jauni alavijai turėtų būti persodinami kasmet, o vėliau tai daryti tik pagal poreikį, kai augalas pasieks tam tikrą dydį.",
                         "Alavijai",
                         convertDrawableToByteArray(R.drawable.alavijas_humilis_variegata)));
-                database.plantsDAO().insert(new Plants(
+                seed.add(new Plants(
                         "Karduotė Superba",
                         "Vienas griežčiausių augalų, kurie savo struktūra puošia interjerą ir gali nudžiuginti savo griežta, stora lapija. Galima rasti vienspalvių, margų veislių. Labai nereiklios, todėl kiekvienas gali juos auginti.\n" +"\n" +
                                 "Laikymas: gerai jaučiasi kambaryje, kuriame mažiau šviesos. Tinka rytinė arba vakarinė pusė. Vasarą atgaivinti galima išnešti į lauką.\n" +"\n" +
@@ -325,7 +286,7 @@ public class AllPlants extends BaseActivity {
                                 "Persodinimas: kovą arba balandį, kai augalas visiškai užpildo vazoną.",
                         "Karduotės",
                         convertDrawableToByteArray(R.drawable.karduote_superba)));
-                database.plantsDAO().insert(new Plants(
+                seed.add(new Plants(
                         "Storalapis Crassula Mix",
                         "Vienas iš augalų, kuriam nereikia daug priežiūros. Dekoratyvus savo mėsingais, storais, blizgančiais, žaliais lapais.\n" +"\n" +
                                 "Laikymas: rytinė ar pietrytinė palangė.\n" +"\n" +
@@ -340,7 +301,7 @@ public class AllPlants extends BaseActivity {
                                 "*Prekės nuotrauka yra informacinio pobūdžio. Originali prekės spalva ir matmenys gali skirtis nuo nuotraukoje pavaizduotos.",
                         "Storalapiai",
                         convertDrawableToByteArray(R.drawable.storalapis_mix)));
-                database.plantsDAO().insert(new Plants(
+                seed.add(new Plants(
                         "Kaktusas Parodija",
                         "Kilusi iš kaktusinių šeimos, todėl ir auginimo sąlygos panašios. Parodija – kiek neįprastas pavadinimas, tačiau miniatiūrinis augalas pakeri savo grožiu. Spygliai tankūs ir gali būti įvairių spalvų bei formų. Žydi nuo ankstyvo pavasario iki rudens. Žiedų įvairovė taip pat gausi: nuo geltonos iki skaisčiai raudonos spalvos.\n" +"\n" +
                                 "Laikymas: rytinė arba pietinė pusė.\n" +"\n" +
@@ -355,7 +316,7 @@ public class AllPlants extends BaseActivity {
                                 "Persodinimas: kas 3 metus.",
                         "Kaktusai",
                         convertDrawableToByteArray(R.drawable.kaktusas_parodija)));
-                database.plantsDAO().insert(new Plants(
+                seed.add(new Plants(
                         "Mamiliarija Albata",
                         "Kaktusų genčiai priklausanti mamiliarija pakeri savo grožiu – žiedai įvairiausių spalvų ir išsidėsto vainiku aplink augalo viršūnę. Natūraliai auga Meksikoje, uolėtose vietose.\n" +"\n" +
                                 "Laikymas: rytinė arba pietinė pusė.\n" +"\n" +
@@ -371,109 +332,100 @@ public class AllPlants extends BaseActivity {
                         "Mamiliarijos",
                         convertDrawableToByteArray(R.drawable.mamiliarija_albata)));
 
-            }
-        });
-        loadPlants();
 
-        ImageButton menu = findViewById(R.id.sidebar_from_all_plants);
-        menu.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getBaseContext(), MeniuOverlay.class);
-                startActivity(intent);
-                overridePendingTransition(R.anim.slide_out_left, 0);
-            }
-        });
-    }
-    private void loadPlants() {
-        executorService.execute(() -> {
 
-            // Užklausa į duomenų bazę
-            List<Plants> plantList = database.plantsDAO().getAllPlants();
-            if (plantList == null || plantList.isEmpty()) return;
+                for (Plants p : seed) {
+                    // konvertuojame drawable į byte[]
+                    byte[] data = p.getImage();
+                    String filename = UUID.randomUUID().toString() + ".png";
+                    StorageReference imgRef = imagesRef.child(filename);
 
-            // Naudojame LinkedHashSet, kad pašalintume pasikartojančius pavadinimus
-            Set<String> uniquePlantNames = new LinkedHashSet<>();
-            for (Plants plant : plantList) {
-                uniquePlantNames.add(plant.getName());
-            }
+                    imgRef.putBytes(data)
+                            .addOnSuccessListener(u -> imgRef.getDownloadUrl()
+                                    .addOnSuccessListener(uri -> {
+                                        // Sukuriame dokumentą
+                                        Map<String,Object> map = new HashMap<>();
+                                        map.put("name", p.getName());
+                                        map.put("description", p.getDescription());
+                                        map.put("category", p.getCategory());
+                                        map.put("origin", p.getOrigin());
+                                        map.put("imageUrl", uri.toString());
+                                        map.put("timestamp", FieldValue.serverTimestamp());
 
-            // Paverčiame atgal į sąrašą ir surūšiuojame pagal pavadinimą
-            List<String> sortedPlantNames = new ArrayList<>(uniquePlantNames);
-            Collections.sort(sortedPlantNames, String.CASE_INSENSITIVE_ORDER);
-
-            // Atliksime UI atnaujinimus pagrindiniame gije
-            runOnUiThread(() -> {
-                plantsContainer.removeAllViews(); // Išvalome senus duomenis
-                char lastLetter = '\0'; // Laikome paskutinę įtrauktą raidę
-
-                for (String plantName : sortedPlantNames) {
-
-                    if (plantName.toLowerCase().contains(searchbar.getQuery().toString().toLowerCase())){
-                        char firstLetter = Character.toUpperCase(plantName.charAt(0));
-                        // Pridėti naują raidės antraštę, jei ši raidė dar nebuvo pridėta
-                        if (firstLetter != lastLetter) {
-                            TextView letterHeader = new TextView(this);
-                            letterHeader.setText(String.valueOf(firstLetter));
-                            letterHeader.setTextSize(24);
-                            letterHeader.setTextColor(ContextCompat.getColor(this, R.color.text_brown));
-                            letterHeader.setTypeface(ResourcesCompat.getCachedFont(this, R.font.spectral_sc), Typeface.BOLD);
-                            plantsContainer.addView(letterHeader);
-                            lastLetter = firstLetter;
-                        }
-
-                        // Sukuriame Button kiekvienam unikaliam augalui
-                        Button plantButton = new Button(this);
-                        plantButton.setText(plantName);
-                        plantButton.setTextSize(20);
-                        plantButton.setTextColor(ContextCompat.getColor(this, R.color.text_brown));
-                        plantButton.setTypeface(ResourcesCompat.getCachedFont(this, R.font.spectral_sc));
-                        plantButton.setBackgroundColor(Color.TRANSPARENT); // Be fono
-                        plantButton.setGravity(Gravity.START | Gravity.CENTER_VERTICAL);
-                        plantButton.setOnClickListener(v -> {
-                            // Užklausa į duomenų bazę, kad gauti konkretaus augalo informaciją
-                            executorService.execute(() -> {
-                                Plants selectedPlant = database.plantsDAO().getPlantByName(plantName);
-                                if (selectedPlant != null) {
-                                    runOnUiThread(() -> {
-                                        // Pereiti į kitą aktyvumą su pasirinktu augalu
-                                        Intent intent = new Intent(getBaseContext(), PlantDescription.class);
-                                        intent.putExtra("augalas", selectedPlant);
-                                        startActivity(intent);
-                                    });
-                                }
-                            });
-                        });
-
-                        plantsContainer.addView(plantButton);
-                    }
-
+                                        db.collection("plants")
+                                                .add(map);
+                                    })
+                            );
                 }
-
-            });
+            }
         });
     }
+
+    private void loadPlantsFromFirestore() {
+        db.collection("plants")
+                .orderBy("name", Query.Direction.ASCENDING)
+                .get()
+                .addOnSuccessListener(snap -> {
+                    allPlants.clear();
+                    for (DocumentSnapshot doc : snap.getDocuments()) {
+
+                        Plants p = doc.toObject(Plants.class);
+                        p.setIdW(doc.getId());
+                        allPlants.add(p);
+                    }
+                    filterAndDisplayPlants("");
+                });
+    }
+
+    private void filterAndDisplayPlants(String query) {
+        plantsContainer.removeAllViews();
+        char last = '\0';
+
+        // Filtruojame, rikiuojame pačius Plants objektus pagal name
+        List<Plants> filtered = allPlants.stream()
+                .filter(p -> p.getName().toLowerCase().contains(query.toLowerCase()))
+                .sorted(Comparator.comparing(Plants::getName, String.CASE_INSENSITIVE_ORDER))
+                .collect(Collectors.toList());
+
+        for (Plants p : filtered) {
+            char first = Character.toUpperCase(p.getName().charAt(0));
+            if (first != last) {
+                TextView header = new TextView(this);
+                header.setText(String.valueOf(first));
+                header.setTextSize(24);
+                header.setTextColor(ContextCompat.getColor(this, R.color.text_brown));
+                header.setTypeface(ResourcesCompat.getCachedFont(this, R.font.spectral_sc), Typeface.BOLD);
+                plantsContainer.addView(header);
+                last = first;
+            }
+            Button btn = new Button(this);
+            btn.setText(p.getName());
+            btn.setTextSize(20);
+            btn.setTextColor(ContextCompat.getColor(this, R.color.text_brown));
+            btn.setTypeface(ResourcesCompat.getCachedFont(this, R.font.spectral_sc));
+            btn.setGravity(Gravity.START | Gravity.CENTER_VERTICAL);
+            btn.setBackgroundColor(Color.TRANSPARENT);
+            btn.setOnClickListener(v -> {
+                Intent i = new Intent(this, PlantDescription.class);
+                i.putExtra("plantId", p.getIdW());   // <- naudojame dokumento ID
+                startActivity(i);
+            });
+            plantsContainer.addView(btn);
+        }
+    }
+
     private byte[] convertDrawableToByteArray(int drawableId) {
-        Drawable drawable = getResources().getDrawable(drawableId, null);
-
-        if (drawable == null) {
-            return null;
+        Drawable d = getResources().getDrawable(drawableId, null);
+        Bitmap bmp = d instanceof BitmapDrawable
+                ? ((BitmapDrawable)d).getBitmap()
+                : Bitmap.createBitmap(d.getIntrinsicWidth(), d.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+        if (!(d instanceof BitmapDrawable)) {
+            Canvas c = new Canvas(bmp);
+            d.setBounds(0,0,c.getWidth(),c.getHeight());
+            d.draw(c);
         }
-
-        // Convert Drawable to Bitmap
-        Bitmap bitmap;
-        if (drawable instanceof BitmapDrawable) {
-            bitmap = ((BitmapDrawable) drawable).getBitmap();
-        } else {
-            bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
-            Canvas canvas = new Canvas(bitmap);
-            drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
-            drawable.draw(canvas);
-        }
-
-        // Convert Bitmap to byte array
-        ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
-        return stream.toByteArray();
+        ByteArrayOutputStream os = new ByteArrayOutputStream();
+        bmp.compress(Bitmap.CompressFormat.PNG, 100, os);
+        return os.toByteArray();
     }
 }
