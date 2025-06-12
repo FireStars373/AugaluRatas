@@ -15,6 +15,15 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FieldValue;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
+
 public class Notifications extends BaseActivity {
 
 
@@ -39,55 +48,78 @@ public class Notifications extends BaseActivity {
         SharedPreferences sharedPref = getBaseContext().getSharedPreferences("augalu_ratas.CURRENT_USER_KEY", Context.MODE_PRIVATE);
         Long current_id = sharedPref.getLong("current_user_id", 0);
         UserSettings settings = db.userSettingsDAO().getByUserId(current_id);
+        FirebaseFirestore dbb = FirebaseFirestore.getInstance();
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        dbb.collection("users").document(currentUser.getUid()).get().addOnCompleteListener(task -> {
 
-        if (settings.getPostViewed()){
-            viewed.setChecked(sharedPref.getBoolean("viewed", true));
-        }
-        if (settings.getPostShared()){
-            shared.setChecked(sharedPref.getBoolean("shared", true));
-        }
-        if (settings.getPostLiked()){
-            liked.setChecked(sharedPref.getBoolean("liked", true));
-        }
-        if (settings.getPostBought()){
-            purchased.setChecked(sharedPref.getBoolean("purchased", true));
-        }
+            if (settings.getPostViewed()) {
+                viewed.setChecked(sharedPref.getBoolean("viewed", true));
 
-        return_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
             }
-        });
+            if (settings.getPostShared()) {
+                shared.setChecked(sharedPref.getBoolean("shared", true));
+            }
+            if (settings.getPostLiked()) {
+                liked.setChecked(sharedPref.getBoolean("liked", true));
+            }
+            if (settings.getPostBought()) {
+                purchased.setChecked(sharedPref.getBoolean("purchased", true));
+            }
 
-        //Setting new settings
-        viewed.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                settings.setPostViewed(isChecked);
-                db.userSettingsDAO().Update(settings);
-            }
+            return_button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    finish();
+                }
+            });
+
+            //Setting new settings
+            viewed.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    settings.setPostViewed(isChecked);
+                    db.userSettingsDAO().Update(settings);
+                    updateNotificationInFirestore(currentUser.getUid(), "post_viewed", isChecked);
+                }
+            });
+            shared.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    settings.setPostShared(isChecked);
+                    db.userSettingsDAO().Update(settings);
+                    updateNotificationInFirestore(currentUser.getUid(), "post_shared", isChecked);
+                }
+            });
+            liked.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    settings.setPostLiked(isChecked);
+                    db.userSettingsDAO().Update(settings);
+                    updateNotificationInFirestore(currentUser.getUid(), "post_liked", isChecked);
+                }
+            });
+            purchased.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    settings.setPostBought(isChecked);
+                    db.userSettingsDAO().Update(settings);
+                    updateNotificationInFirestore(currentUser.getUid(), "post_purchased", isChecked);
+                }
+            });
         });
-        shared.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                settings.setPostShared(isChecked);
-                db.userSettingsDAO().Update(settings);
-            }
-        });
-        liked.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                settings.setPostLiked(isChecked);
-                db.userSettingsDAO().Update(settings);
-            }
-        });
-        purchased.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                settings.setPostBought(isChecked);
-                db.userSettingsDAO().Update(settings);
-            }
-        });
+    }
+    private void updateNotificationInFirestore(String userId, String type, boolean isActive) {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        Map<String, Object> notif = new HashMap<>();
+        notif.put("type", type);
+        notif.put("active", isActive);
+
+        db.collection("users")
+                .document(userId)
+                .collection("notifications")
+                .document(type) // naudojame type kaip dokumento ID
+                .set(notif)
+                .addOnSuccessListener(unused -> Log.d("Firestore", type + " updated to " + isActive))
+                .addOnFailureListener(e -> Log.e("Firestore", "Failed to update " + type, e));
     }
 }

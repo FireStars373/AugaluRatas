@@ -24,6 +24,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
@@ -82,7 +83,7 @@ public class Register extends BaseActivity {
                 if (Password.length() < 5 || !Password.matches(".*\\d.*")) {
                     register.setSoundEffectsEnabled(false);
                     mp.start();
-                    Toast.makeText(getApplicationContext(), "Slaptažodį turi sudaryti bent 5 simboliai, su bent vienu skaičiu", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "Slaptažodį turi sudaryti bent 6 simboliai, su bent vienu skaičiu", Toast.LENGTH_LONG).show();
                     set.start();
                     return;
                 }
@@ -147,6 +148,12 @@ public class Register extends BaseActivity {
                                                         .document(userId)
                                                         .set(user)
                                                         .addOnSuccessListener(unused -> {
+
+                                                            addNotification(db, userId, "post_viewed", false);
+                                                            addNotification(db, userId, "post_shared", false);
+                                                            addNotification(db, userId, "post_liked", false);
+                                                            addNotification(db, userId, "post_purchased", false);
+
                                                             Intent intent = new Intent(getBaseContext(), Login.class);
                                                             startActivity(intent);
                                                         });
@@ -172,5 +179,15 @@ public class Register extends BaseActivity {
                 finish();
             }
         });
+    }
+    private void addNotification(FirebaseFirestore db, String userId, String type, boolean status) {
+        Map<String, Object> notif = new HashMap<>();
+        notif.put("type", type);
+        notif.put("active", status);
+        DocumentReference docRef = db.collection("users").document(userId);
+        docRef
+                .collection("notifications")
+                .document(type).set(notif);
+
     }
     }
