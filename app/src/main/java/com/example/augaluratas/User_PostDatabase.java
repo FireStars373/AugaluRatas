@@ -6,12 +6,14 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
-@Database(entities = {Posts.class, Users.class, UserPostLikes.class}, version = 1, exportSchema = false)
+@Database(entities = {Posts.class, Users.class, UserPostLikes.class, UserSettings.class, UserShoppingCart.class}, version = 1, exportSchema = false)
 public abstract class User_PostDatabase extends RoomDatabase {
 
     public abstract PostsDAO postsDAO();
     public abstract UsersDAO usersDAO();
     public abstract UserPostLikesDAO userPostLikesDAO();
+    public abstract UserSettingsDAO userSettingsDAO();
+    public abstract UserShoppingCartDAO userShoppingCartDAO();
 
     private static volatile User_PostDatabase INSTANCE;
 

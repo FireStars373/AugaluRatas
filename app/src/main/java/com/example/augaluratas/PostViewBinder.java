@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.telephony.TelephonyManager;
 import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.FrameLayout;
@@ -13,6 +14,7 @@ import android.widget.Toast;
 
 import java.util.Currency;
 import java.util.HashSet;
+import java.util.Locale;
 import java.util.Set;
 
 public class PostViewBinder {
@@ -40,9 +42,23 @@ public class PostViewBinder {
         long currentId = sharedPref.getLong("current_user_id", 0);
         User_PostDatabase database = AppActivity.getUser_PostDatabase();
         Users user = database.usersDAO().getUserById(currentId);
+        UserSettings settings = database.userSettingsDAO().getByUserId(currentId);
 
         if (user != null) {
-            String currency = user.getCurrency();
+            String currency = settings.getCurrency();
+            if (currency == null){
+                TelephonyManager tm = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+                String country = tm.getSimCountryIso().toUpperCase();
+                if (country.isEmpty()){
+                    currency = "USD";
+                }
+                else{
+                    currency = Currency.getInstance(new Locale("", country)).getCurrencyCode();
+                }
+                settings.setCurrency(currency);
+                database.userSettingsDAO().Update(settings);
+                AppActivity.getUser_PostDatabase().usersDAO().Update(user);
+            }
             SharedPreferences sharedPrefCur = context.getSharedPreferences("augalu_ratas.CURRENT_CURRENCY", Context.MODE_PRIVATE);
             float conversionRate = sharedPrefCur.getFloat("current_conversion_rate", 1.0f);
 
@@ -76,15 +92,12 @@ public class PostViewBinder {
             holder.addToCart.setOnClickListener(v -> {
                 SharedPreferences prefs = context.getSharedPreferences("cart", Context.MODE_PRIVATE);
                 Set<String> current = prefs.getStringSet("items", new HashSet<>());
-
-                if (current.contains(String.valueOf(post.getId()))) {
+                if(database.userShoppingCartDAO().getSpecificItem(currentId, post.getId()) != null){
                     Toast.makeText(context, "Šis augalas jau jūsų krepšelyje", Toast.LENGTH_SHORT).show();
-                    return;
                 }
 
-                Set<String> newSet = new HashSet<>(current);
-                newSet.add(String.valueOf(post.getId()));
-                prefs.edit().putStringSet("items", newSet).apply();
+                UserShoppingCart cart = new UserShoppingCart(currentId, post.getId());
+                database.userShoppingCartDAO().insert(cart);
 
                 // Animation logic (check if context is an Activity)
                 if (context instanceof Activity) {

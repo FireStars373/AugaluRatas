@@ -160,11 +160,13 @@ public class AllPosts extends AppCompatActivity {
                 @Override
                 public int compare(Posts o1, Posts o2) {
                     Users u1 = db.usersDAO().getUserById(o1.getUserId());
+                    UserSettings s1 = db.userSettingsDAO().getByUserId(u1.getId());
                     Users u2 = db.usersDAO().getUserById(o2.getUserId());
-                    if(u1.getSubscribed() && !u2.getSubscribed()){
+                    UserSettings s2 = db.userSettingsDAO().getByUserId(u2.getId());
+                    if(s1.getSubscribed() && !s2.getSubscribed()){
                         return -1;
                     }
-                    else if(!u1.getSubscribed() && u2.getSubscribed()){
+                    else if(!s1.getSubscribed() && s2.getSubscribed()){
                         return 1;
                     }
                     return 0;

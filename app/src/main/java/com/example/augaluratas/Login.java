@@ -84,6 +84,12 @@ public class Login extends BaseActivity {
                     return;
                 }
                 Users user = usersDatabase.usersDAO().getUserByUsername(Name);
+                UserSettings settings = usersDatabase.userSettingsDAO().getByUserId(user.getId());
+                if(settings == null)
+                {
+                    settings = new UserSettings(user.getId());
+                    usersDatabase.userSettingsDAO().insert(settings);
+                }
                 if(user == null || !user.getPassword().equals(Password)){
                     login.setSoundEffectsEnabled(false);
                     Toast.makeText(getApplicationContext(), "Vartotojo vardas arba slaptažodis neteisingas", Toast.LENGTH_SHORT).show();
@@ -95,7 +101,7 @@ public class Login extends BaseActivity {
                     return;
                 }
 
-                String currency = user.getCurrency();
+                String currency = settings.getCurrency();
 
                 //If currency code isn't saved, gets it from sim card location. USD by default
                 if (currency == null){
@@ -107,7 +113,8 @@ public class Login extends BaseActivity {
                     else{
                         currency = Currency.getInstance(new Locale("", country)).getCurrencyCode();
                     }
-                    user.setCurrency(currency);
+                    settings.setCurrency(currency);
+                    usersDatabase.userSettingsDAO().Update(settings);
                     AppActivity.getUser_PostDatabase().usersDAO().Update(user);
                 }
                 //If conversion rate isn't saved, calls API to find it. 1.0 by default
@@ -126,6 +133,7 @@ public class Login extends BaseActivity {
                 SharedPreferences.Editor editor = sharedPref.edit();
                 editor.putLong("current_user_id", user.getId());
                 editor.apply();
+
                 Intent intent = new Intent(getBaseContext(), MainPage.class);
                 startActivity(intent);
             }

@@ -34,6 +34,7 @@ public class ShoppingCartList extends BaseActivity {
     private User_PostDatabase db;
     private ExecutorService executorService = Executors.newSingleThreadExecutor();
     private RecyclerView recyclerView;
+    private Long current_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +57,9 @@ public class ShoppingCartList extends BaseActivity {
         recyclerView.setLayoutManager(new GridLayoutManager(this, 2)); // 2 columns
         recyclerView.setHasFixedSize(true);
 
+        SharedPreferences sharedPref = getBaseContext().getSharedPreferences("augalu_ratas.CURRENT_USER_KEY", Context.MODE_PRIVATE);
+        current_id = sharedPref.getLong("current_user_id", 0);
+
         add_items();
 
         return_button.setOnClickListener(new View.OnClickListener() {
@@ -70,9 +74,8 @@ public class ShoppingCartList extends BaseActivity {
         shopping_cart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SharedPreferences prefs = getBaseContext().getSharedPreferences("cart", Context.MODE_PRIVATE);
-                Set<String> buying = prefs.getStringSet("buying_items", new HashSet<>());
-                if(buying.isEmpty()){
+                List<Posts> items = db.userShoppingCartDAO().getAllUserBuyingItems(current_id);
+                if(items.isEmpty()){
                     Toast.makeText(getBaseContext(), "Nepasirinktos prekes", Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -88,15 +91,7 @@ public class ShoppingCartList extends BaseActivity {
     }
     public void add_items(){
         executorService.execute(() -> {
-            SharedPreferences prefs = getBaseContext().getSharedPreferences("cart", Context.MODE_PRIVATE);
-            Set<String> current = prefs.getStringSet("items", new HashSet<>());
-            List<Posts> posts = new ArrayList<>();
-            for (String item : current){
-                if (db.postsDAO().getPostById(Long.parseLong(item))!= null)
-                    posts.add(db.postsDAO().getPostById(Long.parseLong(item)));
-            }
-            SharedPreferences sharedPref = getBaseContext().getSharedPreferences("augalu_ratas.CURRENT_USER_KEY", Context.MODE_PRIVATE);
-            Long current_id = sharedPref.getLong("current_user_id", 0);
+            List<Posts> posts = db.userShoppingCartDAO().getAllUserItems(current_id);
 
             //List<Posts> posts = db.postsDAO().getPostsWithoutUser(current_id);
             runOnUiThread(() -> {

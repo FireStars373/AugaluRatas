@@ -51,17 +51,20 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
         holder.plantName.setText(post.getPlantName());
         holder.price.setText(String.format("%.2f €", post.getPrice()));
 
-        SharedPreferences prefs = context.getSharedPreferences("cart", Context.MODE_PRIVATE);
-        Set<String> current = prefs.getStringSet("buying_items", new HashSet<>());
-        current.remove(Long.toString(post.getId()));
-        prefs.edit().putStringSet("buying_items", current).apply();
+        SharedPreferences sharedPref = context.getSharedPreferences("augalu_ratas.CURRENT_USER_KEY", Context.MODE_PRIVATE);
+        Long current_id = sharedPref.getLong("current_user_id", 0);
 
-        // Konvertuoja byte[] į Bitmap
+        User_PostDatabase db = AppActivity.getUser_PostDatabase();
+
+//        List<Posts> posts = db.userShoppingCartDAO().getAllUserItems(current_id);
+//        Set<String> current = prefs.getStringSet("buying_items", new HashSet<>());
+//        current.remove(Long.toString(post.getId()));
+//        prefs.edit().putStringSet("buying_items", current).apply();
+
         Bitmap bitmap = BitmapFactory.decodeByteArray(post.getImage(), 0, post.getImage().length);
         holder.imageView.setImageBitmap(bitmap);
 
         holder.itemView.setOnClickListener(v -> {
-            // Perduoti post ID į kitą aktyvumą
             String a = this.getClass().getSimpleName();
             if (belongs_to_user){
                 Intent intent = new Intent(v.getContext(), UserPostOverlay.class);
@@ -76,15 +79,10 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
         holder.addToCart.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked){
-                    current.add(Long.toString(post.getId()));
-                    prefs.edit().putStringSet("buying_items", current).apply();
-                    return;
-                }
-                if (current.contains(Long.toString(post.getId()))){
-                    current.remove(Long.toString(post.getId()));
-                    prefs.edit().putStringSet("buying_items", current).apply();
-                }
+                UserShoppingCart cart = db.userShoppingCartDAO().getSpecificItem(current_id, post.getId());
+                cart.setBuying(isChecked);
+                db.userShoppingCartDAO().Update(cart);
+
             }
         });
 

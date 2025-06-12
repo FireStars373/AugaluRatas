@@ -73,6 +73,8 @@ public class UserData extends BaseActivity {
         Long current_id = sharedPref.getLong("current_user_id", 0);
         User_PostDatabase database = AppActivity.getUser_PostDatabase();
         Users user = database.usersDAO().getUserById(current_id);
+        UserSettings settings = database.userSettingsDAO().getByUserId(current_id);
+
         name.setText(user.getUsername());
         email.setText(user.getEmail());
         password.setText(user.getPassword());
@@ -121,7 +123,7 @@ public class UserData extends BaseActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         currency_select.setAdapter(adapter);
 
-        String currency = user.getCurrency();
+        String currency = settings.getCurrency();
         if(!currency.equals("NOTFOUND")){
             int pos = 0;
             for (String code : currencies){
@@ -196,7 +198,8 @@ public class UserData extends BaseActivity {
                 user.setEmail(Email);
                 user.setPassword(Password_rewrite);
                 user.setPhoneNumber(Number);
-                user.setCurrency(new_currency);
+                settings.setCurrency(new_currency);
+                database.userSettingsDAO().Update(settings);
                 if(selectedImageBitmap != null){
                     byte[] bytes = ImageUtils.bitmapToByteArray(selectedImageBitmap);
                     user.setImage(bytes);

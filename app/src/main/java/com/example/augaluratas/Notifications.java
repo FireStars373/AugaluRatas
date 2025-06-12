@@ -3,6 +3,7 @@ package com.example.augaluratas;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -34,14 +35,23 @@ public class Notifications extends BaseActivity {
         CheckBox purchased = findViewById(R.id.notification_plant_purchased);
         ImageButton return_button = findViewById(R.id.return_from_notifications);
 
-        SharedPreferences sharedPref = getBaseContext().getSharedPreferences("augalu_ratas.SETTINGS", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPref.edit();
-        //Displaying settings
-        viewed.setChecked(sharedPref.getBoolean("viewed", true));
-        shared.setChecked(sharedPref.getBoolean("shared", true));
-        liked.setChecked(sharedPref.getBoolean("liked", true));
-        purchased.setChecked(sharedPref.getBoolean("purchased", true));
+        User_PostDatabase db = AppActivity.getUser_PostDatabase();
+        SharedPreferences sharedPref = getBaseContext().getSharedPreferences("augalu_ratas.CURRENT_USER_KEY", Context.MODE_PRIVATE);
+        Long current_id = sharedPref.getLong("current_user_id", 0);
+        UserSettings settings = db.userSettingsDAO().getByUserId(current_id);
 
+        if (settings.getPostViewed()){
+            viewed.setChecked(sharedPref.getBoolean("viewed", true));
+        }
+        if (settings.getPostShared()){
+            shared.setChecked(sharedPref.getBoolean("shared", true));
+        }
+        if (settings.getPostLiked()){
+            liked.setChecked(sharedPref.getBoolean("liked", true));
+        }
+        if (settings.getPostBought()){
+            purchased.setChecked(sharedPref.getBoolean("purchased", true));
+        }
 
         return_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,29 +64,29 @@ public class Notifications extends BaseActivity {
         viewed.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                editor.putBoolean("viewed", isChecked);
-                editor.apply();
+                settings.setPostViewed(isChecked);
+                db.userSettingsDAO().Update(settings);
             }
         });
         shared.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                editor.putBoolean("shared", isChecked);
-                editor.apply();
+                settings.setPostShared(isChecked);
+                db.userSettingsDAO().Update(settings);
             }
         });
         liked.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                editor.putBoolean("liked", isChecked);
-                editor.apply();
+                settings.setPostLiked(isChecked);
+                db.userSettingsDAO().Update(settings);
             }
         });
         purchased.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                editor.putBoolean("purchased", isChecked);
-                editor.apply();
+                settings.setPostBought(isChecked);
+                db.userSettingsDAO().Update(settings);
             }
         });
     }

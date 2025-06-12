@@ -112,33 +112,25 @@ public class ShoppingCart extends BaseActivity {
             Toast.makeText(getBaseContext(), "Nepasirinktas pristatymo būdas", Toast.LENGTH_SHORT).show();
             return;
         }
-        SharedPreferences prefs = getBaseContext().getSharedPreferences("cart", Context.MODE_PRIVATE);
-        Set<String> all_in_cart = prefs.getStringSet("items", new HashSet<>());
-        Set<String> buying = prefs.getStringSet("buying_items", new HashSet<>());
+        SharedPreferences sharedPref = getBaseContext().getSharedPreferences("augalu_ratas.CURRENT_USER_KEY", Context.MODE_PRIVATE);
+        Long current_id = sharedPref.getLong("current_user_id", 0);
+        List<Posts> buying = db.userShoppingCartDAO().getAllUserBuyingItems(current_id);
         if(buying.isEmpty()){
             Toast.makeText(getBaseContext(), "Nepasirinkti pirkiniai", Toast.LENGTH_SHORT).show();
             return;
         }
-        for (String id : buying){
-            if (db.postsDAO().getPostById(Long.parseLong(id)) != null){
-                db.postsDAO().delete(db.postsDAO().getPostById(Long.parseLong(id)));
+        for (Posts post : buying){
+            if (post != null){
+                db.postsDAO().delete(post);
             }
         }
-        all_in_cart.removeAll(buying);
-
-        prefs.edit().putStringSet("items", all_in_cart).apply();
-        Toast.makeText(getBaseContext(), "Pirkimas sėkmingai įvykdytas!", Toast.LENGTH_SHORT).show();
 
         finish();
     }
     public void add_items(){
-        SharedPreferences prefs = getBaseContext().getSharedPreferences("cart", Context.MODE_PRIVATE);
-        Set<String> buying = prefs.getStringSet("buying_items", new HashSet<>());
-        List<Posts> posts = new ArrayList<>();
-        for (String item : buying){
-            if (db.postsDAO().getPostById(Long.parseLong(item))!= null)
-                posts.add(db.postsDAO().getPostById(Long.parseLong(item)));
-        }
+        SharedPreferences sharedPref = getBaseContext().getSharedPreferences("augalu_ratas.CURRENT_USER_KEY", Context.MODE_PRIVATE);
+        Long current_id = sharedPref.getLong("current_user_id", 0);
+        List<Posts> posts = db.userShoppingCartDAO().getAllUserBuyingItems(current_id);
 
         int previousViewId = ConstraintSet.PARENT_ID;
         LayoutInflater inflater = getLayoutInflater();
