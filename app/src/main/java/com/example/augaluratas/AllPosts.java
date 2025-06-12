@@ -149,9 +149,6 @@ public class AllPosts extends AppCompatActivity {
 
             byte[] imageBytes = ImageUtils.bitmapToByteArray(bitmap);
 
-            // Jei vartotojas egzistuoja, tęsiame įrašymą
-            //db.postsDAO().insert(new Posts(current_id,"Bananmedis", "fainas medis", imageBytes, 2));
-
             // Gauti įrašus ir nustatyti adapterį
             List<Posts> posts = db.postsDAO().getPostsWithoutUser(current_id);
             //Applying search filter
