@@ -42,8 +42,9 @@ public class UserPostOverlay extends BaseActivity {
         EditText description = findViewById(R.id.user_post_description);
         EditText price = findViewById(R.id.user_post_price);
         Button change = findViewById(R.id.user_post_change);
+        Button remove_post = findViewById(R.id.user_post_delete);
 
-        //(FUTURE) Set data from database
+
         User_PostDatabase db = AppActivity.getUser_PostDatabase();
         long id = getIntent().getLongExtra("POST_ID", -1);
         if (id != -1) {
@@ -69,15 +70,12 @@ public class UserPostOverlay extends BaseActivity {
         sidebar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent intent = new Intent(getBaseContext(), MeniuOverlay.class);
-//                startActivity(intent);
                 finish();
             }
         });
         change.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //(FUTURE) Photo selector
                 String Title = title.getText().toString().trim();
                 String Description = description.getText().toString().trim();
                 String Price = price.getText().toString().trim();
@@ -105,6 +103,16 @@ public class UserPostOverlay extends BaseActivity {
                 Toast.makeText(getBaseContext(), "Sėkmingai pakeistas turinys!", Toast.LENGTH_SHORT).show();
             }
 
+        });
+        remove_post.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Posts post = db.postsDAO().getPostById(id);
+                db.postsDAO().delete(post);
+                Toast.makeText(getBaseContext(), "Sėkmingai ištrintas skelbimas!", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getBaseContext(), UserPosts.class);
+                startActivity(intent);
+            }
         });
     }
 }
