@@ -61,21 +61,16 @@ public class MainPage extends BaseActivity {
                     return insets;
                 });
 
-        // 1. Inicijuojame Firestore ir UI elementus
         db = FirebaseFirestore.getInstance();
         layout = findViewById(R.id.main_page_layout);
         sidebar = findViewById(R.id.sidebar_from_main_page);
 
-        // 2. Rodome prisijungusio vartotojo vardą
         showCurrentUsername();
 
-        // 3. Užsėjame naujienas (į Storage + Firestore) vieną kartą
         seedNewsIfEmpty();
 
-        // 4. Įkeliam visus News iš Firestore
         loadNews();
 
-        // 5. Sidebar mygtukas
         sidebar.setOnClickListener(v -> {
             startActivity(new Intent(this, MeniuOverlay.class));
             overridePendingTransition(R.anim.slide_out_left, 0);
@@ -188,6 +183,7 @@ public class MainPage extends BaseActivity {
                             i.putExtra("summary", summary);
                             i.putExtra("text", text);
                             i.putExtra("imageUrl", imageUrl);
+                            i.putExtra("id", doc.getId());
                             startActivity(i);
                         });
                         layout.addView(tv);
